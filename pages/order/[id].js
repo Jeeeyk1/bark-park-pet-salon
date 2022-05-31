@@ -22,7 +22,6 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import useStyles from "../../utils/styles";
 import CheckoutWizard from "../../components/CheckoutWizard";
-import { useSnackbar } from "notistack";
 import { getError } from "../../utils/error";
 import axios from "axios";
 
@@ -85,7 +84,7 @@ function Order({ params }) {
       fetchOrder();
     }
   }, [order]);
-  const { closeSnackbar, enqueueSnackbar } = useSnackbar();
+
   return (
     <Layout title={`Order ${orderId}`}>
       <CheckoutWizard activeStep={4}></CheckoutWizard>
