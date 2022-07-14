@@ -171,6 +171,7 @@ function AdminProducts() {
                     <Button
                       style={{
                         backgroundColor: "primary",
+                        fontWeight: "bold",
                       }}
                       color="primary"
                       onClick={createHandler}
@@ -224,6 +225,7 @@ function AdminProducts() {
                                     backgroundColor: "#088F8F",
                                     borderRadius: 10,
                                     fontSize: "15px",
+                                    fontWeight: "bold",
                                   }}
                                   size="small"
                                   variant="contained"
@@ -234,9 +236,10 @@ function AdminProducts() {
                               </NextLink>{" "}
                               <Button
                                 style={{
-                                  backgroundColor: "red",
+                                  backgroundColor: "gray",
                                   borderRadius: 10,
                                   fontSize: "15px",
+                                  fontWeight: "bold",
                                 }}
                                 onClick={() => deleteHandler(product._id)}
                                 size="small"

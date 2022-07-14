@@ -52,7 +52,7 @@ function CartScreen() {
       {cartItems.length === 0 ? (
         <div>
           Cart is Empty.{" "}
-          <NextLink href="/" passHref>
+          <NextLink href="/product" passHref>
             <Link>Shop Now</Link>
           </NextLink>
         </div>

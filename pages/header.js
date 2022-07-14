@@ -3,27 +3,25 @@ import Head from "next/head";
 import {
   AppBar,
   Toolbar,
+  Typography,
   Container,
   Link,
   createTheme,
   ThemeProvider,
   CssBaseline,
+  Switch,
   Badge,
   Button,
   Menu,
   MenuItem,
 } from "@material-ui/core";
-import { FaPaw } from "react-icons/fa";
+import useStyles from "../utils/styles";
 import NextLink from "next/link";
-import styles from "../utils/style.module.css";
+import { Store } from "../utils/Store";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { red } from "@material-ui/core/colors";
-import { Store } from "../utils/Store";
-import useStyles from "../utils/styles";
-import Footer from "../pages/footer";
-import { HiShoppingCart } from "react-icons/hi";
-import { CgProfile } from "react-icons/cg";
+
 export default function Layout({ title, description, children }) {
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
@@ -32,19 +30,19 @@ export default function Layout({ title, description, children }) {
     typography: {
       h1: {
         fontSize: "1.6rem",
-        fontWeight: 100,
+        fontWeight: 1000,
         margin: "1rem 0",
       },
       h2: {
         fontSize: "1.4rem",
-        fontWeight: 200,
+        fontWeight: 400,
         margin: "1rem 0",
       },
     },
     palette: {
       type: darkMode ? "dark" : "light",
       primary: {
-        main: "#4fa8bd",
+        main: "#088F8F",
       },
       secondary: {
         main: "#208080",
@@ -55,7 +53,11 @@ export default function Layout({ title, description, children }) {
     },
   });
   const classes = useStyles();
-
+  const darkModeChangeHandler = () => {
+    dispatch({ type: darkMode ? "DARK_MODE_OFF" : "DARK_MODE_ON" });
+    const newDarkMode = !darkMode;
+    Cookies.set("darkMode", newDarkMode ? "ON" : "OFF");
+  };
   const [anchorEl, setAnchorEl] = useState(null);
   const loginClickHandler = (e) => {
     setAnchorEl(e.currentTarget);
@@ -85,41 +87,32 @@ export default function Layout({ title, description, children }) {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-
         <AppBar position="static" className={classes.navbar}>
           <Toolbar>
             <NextLink href="/" passHref>
               <Link>
-                <i className={styles.logo1}>
-                  <FaPaw />
+                <Typography className={classes.brand}>
                   Bark Park Pet Salon
-                </i>
+                </Typography>
               </Link>
             </NextLink>
             <div className={classes.grow}></div>
-            <div className={styles.icons}>
+            <div>
+              <Switch
+                checked={darkMode}
+                onChange={darkModeChangeHandler}
+              ></Switch>
               <NextLink href="/cart" passHref>
-                <Link style={{ fontSize: "25px" }}>
+                <Link>
                   {cart.cartItems.length > 0 ? (
                     <Badge
                       color="secondary"
                       badgeContent={cart.cartItems.length}
                     >
-                      <HiShoppingCart
-                        style={{
-                          fontSize: "2rem",
-                          marginBottom: "12px",
-                          marginRight: "5px",
-                        }}
-                      />
+                      Cart
                     </Badge>
                   ) : (
-                    <HiShoppingCart
-                      style={{
-                        fontSize: "2rem",
-                        marginTop: "10px",
-                      }}
-                    />
+                    "Cart"
                   )}
                 </Link>
               </NextLink>
@@ -130,9 +123,8 @@ export default function Layout({ title, description, children }) {
                     aria-haspopup="true"
                     onClick={loginClickHandler}
                     className={classes.navbarButton}
-                    style={{ fontSize: "1.5rem", marginBottom: "10px" }}
                   >
-                    <CgProfile style={{ fontSize: "2rem" }} />
+                    {userInfo.name}{" "}
                   </Button>
                   <Menu
                     id="simple-menu"
@@ -167,17 +159,24 @@ export default function Layout({ title, description, children }) {
                 </>
               ) : (
                 <NextLink href="/login" passHref>
-                  <Link style={{ fontSize: "25px" }}>
-                    <CgProfile style={{ fontSize: "2rem" }} />
-                  </Link>
+                  <Link>Login</Link>
                 </NextLink>
               )}
             </div>
           </Toolbar>
         </AppBar>
+        <div className={classes.container}>
+          <h1 className={classes.root}>
+            Welcome to <br />
+            Bark Park Pet Salon Baguio <br />
+          </h1>
+          <Button variant="contained" className={classes.root1}>
+            Shop Now!
+          </Button>
+        </div>
+
         <Container className={classes.main}>{children}</Container>
       </ThemeProvider>
-      <Footer />
     </div>
   );
 }

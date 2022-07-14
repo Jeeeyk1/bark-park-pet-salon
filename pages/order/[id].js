@@ -107,8 +107,13 @@ function Order({ params }) {
                   </Typography>
                 </ListItem>
                 <ListItem>
-                  {shippingAddress.fullName},{shippingAddress.address},
+                  {shippingAddress.fullName}, {""}
+                  {shippingAddress.address}, {""}
                   {shippingAddress.zipCode}
+                </ListItem>
+                <ListItem>
+                  Contact Number: {""}
+                  {shippingAddress.contactNumber}
                 </ListItem>
                 <ListItem>
                   Status:{" "}

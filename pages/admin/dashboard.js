@@ -74,7 +74,7 @@ function AdminDashboard() {
     <Layout title="Order History">
       <Grid container spacing={1}>
         <Grid item md={3} xs={12}>
-          <Card className={classes.section}>
+          <Card className={classes.section2}>
             <List>
               <NexLink href="/admin/dashboard" passHref>
                 <ListItem selected button component="a">

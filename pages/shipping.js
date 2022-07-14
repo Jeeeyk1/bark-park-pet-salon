@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Layout from "../components/Layout";
 import { Store } from "../utils/Store";
 import useStyles from "../utils/styles";
@@ -11,10 +11,18 @@ import {
   List,
   TextField,
   Button,
+  MenuItem,
 } from "@material-ui/core";
 import CheckoutWizard from "../components/CheckoutWizard";
 
 export default function Shipping() {
+  const [barangay, setBarangay] = useState();
+
+  const handlerChange = (event) => {
+    setBarangay(event.target.value);
+    console.log(shippingAddress.barangay);
+  };
+
   const {
     handleSubmit,
     control,
@@ -140,6 +148,7 @@ export default function Shipping() {
               )}
             ></Controller>
           </ListItem>
+
           <ListItem>
             <Controller
               name="barangay"
@@ -154,21 +163,35 @@ export default function Shipping() {
                   variant="outlined"
                   fullWidth
                   id="barangay"
-                  label="Barangay"
+                  value={barangay}
+                  label="Select barangay"
+                  select
                   inputProps={{ type: "text" }}
+                  onChange={handlerChange}
                   error={Boolean(errors.barangay)}
                   helperText={
                     errors.barangay
-                      ? errors.barangay.type === "minLength"
-                        ? "Barangay length is more than 4"
-                        : "Barangay is required"
+                      ? errors.barangay.type === "Barangay is required"
                       : ""
                   }
                   {...field}
-                ></TextField>
+                >
+                  <MenuItem value="Brookside">Brookside</MenuItem>
+                  <MenuItem value="Irisan">Irisan</MenuItem>
+                  <MenuItem value="Green valley">Green valley</MenuItem>
+                  <MenuItem value="Quezon Hill">Quezon Hill</MenuItem>
+                  <MenuItem value="Ambiong">Ambiong</MenuItem>
+                  <MenuItem value="Campo sioco">Campo sioco</MenuItem>
+                  <MenuItem value="Bakakeng norte">Bakakeng norte</MenuItem>
+                  <MenuItem value="Bakakeng sur">Bakakeng sur</MenuItem>
+                  <MenuItem value="Camp 7">Camp 7</MenuItem>
+                  <MenuItem value="Loakan proper">Loakan proper</MenuItem>
+                  <MenuItem value="Bakakeng norte">Bakakeng norte</MenuItem>
+                </TextField>
               )}
             ></Controller>
           </ListItem>
+
           <ListItem>
             <Controller
               name="city"
@@ -183,6 +206,7 @@ export default function Shipping() {
                   variant="outlined"
                   fullWidth
                   id="city"
+                  select
                   label="City"
                   inputProps={{ type: "text" }}
                   error={Boolean(errors.city)}
@@ -194,7 +218,9 @@ export default function Shipping() {
                       : ""
                   }
                   {...field}
-                ></TextField>
+                >
+                  <MenuItem value="Baguio City">Baguio City</MenuItem>
+                </TextField>
               )}
             ></Controller>
           </ListItem>
@@ -205,7 +231,7 @@ export default function Shipping() {
               defaultValue=""
               rules={{
                 required: true,
-                minLength: 5,
+                minLength: 4,
               }}
               render={({ field }) => (
                 <TextField
@@ -218,7 +244,7 @@ export default function Shipping() {
                   helperText={
                     errors.zipCode
                       ? errors.zipCode.type === "minLength"
-                        ? "Zip Code length is more than 4"
+                        ? "Zip Code length is more than 3"
                         : "Zip Code is required"
                       : ""
                   }

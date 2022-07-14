@@ -114,37 +114,127 @@ function AdminOrders() {
                     <Table>
                       <TableHead>
                         <TableRow>
-                          <TableCell>ID</TableCell>
-                          <TableCell>USER</TableCell>
-                          <TableCell>DATE</TableCell>
-                          <TableCell>TOTAL</TableCell>
-                          <TableCell>PAID</TableCell>
-                          <TableCell>DELIVERED</TableCell>
-                          <TableCell>ACTION</TableCell>
+                          <TableCell
+                            style={{
+                              fontWeight: "bold",
+                              fontSize: "1rem",
+                            }}
+                          >
+                            ID
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              fontWeight: "bold",
+                              fontSize: "1rem",
+                            }}
+                          >
+                            USER
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              fontWeight: "bold",
+                              fontSize: "1rem",
+                            }}
+                          >
+                            DATE
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              fontWeight: "bold",
+                              fontSize: "1rem",
+                            }}
+                          >
+                            TOTAL
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              fontWeight: "bold",
+                              fontSize: "1rem",
+                            }}
+                          >
+                            PAID
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              fontWeight: "bold",
+                              fontSize: "1rem",
+                            }}
+                          >
+                            DELIVERED
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              fontWeight: "bold",
+                              fontSize: "1rem",
+                            }}
+                          >
+                            ACTION
+                          </TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>
                         {orders.map((order) => (
                           <TableRow key={order._id}>
-                            <TableCell>{order._id.substring(20, 24)}</TableCell>
-                            <TableCell>
+                            <TableCell
+                              style={{
+                                fontWeight: "bold",
+                              }}
+                            >
+                              {order._id.substring(20, 24)}
+                            </TableCell>
+                            <TableCell
+                              style={{
+                                fontWeight: "bold",
+                              }}
+                            >
                               {order.user ? order.user.name : "DELETED USER"}
                             </TableCell>
-                            <TableCell>{order.createdAt}</TableCell>
-                            <TableCell>{order.totalPrice}</TableCell>
-                            <TableCell>
+                            <TableCell
+                              style={{
+                                fontWeight: "bold",
+                              }}
+                            >
+                              {order.createdAt}
+                            </TableCell>
+                            <TableCell
+                              style={{
+                                fontWeight: "bold",
+                              }}
+                            >
+                              {order.totalPrice}
+                            </TableCell>
+                            <TableCell
+                              style={{
+                                fontWeight: "bold",
+                              }}
+                            >
                               {order.isPaid
                                 ? `paid at ${order.paidAt}`
                                 : "not paid"}
                             </TableCell>
-                            <TableCell>
+                            <TableCell
+                              style={{
+                                fontWeight: "bold",
+                              }}
+                            >
                               {order.isDelivered
                                 ? `delivered at ${order.deliveredAt}`
                                 : "not delivered"}
                             </TableCell>
-                            <TableCell>
+                            <TableCell
+                              style={{
+                                fontWeight: "bold",
+                              }}
+                            >
                               <NextLink href={`/order/${order._id}`} passHref>
-                                <Button variant="contained">Details</Button>
+                                <Button
+                                  style={{
+                                    fontWeight: "bold",
+                                  }}
+                                  variant="contained"
+                                >
+                                  Details
+                                </Button>
                               </NextLink>
                             </TableCell>
                           </TableRow>

@@ -8,6 +8,14 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Rubik+Moonrocks&display=swap"
+            rel="stylesheet"
+          ></link>
+          <link
+            href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rubik+Moonrocks&display=swap"
+            rel="stylesheet"
+          />
           <Link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
@@ -15,6 +23,7 @@ export default class MyDocument extends Document {
         </Head>
         <body>
           <Main />
+
           <NextScript />
         </body>
       </Html>

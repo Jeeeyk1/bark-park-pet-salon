@@ -1,3 +1,11 @@
+import {
+  List,
+  ListItem,
+  Typography,
+  TextField,
+  Button,
+  Link,
+} from "@material-ui/core";
 import axios from "axios";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
@@ -8,14 +16,6 @@ import useStyles from "../utils/styles";
 import Cookies from "js-cookie";
 import { Controller, useForm } from "react-hook-form";
 import { useSnackbar } from "notistack";
-import {
-  ListItem,
-  Typography,
-  List,
-  TextField,
-  Button,
-  Link,
-} from "@material-ui/core";
 import { getError } from "../utils/error";
 
 export default function Register() {

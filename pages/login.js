@@ -45,7 +45,7 @@ export default function Login() {
       });
       dispatch({ type: "USER_LOGIN", payload: data });
       Cookies.set("userInfo", data);
-      router.push(redirect || "/");
+      router.push(redirect || "/product");
     } catch (err) {
       enqueueSnackbar(getError(err), { variant: "error" });
     }

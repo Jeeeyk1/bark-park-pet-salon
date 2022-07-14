@@ -105,7 +105,8 @@ function Placeorder() {
               </ListItem>
               <ListItem>
                 {shippingAddress.fullName},{shippingAddress.address},
-                {shippingAddress.zipCode}
+                {shippingAddress.zipCode}, {shippingAddress.barangay},
+                {shippingAddress.city}
               </ListItem>
             </List>
           </Card>
