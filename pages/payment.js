@@ -74,12 +74,8 @@ export default function Payment() {
                 >
                   Gcash
                 </FormControlLabel>
-                <FormControlLabel
-                  label="Paymaya"
-                  value="Paymaya"
-                  control={<Radio />}
-                >
-                  Paymaya
+                <FormControlLabel label="COD" value="COD" control={<Radio />}>
+                  Cash on Delivery
                 </FormControlLabel>
               </RadioGroup>
             </FormControl>

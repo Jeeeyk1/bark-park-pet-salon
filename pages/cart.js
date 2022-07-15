@@ -46,7 +46,10 @@ function CartScreen() {
   };
   return (
     <Layout title="Shopping Cart">
-      <Typography component="h1" variant="h1">
+      <Typography
+        variant="h1"
+        style={{ fontSize: "30px", fontWeight: "bolder", marginTop: "20px" }}
+      >
         Shopping Cart
       </Typography>
       {cartItems.length === 0 ? (

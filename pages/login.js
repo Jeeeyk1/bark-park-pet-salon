@@ -53,7 +53,10 @@ export default function Login() {
   return (
     <Layout title="Login">
       <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
-        <Typography component="h1" variant="h1">
+        <Typography
+          variant="h1"
+          style={{ fontSize: "40px", fontWeight: "bolder" }}
+        >
           Login
         </Typography>
         <List>

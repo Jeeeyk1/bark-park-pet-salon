@@ -86,7 +86,10 @@ export default function Shipping() {
     <Layout title="Shipping">
       <CheckoutWizard activeStep={1} />
       <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
-        <Typography component="h1" variant="h1">
+        <Typography
+          component="h1"
+          style={{ fontSize: "25px", fontWeight: "bolder" }}
+        >
           Shipping Address
         </Typography>
         <List>

@@ -88,7 +88,10 @@ function Order({ params }) {
   return (
     <Layout title={`Order ${orderId}`}>
       <CheckoutWizard activeStep={4}></CheckoutWizard>
-      <Typography component="h1" variant="h1">
+      <Typography
+        component="h1"
+        style={{ fontSize: "25px", fontWeight: "bolder" }}
+      >
         {" "}
         Order {orderId}
       </Typography>
@@ -102,7 +105,10 @@ function Order({ params }) {
             <Card className={classes.section}>
               <List>
                 <ListItem>
-                  <Typography component="h2" variant="h2">
+                  <Typography
+                    component="h2"
+                    style={{ fontSize: "25px", fontWeight: "bolder" }}
+                  >
                     Shipping Address
                   </Typography>
                 </ListItem>
@@ -127,7 +133,10 @@ function Order({ params }) {
             <Card className={classes.section}>
               <List>
                 <ListItem>
-                  <Typography component="h2" variant="h2">
+                  <Typography
+                    component="h2"
+                    style={{ fontSize: "25px", fontWeight: "bolder" }}
+                  >
                     Payment Method
                   </Typography>
                 </ListItem>
