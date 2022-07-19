@@ -7,7 +7,7 @@ import NextLink from "next/link";
 import Footer from "./footer";
 import db from "../utils/db";
 import Product from "../models/Product";
-import { FeatureImage } from "../utils/styles";
+
 import Header from "../homepage/header";
 import Aboutus from "../homepage/aboutus";
 import Navbar from "../homepage/navbar";
@@ -49,12 +49,12 @@ export default function Homepage(props) {
               passHref
             >
               <Link>
-                <FeatureImage
+                <img
                   src={product.image}
+                  alt={product.slug}
                   width={700}
                   height={600}
                   layout="responsive"
-                  style={{}}
                 />
 
                 <Typography
