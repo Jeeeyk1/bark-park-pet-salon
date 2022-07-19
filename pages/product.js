@@ -22,6 +22,7 @@ export default function Home(props) {
     const existItem = state.cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${product._id}`);
+    console.log(data.length);
     if (data.countInStock < quantity) {
       window.alert("Sorry, Product is out of stock");
       return;
@@ -37,6 +38,7 @@ export default function Home(props) {
     e.preventDefault();
     router.push(`/search?query=${query}`);
   };
+
   return (
     <Layout>
       <div>
@@ -91,7 +93,7 @@ export default function Home(props) {
         <h1>Products</h1>
         <Grid container spacing={1}>
           {topRatedProducts.map((product) => (
-            <Grid item md={2} key={product.name}>
+            <Grid item md={4} key={product.name}>
               <Productitem
                 product={product}
                 addToCartHandler={addToCartHandler}
@@ -118,7 +120,7 @@ export async function getServerSideProps() {
     .sort({
       rating: -1,
     })
-    .limit();
+    .limit(6);
   await db.disconnect();
   return {
     props: {

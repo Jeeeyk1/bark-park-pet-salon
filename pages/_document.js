@@ -9,6 +9,10 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <link
+            href="https://fonts.googleapis.com/css2?family=Anton&display=swap"
+            rel="stylesheet"
+          ></link>
+          <link
             href="https://fonts.googleapis.com/css2?family=Rubik+Moonrocks&display=swap"
             rel="stylesheet"
           ></link>

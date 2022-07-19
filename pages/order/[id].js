@@ -63,6 +63,7 @@ function Order({ params }) {
     paidAt,
     isDelivered,
     deliveredAt,
+    sales,
   } = order;
 
   useEffect(() => {
@@ -82,6 +83,10 @@ function Order({ params }) {
     };
     if (!order._id || (order._id && order._id !== orderId)) {
       fetchOrder();
+    }
+    console.log(sales);
+    if (!isPaid) {
+      order.sales = order.totalPrice;
     }
   }, [order]);
 

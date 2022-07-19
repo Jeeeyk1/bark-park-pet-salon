@@ -4,9 +4,6 @@ import React from "react";
 import Carousel from "react-material-ui-carousel";
 
 import NextLink from "next/link";
-import Categories from "../homepage/categories";
-import Services from "../homepage/services";
-
 import Footer from "./footer";
 import db from "../utils/db";
 import Product from "../models/Product";
@@ -30,12 +27,20 @@ export default function Homepage(props) {
         style={{
           textAlign: "center",
           p: 4,
-          marginBottom: "200px",
         }}
       >
         <Typography style={{ fontSize: "75px", fontFamily: "Bebas Neue" }}>
           Top rated Products
         </Typography>
+      </Box>
+      <Box
+        justifyContent={"center"}
+        style={{
+          textAlign: "center",
+
+          marginBottom: "200px",
+        }}
+      >
         <Carousel animation="slide">
           {featuredProducts.map((product) => (
             <NextLink
@@ -46,10 +51,10 @@ export default function Homepage(props) {
               <Link>
                 <FeatureImage
                   src={product.image}
-                  width={800}
-                  height={500}
+                  width={700}
+                  height={600}
                   layout="responsive"
-                  style={{ borderRadius: "35%" }}
+                  style={{}}
                 />
 
                 <Typography
@@ -66,41 +71,6 @@ export default function Homepage(props) {
         </Carousel>
       </Box>
 
-      <Box
-        display="flex"
-        justifyContent={"center"}
-        style={{
-          textAlign: "center",
-          p: 4,
-        }}
-      >
-        <Typography
-          variant="h4"
-          style={{ fontSize: "75px", fontFamily: "Bebas Neue" }}
-        >
-          Categories
-        </Typography>
-      </Box>
-      <Categories />
-      <Box
-        display="flex"
-        justifyContent={"center"}
-        style={{
-          textAlign: "center",
-          p: 4,
-        }}
-      >
-        <Typography
-          style={{
-            marginTop: "100px",
-            fontSize: "75px",
-            fontFamily: "Bebas Neue",
-          }}
-        >
-          Our Services
-        </Typography>
-      </Box>
-      <Services />
       <Box
         display="flex"
         justifyContent={"center"}
@@ -136,7 +106,7 @@ export default function Homepage(props) {
             fontFamily: "Bebas Neue",
           }}
         >
-          Locate Us
+          Located Us
         </Typography>
       </Box>
       <Box>

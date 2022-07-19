@@ -97,29 +97,18 @@ export default function Layout({ title, description, children }) {
               </Link>
             </NextLink>
             <div className={classes.grow}></div>
-            <div className={styles.icons}>
+            <div>
               <NextLink href="/cart" passHref>
-                <Link style={{ fontSize: "25px" }}>
+                <Link>
                   {cart.cartItems.length > 0 ? (
                     <Badge
                       color="secondary"
                       badgeContent={cart.cartItems.length}
                     >
-                      <HiShoppingCart
-                        style={{
-                          fontSize: "2rem",
-                          marginBottom: "12px",
-                          marginRight: "5px",
-                        }}
-                      />
+                      <HiShoppingCart className={styles.icons1} />
                     </Badge>
                   ) : (
-                    <HiShoppingCart
-                      style={{
-                        fontSize: "2rem",
-                        marginTop: "10px",
-                      }}
-                    />
+                    <HiShoppingCart className={styles.icons1} />
                   )}
                 </Link>
               </NextLink>
@@ -129,10 +118,9 @@ export default function Layout({ title, description, children }) {
                     aria-controls="simple-menu"
                     aria-haspopup="true"
                     onClick={loginClickHandler}
-                    className={classes.navbarButton}
-                    style={{ fontSize: "1.5rem", marginBottom: "10px" }}
+                    className={styles.icons1}
                   >
-                    <CgProfile style={{ fontSize: "2rem" }} />
+                    <CgProfile className={styles.icons1} />
                   </Button>
                   <Menu
                     id="simple-menu"
@@ -167,8 +155,8 @@ export default function Layout({ title, description, children }) {
                 </>
               ) : (
                 <NextLink href="/login" passHref>
-                  <Link style={{ fontSize: "25px" }}>
-                    <CgProfile style={{ fontSize: "2rem" }} />
+                  <Link>
+                    <CgProfile className={styles.icons1} />
                   </Link>
                 </NextLink>
               )}

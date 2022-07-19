@@ -5,21 +5,8 @@ import { Typography } from "@material-ui/core";
 const Aboutus = () => {
   return (
     <div className={styles.image}>
-      <img
-        style={{ height: "500px", width: "2000px" }}
-        src="images/aboutus.jpg"
-        alt="about us"
-      ></img>
-      <Typography
-        variant="body"
-        style={{
-          justifyContent: "center",
-          alignText: "center",
-          marginTop: "50px",
-          marginLeft: "120px",
-          fontSize: "25px",
-        }}
-      >
+      <img className={styles.image1} src="images/aboutus.jpg" alt="about us" />
+      <Typography variant="body" className={styles.textAbout}>
         BARKPACK OFFERS A COMPLETE PACKAGE FOR YOUR PET. We provide quality care
         with style & comfort in our grooming services. We are committed to serve
         you the best products for your pet at the lowest prices. operates both

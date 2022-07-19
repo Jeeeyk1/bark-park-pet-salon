@@ -16,6 +16,7 @@
 
 .header {
   background: #4fa8bd;
+
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -33,11 +34,11 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  -webkit-transform: translateY(-10rem);
-  transform: translateY(-10rem);
 }
 .active {
   background: #4fa8bd;
+  box-shadow: box-shadow;
+  position: fixed;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -69,7 +70,7 @@
 }
 
 .icons {
-  font-size: 2.5rem;
+  font-size: 2rem;
   margin-left: 2rem;
   color: #fff;
   cursor: pointer;
@@ -79,13 +80,25 @@
 .icons:hover {
   color: #088f8f;
 }
+.icons1 {
+  font-size: 2rem;
+  margin-right: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.icons1:hover {
+  color: #088f8f;
+}
 
 .logo {
-  font-size: 2.5rem;
+  margin-right: 20px;
+  font-size: 2rem;
   color: #130f40;
   font-weight: bolder;
   position: left;
   position: 100px;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 .logo1 {
   margin-left: 30px;
@@ -156,7 +169,7 @@
 
 .wave {
   position: absolute;
-  bottom: -100px;
+  bottom: -250px;
 
   left: 0;
   width: 100%;
@@ -184,25 +197,35 @@
 }
 
 .image {
-  width: 100%;
-
+  height: 500px;
+  width: 1800px;
+  justify-items: right;
   display: flex;
   margin-top: 100px;
 }
 
 .image img {
-  height: 300px;
-  width: 500px;
+  height: 500px;
+  width: 2000px;
   border-radius: 50%;
   margin-left: 15px;
 }
+.textAbout {
+  text-align: justify;
+  text-justify: inter-word;
+  margin-top: 50px;
+  margin-left: 120px;
+  font-size: 25px;
+}
 .locate {
   height: 500px;
-  width: 800px;
+  width: 700px;
   display: "flex";
   margin-left: 550px;
   margin-top: 10px;
-  border-radius: 20%;
+  border-style: solid;
+  border-width: 10px;
+  border-color: #088f8f;
 }
 .direction {
   display: inline-block;
@@ -249,6 +272,16 @@
   .header {
     padding: 2rem;
   }
+
+  .home {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background-position: right;
+  }
+  .header {
+    padding: 2rem;
+  }
   .section1 {
     padding: 5rem 2rem;
   }
@@ -277,5 +310,25 @@
     display: block;
     margin: 2rem;
     font-size: 2rem;
+  }
+  .icons {
+    font-size: 3rem;
+  }
+  .logo {
+    font-size: 25px;
+  }
+  .textAbout {
+    justify-content: center;
+    text-align: center;
+    margin-top: 50px;
+    margin-left: 0px;
+    font-size: 19px;
+  }
+  .image {
+    width: 500px;
+  }
+
+  .image img {
+    display: none;
   }
 }

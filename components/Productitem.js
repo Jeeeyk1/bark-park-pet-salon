@@ -26,17 +26,24 @@ function Productitem({ product, addToCartHandler }) {
               title={product.name}
             ></CardMedia>
             <CardContent>
-              <Typography>{product.name}</Typography>
+              <Typography style={{ fontSize: "25px", fontWeight: "bolder" }}>
+                {product.name}
+              </Typography>
               <Rating value={product.rating} readOnly></Rating>
             </CardContent>
           </CardActionArea>
         </NextLink>
         <CardActions>
-          <Typography>{product.price}</Typography>
+          <Typography style={{ fontSize: "20px", fontWeight: "bolder" }}>
+            ₱{product.price}
+          </Typography>
           <Button
             style={{
+              height: "70px",
+              width: "500px",
               borderRadius: 10,
-              fontSize: "15px",
+              fontSize: "25px",
+              fontWeight: "bolder",
             }}
             variant="contained"
             size="small"

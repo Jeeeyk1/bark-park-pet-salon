@@ -43,7 +43,24 @@ function Header() {
     setChecked(true);
   }, []);
   return (
-    <div>
+    <div style={{ marginTop: "100px" }}>
+      <Box className={classes.boxD}>
+        <Slide
+          in={show}
+          direction={show ? "left" : "right"}
+          timeout={{
+            enter: 500,
+            exit: 100,
+          }}
+        >
+          <Box display={"flex"} justifyContent="center" alignItems={"center"}>
+            <Typography className={classes.message}>
+              {messages[messageIndex]}
+            </Typography>
+          </Box>
+        </Slide>
+      </Box>
+
       <Container maxWidth="100vh" className={styles.section1}>
         <Box className={classes.boxC}>
           <Collapse
@@ -64,22 +81,6 @@ function Header() {
       </Container>
 
       <img src="/images/bottom_wave.png" className={styles.wave} alt=""></img>
-      <Box className={classes.boxD}>
-        <Slide
-          in={show}
-          direction={show ? "left" : "right"}
-          timeout={{
-            enter: 500,
-            exit: 100,
-          }}
-        >
-          <Box display={"flex"} justifyContent="center" alignItems={"center"}>
-            <Typography className={classes.message}>
-              {messages[messageIndex]}
-            </Typography>
-          </Box>
-        </Slide>
-      </Box>
     </div>
   );
 }

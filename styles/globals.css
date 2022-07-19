@@ -39,3 +39,9 @@ html::-webkit-scrollbar-thumb {
   background: #088f8f;
   border-radius: 5rem;
 }
+
+@media (max-width: 991px) {
+  html {
+    font-size: 55%;
+  }
+}

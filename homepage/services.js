@@ -24,8 +24,8 @@ function Services() {
               title="Try"
             ></CardMedia>
             <CardContent>
-              <Typography variant="h3" style={{ fontFamily: "sans-serif" }}>
-                Pet Hotel
+              <Typography variant="h3" style={{ fontFamily: "Anton" }}>
+                Pet Boarding
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -43,7 +43,9 @@ function Services() {
               title="Try"
             ></CardMedia>
             <CardContent>
-              <Typography variant="h3">Grooming</Typography>
+              <Typography variant="h3" style={{ fontFamily: "Anton" }}>
+                Grooming
+              </Typography>
             </CardContent>
           </CardActionArea>
         </NextLink>

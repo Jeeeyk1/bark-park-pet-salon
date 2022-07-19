@@ -166,12 +166,12 @@ const useStyles = makeStyles((theme) => ({
     padding: "20px 0px 20px 0px",
 
     background: "rgba(91, 218, 255, .1)",
-    margin: " 0px 50px 50px",
+
     height: "100%",
   },
   titleB: {
-    textAlign: "center",
-    color: "#FFF",
+    textAlign: "left",
+    color: "#fff",
     lineHeight: 1.5,
     fontSize: "72px",
     fontFamily: "Rubik Moonrocks",
@@ -235,8 +235,7 @@ export const BannerImage = styled("img")(({ src, theme }) => ({
 }));
 export const FeatureImage = styled("img")(({ src, theme }) => ({
   src: `url(${src})`,
-  height: "500px",
-  width: "700px",
+
   [theme.breakpoints.down("md")]: {
     height: "300",
     width: "500px",

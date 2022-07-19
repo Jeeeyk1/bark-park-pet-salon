@@ -1,5 +1,5 @@
 import { Box, Grid, Link, Typography } from "@material-ui/core";
-import { List, ListItemText } from "@material-ui/icons";
+import { List } from "@material-ui/icons";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import NextLink from "next/link";
@@ -46,9 +46,7 @@ export default function Footer() {
         </Grid>
         <Grid item md={6} lg={2}>
           <Typography variant="body">Information</Typography>
-          <List>
-            <ListItemText>ABout us</ListItemText>
-          </List>
+          <List></List>
         </Grid>
       </Grid>
     </Box>

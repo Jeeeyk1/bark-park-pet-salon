@@ -23,7 +23,7 @@ import { InputBase, IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { Pagination, Rating } from "@material-ui/lab";
 
-const PAGE_SIZE = 12;
+const PAGE_SIZE = 6;
 const prices = [
   {
     name: "1 to 50",
@@ -235,9 +235,9 @@ function Search(props) {
               </Select>
             </Grid>
           </Grid>
-          <Grid className={classes.mt1} container spacing={3}>
+          <Grid className={classes.mt1} container spacing={5}>
             {products.map((product) => (
-              <Grid item md={2} key={product.name}>
+              <Grid item md={4} key={product.name}>
                 <Productitem
                   product={product}
                   addToCartHandler={addToCartHandler}

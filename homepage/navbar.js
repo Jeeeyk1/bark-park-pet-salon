@@ -60,36 +60,24 @@ export default function Navbar({ title, description }) {
       </Head>
       <a href="" className={styles.logo}>
         <FaPaw />
-        <i className="fas fa-paw">Bark Park Pet Salon Baguio</i>
+        <i className="fas fa-paw">Bark Park Pet Salon </i>
       </a>
 
       <nav className={styles.navbar}>
-        <a href="">Home</a>
-        <a href="/product">Products</a>
+        <a href="/ ">Home</a>
+        <a href="product">Products</a>
         <a href="search?category=">Categories</a>
-        <a href="">Services</a>
+        <a href="services">Services</a>
       </nav>
-      <div className={styles.icons}>
+      <div className={styles.icuons}>
         <NextLink href="/cart" passHref>
           <Link style={{ fontSize: "25px" }}>
             {cart.cartItems.length > 0 ? (
               <Badge color="secondary" badgeContent={cart.cartItems.length}>
-                <HiShoppingCart
-                  style={{
-                    fontSize: "2rem",
-                    marginRight: "15px",
-                    color: "#fff",
-                  }}
-                />
+                <HiShoppingCart className={styles.icons} />
               </Badge>
             ) : (
-              <HiShoppingCart
-                style={{
-                  fontSize: "2rem",
-                  marginRight: "20px",
-                  color: "#fff",
-                }}
-              />
+              <HiShoppingCart className={styles.icons} />
             )}
           </Link>
         </NextLink>
@@ -132,7 +120,7 @@ export default function Navbar({ title, description }) {
         ) : (
           <NextLink href="/login" passHref>
             <Link style={{ fontSize: "25px" }}>
-              <CgProfile style={{ fontSize: "2rem", color: "black" }} />
+              <CgProfile className={styles.icons} />
             </Link>
           </NextLink>
         )}
