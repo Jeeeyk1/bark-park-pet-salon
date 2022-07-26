@@ -2,7 +2,7 @@
 import { Box, Link, Typography } from "@material-ui/core";
 import React from "react";
 import Carousel from "react-material-ui-carousel";
-
+import styles from "../utils/style.module.css";
 import NextLink from "next/link";
 import Footer from "./footer";
 import db from "../utils/db";
@@ -17,7 +17,7 @@ export default function Homepage(props) {
   const { featuredProducts } = props;
 
   return (
-    <div maxWidth="fullwidth">
+    <div>
       <Navbar />
       <Header />
 
@@ -29,42 +29,32 @@ export default function Homepage(props) {
           p: 4,
         }}
       >
-        <Typography style={{ fontSize: "75px", fontFamily: "Bebas Neue" }}>
-          Top rated Products
-        </Typography>
+        <Typography className={styles.text}>Top rated Products</Typography>
       </Box>
       <Box
         justifyContent={"center"}
         style={{
           textAlign: "center",
 
-          marginBottom: "200px",
+          marginBottom: "100px",
         }}
       >
         <Carousel animation="slide">
           {featuredProducts.map((product) => (
             <NextLink
               key={product._id}
-              href={`/product/${product.slug}`}
+              href={`/products/${product.slug}`}
               passHref
             >
               <Link>
                 <img
                   src={product.image}
                   alt={product.slug}
-                  width={700}
-                  height={600}
                   layout="responsive"
+                  className={styles.img2}
                 />
 
-                <Typography
-                  style={{
-                    fontSize: "50px",
-                    fontFamily: "Bebas Neue",
-                  }}
-                >
-                  {product.name}
-                </Typography>
+                <Typography className={styles.text}>{product.name}</Typography>
               </Link>
             </NextLink>
           ))}
@@ -79,16 +69,7 @@ export default function Homepage(props) {
           p: 4,
         }}
       >
-        <Typography
-          style={{
-            fontSize: "75px",
-            fontFamily: "Bebas Neue",
-            marginTop: "50px",
-          }}
-        >
-          {" "}
-          About us
-        </Typography>
+        <Typography className={styles.text}> About us</Typography>
       </Box>
       <Aboutus />
 
@@ -97,17 +78,10 @@ export default function Homepage(props) {
         justifyContent={"center"}
         style={{
           textAlign: "center",
-          p: 4,
+          marginTop: "100px",
         }}
       >
-        <Typography
-          style={{
-            fontSize: "75px",
-            fontFamily: "Bebas Neue",
-          }}
-        >
-          Located Us
-        </Typography>
+        <Typography className={styles.text}>Located Us</Typography>
       </Box>
       <Box>
         <Location />

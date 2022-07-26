@@ -6,19 +6,14 @@ import NextLink from "next/link";
 const Location = () => {
   return (
     <div>
-      <Box
-        style={{
-          marginLeft: "50px",
-          display: "flex",
-          height: "800px",
-        }}
-      >
+      <Box className={styles.location}>
         <div>
-          <Typography style={{ fontSize: "25px" }}>
+          <Typography className={styles.locate_text}>
             <br />
             <br />
-            Bark Park Pet Salon Baguio <br /> <br /> <br /> 49 2F, SAJJ Building
-            , Sajj Building, Rimando Road <br />
+            <b styles={{ fontWeight: 100 }}> Bark Park Pet Salon Baguio</b>{" "}
+            <br /> <br /> <br /> 49 2F, SAJJ Building , Sajj Building, Rimando
+            Road <br />
             Aurora Hill 2600 Baguio City, Philippines.
             <br />
             <br /> Open Hours <br />

@@ -1,54 +1,53 @@
-import { Box, Grid, Link, Typography } from "@material-ui/core";
-import { List } from "@material-ui/icons";
+import styles from "../utils/footer.module.css";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import NextLink from "next/link";
+
+import TwitterIcon from "@mui/icons-material/Twitter";
 export default function Footer() {
   return (
-    <Box
-      style={{
-        marginTop: "20px",
-        background: "#4fa8bd",
-        color: "#ffff",
-        padding: { xs: 4, md: 10 },
-        paddingTop: 12,
-        paddingBottom: 12,
-        fontSize: { xs: "12px", md: "14px" },
-      }}
-    >
-      <Grid container spacing={2} justifyContent="center">
-        <Grid item md={6} lg={4}>
-          <Typography
-            style={{
-              textTransform: "uppercase",
-              marginBottom: "1rem",
-            }}
-          >
-            About us
-          </Typography>
-          <Typography variant="caption2">Bark Park Pet Salon</Typography>
-          <Box
-            sx={{
-              mt: 4,
-              color: "#ffff",
-            }}
-          >
-            <Link>
-              <NextLink
-                href="https://www.facebook.com/Bark-Pack-Pet-Salon-Baguio-620647448458299"
-                passHref
-              >
-                <FacebookIcon sx={{ mr: 1 }} />
-              </NextLink>
-            </Link>
-            <InstagramIcon sx={{ mr: 1 }} />
-          </Box>
-        </Grid>
-        <Grid item md={6} lg={2}>
-          <Typography variant="body">Information</Typography>
-          <List></List>
-        </Grid>
-      </Grid>
-    </Box>
+    <footer className={styles.footer}>
+      <div className={styles.waves}>
+        <div className={styles.wave} id="wave1"></div>
+        <div className={styles.wave2} id="wave2"></div>
+        <div className={styles.wave3} id="wave3"></div>
+        <div className={styles.wave4} id="wave4"></div>
+      </div>
+      <h2 className={styles.h2}>Bark Park Pet Salon Baguio</h2>
+
+      <ul className={styles.social_icon}>
+        <li>
+          <a href="#">
+            <FacebookIcon />
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <InstagramIcon />
+          </a>{" "}
+        </li>
+        <li>
+          <a href="#">
+            <TwitterIcon />
+          </a>{" "}
+        </li>
+      </ul>
+      <ul className={styles.menu}>
+        <li>
+          <a href="#">Home</a>
+        </li>
+        <li>
+          <a href="#">Products</a>
+        </li>
+        <li>
+          <a href="#">Categories</a>
+        </li>
+        <li>
+          <a href="#">Services</a>
+        </li>
+      </ul>
+      <p className={styles.p1}>
+        @2019 Bark Park Pet Salon Baguio | All Rights Reserved
+      </p>
+    </footer>
   );
 }

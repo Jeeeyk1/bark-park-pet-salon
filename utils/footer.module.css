@@ -1,0 +1,63 @@
+.h2 {
+  justify-content: right;
+  text-align: right;
+  color: #fff;
+}
+
+.footer {
+  position: relative;
+  width: 100%;
+  background: #4fa8bd;
+  min-height: 100px;
+  padding: 20px 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.social_icon,
+.menu {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.social_icon li a {
+  font-size: 2em;
+  color: #fff;
+  margin: 0 10px;
+  display: inline-block;
+  transition: 0.5s;
+}
+.social_icon li a:hover {
+  color: black;
+  transform: translateY(-10px);
+}
+
+.menu li {
+  list-style: none;
+}
+.menu li a {
+  font-size: 1.2em;
+  color: #fff;
+  margin: 0 10px;
+  display: inline-block;
+  opacity: 0.75;
+  text-decoration: none;
+}
+.menu li a:hover {
+  opacity: 1;
+}
+
+.p1 {
+  color: #fff;
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}

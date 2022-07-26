@@ -45,3 +45,9 @@ html::-webkit-scrollbar-thumb {
     font-size: 55%;
   }
 }
+
+@media (max-width: 768px) {
+  html {
+    font-size: 70%;
+  }
+}

@@ -97,18 +97,18 @@ export default function Layout({ title, description, children }) {
               </Link>
             </NextLink>
             <div className={classes.grow}></div>
-            <div>
+            <div className={styles.icons1}>
               <NextLink href="/cart" passHref>
                 <Link>
-                  {cart.cartItems.length > 0 ? (
+                  {cart.cartItems.length > 0 && userInfo ? (
                     <Badge
                       color="secondary"
                       badgeContent={cart.cartItems.length}
                     >
-                      <HiShoppingCart className={styles.icons1} />
+                      <HiShoppingCart className={styles.icons2} />
                     </Badge>
                   ) : (
-                    <HiShoppingCart className={styles.icons1} />
+                    <HiShoppingCart className={styles.icons3} />
                   )}
                 </Link>
               </NextLink>
@@ -118,9 +118,8 @@ export default function Layout({ title, description, children }) {
                     aria-controls="simple-menu"
                     aria-haspopup="true"
                     onClick={loginClickHandler}
-                    className={styles.icons1}
                   >
-                    <CgProfile className={styles.icons1} />
+                    <CgProfile className={styles.icons2} />
                   </Button>
                   <Menu
                     id="simple-menu"
@@ -156,7 +155,7 @@ export default function Layout({ title, description, children }) {
               ) : (
                 <NextLink href="/login" passHref>
                   <Link>
-                    <CgProfile className={styles.icons1} />
+                    <CgProfile className={styles.icons3} />
                   </Link>
                 </NextLink>
               )}

@@ -148,9 +148,9 @@ const useStyles = makeStyles((theme) => ({
   },
   boxC: {
     display: "flex",
-    alignText: "center",
+    alignText: "right",
     flexDirection: "column",
-    justifyContent: "center",
+    justifyContent: "right",
     maWidth: 420,
     padding: "30px",
   },
@@ -170,7 +170,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
   },
   titleB: {
-    textAlign: "left",
+    textAlign: "center",
     color: "#fff",
     lineHeight: 1.5,
     fontSize: "72px",

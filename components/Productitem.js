@@ -40,7 +40,7 @@ function Productitem({ product, addToCartHandler }) {
           <Button
             style={{
               height: "70px",
-              width: "500px",
+              width: "300px",
               borderRadius: 10,
               fontSize: "25px",
               fontWeight: "bolder",

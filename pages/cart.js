@@ -60,7 +60,7 @@ function CartScreen() {
           </NextLink>
         </div>
       ) : (
-        <Grid container spacing={1}>
+        <Grid container spacing={2}>
           <Grid item md={9} xs={12}>
             <TableContainer>
               <Table>
@@ -130,10 +130,17 @@ function CartScreen() {
             <Card>
               <List>
                 <ListItem>
-                  <Typography variant="h2">
+                  <Typography
+                    variant="h2"
+                    style={{
+                      fontSize: "30px",
+                      fontWeight: "bolder",
+                      marginTop: "20px",
+                    }}
+                  >
                     Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}
                     {""}
-                    items) :{" "}
+                    Items) :{" "}
                     {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
                   </Typography>
                 </ListItem>

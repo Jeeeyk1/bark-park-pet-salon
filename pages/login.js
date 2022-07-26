@@ -7,6 +7,7 @@ import {
   Link,
 } from "@material-ui/core";
 import axios from "axios";
+import PersonIcon from "@mui/icons-material/Person";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 import React, { useContext, useEffect } from "react";
@@ -17,7 +18,7 @@ import Cookies from "js-cookie";
 import { Controller, useForm } from "react-hook-form";
 import { useSnackbar } from "notistack";
 import { getError } from "../utils/error";
-
+import LockIcon from "@mui/icons-material/Lock";
 export default function Login() {
   const {
     handleSubmit,
@@ -53,14 +54,12 @@ export default function Login() {
   return (
     <Layout title="Login">
       <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
-        <Typography
-          variant="h1"
-          style={{ fontSize: "40px", fontWeight: "bolder" }}
-        >
+        <Typography style={{ fontSize: "40px", fontWeight: "bolder" }}>
           Login
         </Typography>
         <List>
           <ListItem>
+            <PersonIcon />
             <Controller
               name="email"
               control={control}
@@ -90,6 +89,7 @@ export default function Login() {
             ></Controller>
           </ListItem>
           <ListItem>
+            <LockIcon />
             <Controller
               name="password"
               control={control}
@@ -119,7 +119,13 @@ export default function Login() {
             ></Controller>
           </ListItem>
           <ListItem>
-            <Button variant="contained" type="submit" fullWidth color="primary">
+            <Button
+              variant="contained"
+              type="submit"
+              fullWidth
+              color="primary"
+              style={{ fontWeight: "bolder" }}
+            >
               Login
             </Button>
           </ListItem>

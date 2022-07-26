@@ -6,6 +6,7 @@ const Aboutus = () => {
   return (
     <div className={styles.image}>
       <img className={styles.image1} src="images/aboutus.jpg" alt="about us" />
+
       <Typography variant="body" className={styles.textAbout}>
         BARKPACK OFFERS A COMPLETE PACKAGE FOR YOUR PET. We provide quality care
         with style & comfort in our grooming services. We are committed to serve

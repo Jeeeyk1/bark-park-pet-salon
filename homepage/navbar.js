@@ -11,6 +11,7 @@ import useStyles from "../utils/styles";
 import { HiShoppingCart } from "react-icons/hi";
 import { CgProfile } from "react-icons/cg";
 import NextLink from "next/link";
+import { CgMenu } from "react-icons/cg";
 
 export default function Navbar({ title, description }) {
   const classes = useStyles();
@@ -69,7 +70,8 @@ export default function Navbar({ title, description }) {
         <a href="search?category=">Categories</a>
         <a href="services">Services</a>
       </nav>
-      <div className={styles.icuons}>
+      <div>
+        <CgMenu className={styles.menu} />
         <NextLink href="/cart" passHref>
           <Link style={{ fontSize: "25px" }}>
             {cart.cartItems.length > 0 ? (
@@ -90,7 +92,7 @@ export default function Navbar({ title, description }) {
               className={classes.navbarButton}
               style={{ fontSize: "1.5rem", marginBottom: "10px" }}
             >
-              <CgProfile style={{ fontSize: "2rem" }} />
+              <CgProfile className={styles.icons} />
             </Button>
             <Menu
               id="simple-menu"

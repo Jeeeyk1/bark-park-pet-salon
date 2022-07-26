@@ -68,7 +68,7 @@ function Header() {
             {...(checked ? { timeout: 2000 } : {})}
             collapsedHeight={15}
           >
-            <Typography className={classes.titleB}>
+            <Typography className={styles.bppsb}>
               Bark Park Pet Salon Baguio
             </Typography>
           </Collapse>

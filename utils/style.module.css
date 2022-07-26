@@ -68,6 +68,22 @@
 .navbar a:hover {
   color: #088f8f;
 }
+.text {
+  font-size: 75px;
+  font-family: Bebas Neue;
+}
+.bppsb {
+  font-size: 6rem;
+  color: #fff;
+  padding-bottom: 1rem;
+  text-align: right;
+  justify-content: right;
+  font-family: "Bebas Neue";
+}
+
+.menu {
+  display: none;
+}
 
 .icons {
   font-size: 2rem;
@@ -80,17 +96,41 @@
 .icons:hover {
   color: #088f8f;
 }
+
 .icons1 {
   font-size: 2rem;
   margin-right: 10px;
+
   color: #fff;
   cursor: pointer;
 }
-
-.icons1:hover {
+.icons0 {
+  font-size: 2rem;
+  margin-top: 5px;
+  color: #fff;
+}
+.icons0:hover {
   color: #088f8f;
 }
+.icons3 {
+  font-size: 2rem;
 
+  margin-right: 10px;
+  color: #fff;
+}
+.icons3:hover {
+  color: #088f8f;
+}
+.icons2 {
+  font-size: 2rem;
+
+  color: #fff;
+  margin-right: 10px;
+  margin-bottom: 12px;
+}
+.icons2:hover {
+  color: #088f8f;
+}
 .logo {
   margin-right: 20px;
   font-size: 2rem;
@@ -99,6 +139,9 @@
   position: left;
   position: 100px;
   font-family: Georgia, "Times New Roman", Times, serif;
+}
+.logo:hover {
+  color: #088f8f;
 }
 .logo1 {
   margin-left: 30px;
@@ -120,7 +163,7 @@
   align-items: center;
   -webkit-box-pack: end;
   -ms-flex-pack: end;
-  justify-content: flex-end;
+
   background: url(/images/image1.jpg) no-repeat;
 
   background-position: center;
@@ -128,7 +171,8 @@
   position: relative;
 }
 .btn1 {
-  display: inline-block;
+  display: flex;
+
   margin-top: 1rem;
   padding: 0.8rem 2.8rem;
   border-radius: 5rem;
@@ -136,13 +180,15 @@
   border: 0.2rem solid #fff;
   cursor: pointer;
   background: none;
-  color: #fff;
+  color: #4fa8bd;
   font-size: 1.7rem;
   overflow: hidden;
   z-index: 0;
-  position: relative;
+  position: center;
   font-weight: bold;
+  justify-content: center;
 }
+
 .btn1::before {
   content: "";
   position: absolute;
@@ -209,12 +255,19 @@
   width: 2000px;
   border-radius: 50%;
   margin-left: 15px;
+  margin-bottom: 100px;
 }
 .textAbout {
   text-align: justify;
   text-justify: inter-word;
-  margin-top: 50px;
+  margin-top: 100px;
   margin-left: 120px;
+  font-size: 25px;
+}
+.location {
+  margin-left: 50px;
+  display: flex;
+  height: 800px;
   font-size: 25px;
 }
 .locate {
@@ -226,6 +279,9 @@
   border-style: solid;
   border-width: 10px;
   border-color: #088f8f;
+}
+.locate_text {
+  font-size: 25px;
 }
 .direction {
   display: inline-block;
@@ -267,6 +323,11 @@
 .direction:hover {
   color: #088f8f;
 }
+.img2 {
+  height: 600px;
+  width: 700px;
+  border-radius: 20%;
+}
 
 @media (max-width: 991px) {
   .header {
@@ -289,7 +350,8 @@
 
 @media (max-width: 768px) {
   .btn1 {
-    display: inline-block;
+    position: center;
+    width: 400px;
   }
 
   .navbar {
@@ -318,17 +380,72 @@
     font-size: 25px;
   }
   .textAbout {
-    justify-content: center;
-    text-align: center;
+    text-align: justify;
     margin-top: 50px;
-    margin-left: 0px;
-    font-size: 19px;
+    margin-left: 20px;
+
+    font-size: 10px;
   }
   .image {
-    width: 500px;
+    width: 450px;
+    margin-top: 10px;
+    height: 100px;
   }
 
   .image img {
+    display: flex;
+    height: 150px;
+    width: 150px;
+  }
+  .wave {
+    position: absolute;
+    bottom: -180px;
+
+    left: 0;
+    width: 100%;
+    height: 12rem;
+  }
+  .menu {
+    display: inline-block;
+    font-size: 2rem;
+    margin-left: 2rem;
+    margin-bottom: -2px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .menu:hover {
+    color: #088f8f;
+  }
+
+  .bppsb {
     display: none;
+  }
+  .logo {
+    font-size: 1.5rem;
+  }
+  .icons {
+    font-size: 2rem;
+  }
+  .text {
+    margin-top: 10px;
+    font-size: 3em;
+  }
+  .img2 {
+    height: 300px;
+    width: 300px;
+  }
+
+  .locate_text {
+    text-align: justify;
+    justify-content: justify;
+    justify-items: center;
+    font-size: 12px;
+  }
+  .locate {
+    display: none;
+  }
+  .location {
+    height: 300px;
   }
 }

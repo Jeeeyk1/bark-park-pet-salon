@@ -10,8 +10,6 @@ import { Store } from "../utils/Store";
 import useStyles from "../utils/styles";
 import Productitem from "../components/Productitem";
 
-import { Pagination } from "@material-ui/lab";
-
 export default function Home(props) {
   const { topRatedProducts } = props;
   const classes = useStyles();
@@ -102,7 +100,6 @@ export default function Home(props) {
           ))}
         </Grid>
       </div>
-      <Pagination count={10}></Pagination>
     </Layout>
   );
 }
