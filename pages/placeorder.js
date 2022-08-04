@@ -42,6 +42,7 @@ function Placeorder() {
   );
   const shippingPrice = itemsPrice > 200 ? 0 : 15;
   const totalPrice = round2(itemsPrice + shippingPrice);
+
   useEffect(() => {
     if (!paymentMethod) {
       router.push("/payment");
