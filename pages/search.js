@@ -23,28 +23,31 @@ import { InputBase, IconButton } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { Pagination, Rating } from "@material-ui/lab";
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 3;
 const prices = [
   {
-    name: "1 to 50",
+    name: "$1 to $50",
     value: "1-50",
   },
   {
-    name: "51 to 200",
+    name: "$51 to $200",
     value: "51-200",
   },
   {
-    name: "201 to 1000",
+    name: "$201 to $1000",
     value: "201-1000",
   },
 ];
+
 const ratings = [1, 2, 3, 4, 5];
-function Search(props) {
+
+export default function Search(props) {
   const classes = useStyles();
   const router = useRouter();
   const {
     query = "all",
     category = "all",
+
     price = "all",
     rating = "all",
     sort = "featured",
@@ -54,6 +57,7 @@ function Search(props) {
   const filterSearch = ({
     page,
     category,
+    brand,
     sort,
     min,
     max,
@@ -64,25 +68,28 @@ function Search(props) {
     const path = router.pathname;
     const { query } = router;
     if (page) query.page = page;
-    if (sort) query.sort = sort;
     if (searchQuery) query.searchQuery = searchQuery;
+    if (sort) query.sort = sort;
     if (category) query.category = category;
+    if (brand) query.brand = brand;
     if (price) query.price = price;
     if (rating) query.rating = rating;
     if (min) query.min ? query.min : query.min === 0 ? 0 : min;
     if (max) query.max ? query.max : query.max === 0 ? 0 : max;
+
     router.push({
       pathname: path,
       query: query,
     });
   };
-  const { state, dispatch } = useContext(Store);
   const categoryHandler = (e) => {
     filterSearch({ category: e.target.value });
   };
   const pageHandler = (e, page) => {
+    console.log(query);
     filterSearch({ page });
   };
+
   const sortHandler = (e) => {
     filterSearch({ sort: e.target.value });
   };
@@ -92,16 +99,18 @@ function Search(props) {
   const ratingHandler = (e) => {
     filterSearch({ rating: e.target.value });
   };
+
+  const { state, dispatch } = useContext(Store);
   const addToCartHandler = async (product) => {
     const existItem = state.cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${product._id}`);
     if (data.countInStock < quantity) {
-      window.alert("Sorry, Product is out of stock");
+      window.alert("Sorry. Product is out of stock");
       return;
     }
     dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity } });
-    router.push("cart");
+    router.push("/cart");
   };
   const [query1, setQuery] = useState("");
   const queryChangeHandler = (e) => {
@@ -257,7 +266,6 @@ function Search(props) {
   );
 }
 
-export default Search;
 export async function getServerSideProps({ query }) {
   await db.connect();
   const pageSize = query.pageSize || PAGE_SIZE;

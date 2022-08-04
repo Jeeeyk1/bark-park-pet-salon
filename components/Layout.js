@@ -21,7 +21,7 @@ import { useRouter } from "next/router";
 import { red } from "@material-ui/core/colors";
 import { Store } from "../utils/Store";
 import useStyles from "../utils/styles";
-import Footer from "../pages/footer";
+import Footer from "../pages/footer1";
 import { HiShoppingCart } from "react-icons/hi";
 import { CgProfile } from "react-icons/cg";
 export default function Layout({ title, description, children }) {

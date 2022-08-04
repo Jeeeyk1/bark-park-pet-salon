@@ -1,20 +1,26 @@
 import { Box } from "@material-ui/core";
 import { Pagination } from "@material-ui/lab";
+import axios from "axios";
 
 import { useEffect, useState } from "react";
-
-import db from "../utils/db";
 
 const pageSize = 5;
 
 export default function AppPagination(props, { setProducts }) {
-  const topRatedProducts = props;
   const service = {
     getData: ({ from, to }) => {
       return new Promise((resolve, reject) => {
-        const data = topRatedProducts.slice(from, to);
+        const res = axios
+          .get("/api/products/")
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        const data = res.data.slice(from, to);
         resolve({
-          count: topRatedProducts.length,
+          count: res.length,
           data: data,
         });
       });
@@ -39,6 +45,9 @@ export default function AppPagination(props, { setProducts }) {
   }, [pagination.from]);
 
   const handlePageChange = (event, page) => {
+    const res = axios.get("/api/products/");
+
+    console.log(res.data);
     const from = (page - 1) * pageSize;
     const to = (page - 1) * pageSize + pageSize;
 
@@ -60,28 +69,4 @@ export default function AppPagination(props, { setProducts }) {
       ></Pagination>
     </Box>
   );
-}
-
-export async function getServerSideProps() {
-  await db.connect();
-  const featuredProductsDocs = await Products.find(
-    { isFeatured: true },
-    "-reviews"
-  )
-    .lean()
-
-    .limit(3);
-  const topRatedProductsDocs = await Products.find({}, "-reviews")
-    .lean()
-    .sort({
-      rating: -1,
-    })
-    .limit(6);
-  await db.disconnect();
-  return {
-    props: {
-      featuredProducts: featuredProductsDocs.map(db.convertDocToObj),
-      topRatedProducts: topRatedProductsDocs.map(db.convertDocToObj),
-    },
-  };
 }

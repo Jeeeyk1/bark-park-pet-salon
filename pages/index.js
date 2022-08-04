@@ -1,27 +1,32 @@
 /*eslint-disable @next/next/no-img-element*/
 import { Box, Link, Typography } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
 import styles from "../utils/style.module.css";
 import NextLink from "next/link";
 import Footer from "./footer";
 import db from "../utils/db";
 import Product from "../models/Product";
-
+import "aos/dist/aos.css";
 import Header from "../homepage/header";
 import Aboutus from "../homepage/aboutus";
 import Navbar from "../homepage/navbar";
 import Location from "../homepage/location";
+import Aos from "aos";
 
 export default function Homepage(props) {
   const { featuredProducts } = props;
-
+  useEffect(() => {
+    Aos.init({ duration: 2000 });
+  }, []);
   return (
     <div>
       <Navbar />
+
       <Header />
 
       <Box
+        data-aos="flip-right"
         display="flex"
         justifyContent={"center"}
         style={{
@@ -32,6 +37,7 @@ export default function Homepage(props) {
         <Typography className={styles.text}>Top rated Products</Typography>
       </Box>
       <Box
+        data-aos="flip-right"
         justifyContent={"center"}
         style={{
           textAlign: "center",
@@ -40,21 +46,21 @@ export default function Homepage(props) {
         }}
       >
         <Carousel animation="slide">
-          {featuredProducts.map((product) => (
+          {featuredProducts.map((products) => (
             <NextLink
-              key={product._id}
-              href={`/products/${product.slug}`}
+              key={products._id}
+              href={`/products/${products.slug}`}
               passHref
             >
               <Link>
                 <img
-                  src={product.image}
-                  alt={product.slug}
+                  src={products.image}
+                  alt={products.slug}
                   layout="responsive"
                   className={styles.img2}
                 />
 
-                <Typography className={styles.text}>{product.name}</Typography>
+                <Typography className={styles.text}>{products.name}</Typography>
               </Link>
             </NextLink>
           ))}
@@ -83,9 +89,11 @@ export default function Homepage(props) {
       >
         <Typography className={styles.text}>Located Us</Typography>
       </Box>
+
       <Box>
         <Location />
       </Box>
+
       <Footer />
     </div>
   );

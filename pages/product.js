@@ -4,11 +4,16 @@ import Layout from "../components/Layout";
 import db from "../utils/db";
 import Product from "../models/Product";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Store } from "../utils/Store";
 import useStyles from "../utils/styles";
 import Productitem from "../components/Productitem";
+
+import Pagination2 from "./pagination";
+import { Pagination } from "@material-ui/lab";
+
+const PAGE_SIZE = 6;
 
 export default function Home(props) {
   const { topRatedProducts } = props;
@@ -16,6 +21,28 @@ export default function Home(props) {
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
 
+  const [products, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage, setPostPerPage] = useState(6);
+
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const currentProducts = products.slice(indexOfFirstPost, indexOfLastPost);
+  const paginateOnchange = (e, value) => {
+    setCurrentPage(value);
+    console.log(indexOfFirstPost, indexOfLastPost);
+    console.log(currentProducts);
+  };
+  const pageNumbers = Math.ceil(products.length / postPerPage);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const res = await axios.get(`/api/products`);
+      setProducts(res.data);
+      console.log(res.data);
+    };
+
+    fetchProducts();
+  }, [currentPage]);
   const addToCartHandler = async (product) => {
     const existItem = state.cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
@@ -36,6 +63,8 @@ export default function Home(props) {
     e.preventDefault();
     router.push(`/search?query=${query}`);
   };
+
+  // Get current post
 
   return (
     <Layout>
@@ -90,7 +119,7 @@ export default function Home(props) {
 
         <h1>Products</h1>
         <Grid container spacing={1}>
-          {topRatedProducts.map((product) => (
+          {currentProducts.map((product) => (
             <Grid item md={4} key={product.name}>
               <Productitem
                 product={product}
@@ -100,11 +129,20 @@ export default function Home(props) {
           ))}
         </Grid>
       </div>
+      <Pagination count={pageNumbers} onChange={paginateOnchange}></Pagination>
     </Layout>
   );
 }
-export async function getServerSideProps() {
+export async function getServerSideProps({ query }) {
   await db.connect();
+
+  const pageSize = query.pageSize || PAGE_SIZE;
+  const page = query.page || 1;
+  const productDocs = await Product.find({}, "-reviews")
+
+    .skip(pageSize * (page - 1))
+    .limit(pageSize)
+    .lean();
   const featuredProductsDocs = await Product.find(
     { isFeatured: true },
     "-reviews"
@@ -113,16 +151,23 @@ export async function getServerSideProps() {
 
     .limit(3);
   const topRatedProductsDocs = await Product.find({}, "-reviews")
+    .skip(pageSize * (page - 1))
     .lean()
     .sort({
       rating: -1,
     })
-    .limit(6);
+    .limit(pageSize);
+
+  const countProducts = await Product.countDocuments({});
   await db.disconnect();
+  const products = productDocs.map(db.convertDocToObj);
   return {
     props: {
       featuredProducts: featuredProductsDocs.map(db.convertDocToObj),
       topRatedProducts: topRatedProductsDocs.map(db.convertDocToObj),
+      page,
+      products,
+      pages: Math.ceil(countProducts / pageSize),
     },
   };
 }

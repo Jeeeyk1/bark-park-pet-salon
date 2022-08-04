@@ -34,6 +34,7 @@
   left: 0;
   right: 0;
   z-index: 1000;
+  opacity: 1;
 }
 .active {
   background: #4fa8bd;
@@ -151,6 +152,7 @@
   position: left;
   position: 100px;
   text-decoration: none;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 
 .section1 {
@@ -171,22 +173,21 @@
   position: relative;
 }
 .btn1 {
-  display: flex;
-
-  margin-top: 1rem;
+  display: inline-block;
+  width: 700px;
+  text-align: center;
   padding: 0.8rem 2.8rem;
   border-radius: 5rem;
   border-top-left-radius: 0;
-  border: 0.2rem solid #fff;
+  border: 0.2rem solid #eee;
   cursor: pointer;
   background: none;
-  color: #4fa8bd;
+  color: #088f8f;
   font-size: 1.7rem;
   overflow: hidden;
   z-index: 0;
-  position: center;
+  position: relative;
   font-weight: bold;
-  justify-content: center;
 }
 
 .btn1::before {
@@ -330,6 +331,10 @@
 }
 
 @media (max-width: 991px) {
+  .wave {
+    position: absolute;
+    bottom: -206px;
+  }
   .header {
     padding: 2rem;
   }
@@ -447,5 +452,29 @@
   }
   .location {
     height: 300px;
+  }
+}
+
+@media (max-width: 500px) {
+  .section1 {
+    width: max-content;
+  }
+
+  .wave {
+    position: absolute;
+    bottom: -168px;
+    width: 505px;
+  }
+}
+
+@media (max-width: 420px) {
+  .section1 {
+    width: max-content;
+  }
+
+  .wave {
+    position: absolute;
+    bottom: -168px;
+    width: 505px;
   }
 }

@@ -66,7 +66,14 @@ function Order({ params }) {
     sales,
   } = order;
 
+  if (!order.isPaid) {
+    order.sales = order.totalPrice;
+  }
   useEffect(() => {
+    if (!order.isPaid) {
+      order.sales = order.totalPrice;
+    }
+
     if (!userInfo) {
       return router.push("/login");
     }
@@ -85,9 +92,6 @@ function Order({ params }) {
       fetchOrder();
     }
     console.log(sales);
-    if (!isPaid) {
-      order.sales = order.totalPrice;
-    }
   }, [order]);
 
   return (

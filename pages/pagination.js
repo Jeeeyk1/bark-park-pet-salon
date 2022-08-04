@@ -1,30 +1,25 @@
-/* eslint-disable react/jsx-key */
-import _ from "lodash";
+import { Pagination } from "@material-ui/lab";
+import React from "react";
 
-const Pagination = ({ items, pageSize, currentPage, onPageChange }) => {
-  const pageCount = items / pageSize;
-  if (Math.ceil(pageCount) === 1) return null;
+const Pagination2 = ({ postPerPage, totalPosts, paginate }) => {
+  const pageNumbers = [];
 
-  const pages = _.range(1, pageCount + 1);
-
+  for (let i = 1; i <= Math.ceil(totalPosts / postPerPage); i++) {
+    pageNumbers.push(i);
+  }
   return (
     <nav>
       <ul className="pagination">
-        {pages.map((page) => (
-          <li
-            key={page}
-            className={page === currentPage ? "page-item active" : "page-item"}
-          >
-            <a onClick={() => onPageChange(page)} className="" href="page-link">
-              {" "}
-              {page}
+        {pageNumbers.map((number) => (
+          <li key={number} className="page-item">
+            <a onClick={() => paginate(number)} href="" className="page-link">
+              {number}
             </a>
           </li>
         ))}
       </ul>
-      asdasd
     </nav>
   );
 };
 
-export default Pagination;
+export default Pagination2;

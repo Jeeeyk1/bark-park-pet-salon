@@ -1,13 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
 import { Box, Button, Link, Typography } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "../utils/style.module.css";
 import NextLink from "next/link";
+import Aos from "aos";
+
+import "aos/dist/aos.css";
 const Location = () => {
+  useEffect(() => {
+    Aos.init({ duration: 3000 });
+  }, []);
   return (
     <div>
       <Box className={styles.location}>
-        <div>
+        <div data-aos="fade-right">
           <Typography className={styles.locate_text}>
             <br />
             <br />
@@ -29,7 +35,12 @@ const Location = () => {
             </NextLink>
           </Link>
         </div>
-        <img src="images/Locate.jpg" alt="" className={styles.locate}></img>
+        <img
+          data-aos="fade-left"
+          src="images/Locate.jpg"
+          alt=""
+          className={styles.locate}
+        ></img>
       </Box>
     </div>
   );
