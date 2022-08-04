@@ -27,23 +27,24 @@ export default function Homepage(props) {
 
       <Box
         data-aos="flip-right"
-        display="flex"
         justifyContent={"center"}
         style={{
+          display: "contents",
           textAlign: "center",
           p: 4,
+          marginBottom: "150px",
         }}
       >
         <Typography className={styles.text}>Top rated Products</Typography>
       </Box>
-      <Box
-        data-aos="flip-right"
-        justifyContent={"center"}
+      <div
         style={{
+          display: "contents",
           textAlign: "center",
-
-          marginBottom: "100px",
+          p: 4,
+          marginBottom: "150px",
         }}
+        data-aos="flip-right"
       >
         <Carousel animation="slide">
           {featuredProducts.map((products) => (
@@ -65,7 +66,7 @@ export default function Homepage(props) {
             </NextLink>
           ))}
         </Carousel>
-      </Box>
+      </div>
 
       <Box
         display="flex"

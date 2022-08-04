@@ -10,7 +10,7 @@ import {
 import React from "react";
 import NextLink from "next/link";
 import Rating from "@material-ui/lab/Rating";
-
+import styles from "../utils/style.module.css";
 function Productitem({ product, addToCartHandler }) {
   return (
     <div>
@@ -38,13 +38,7 @@ function Productitem({ product, addToCartHandler }) {
             ₱{product.price}
           </Typography>
           <Button
-            style={{
-              height: "70px",
-              width: "300px",
-              borderRadius: 10,
-              fontSize: "25px",
-              fontWeight: "bolder",
-            }}
+            className={styles.cartBtn}
             variant="contained"
             size="small"
             color="primary"

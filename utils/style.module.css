@@ -60,6 +60,13 @@
   -webkit-transform: translateY(0rem);
   transform: translateY(0rem);
 }
+.cartBtn {
+  height: 80px;
+  width: 300px;
+  font-size: 25px;
+  font-weight: bolder;
+  border-radius: 10%;
+}
 .navbar a {
   margin: 0 1rem;
   font-size: 1.7rem;
@@ -71,7 +78,7 @@
 }
 .text {
   font-size: 75px;
-  font-family: Bebas Neue;
+  font-family: "Bebas Neue";
 }
 .bppsb {
   font-size: 6rem;
@@ -325,6 +332,9 @@
   color: #088f8f;
 }
 .img2 {
+  justify-items: center;
+  align-items: center;
+
   height: 600px;
   width: 700px;
   border-radius: 20%;
@@ -465,6 +475,13 @@
     bottom: -168px;
     width: 505px;
   }
+  .cartBtn {
+    height: 80px;
+    width: 300px;
+    font-size: 25px;
+    font-weight: bolder;
+    border-radius: 10%;
+  }
 }
 
 @media (max-width: 420px) {
@@ -476,5 +493,27 @@
     position: absolute;
     bottom: -168px;
     width: 505px;
+  }
+  .logo1 {
+    margin-left: 30px;
+    font-size: 1rem;
+    color: #130f40;
+    font-weight: bolder;
+    position: left;
+    position: 100px;
+    text-decoration: none;
+    font-family: Georgia, "Times New Roman", Times, serif;
+  }
+  .icons3 {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 350px) {
+  .cartBtn {
+    height: 80px;
+    width: 200px;
+    font-size: 25px;
+    font-weight: bolder;
+    border-radius: 10%;
   }
 }
