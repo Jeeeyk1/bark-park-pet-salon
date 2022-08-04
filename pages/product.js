@@ -10,20 +10,18 @@ import { Store } from "../utils/Store";
 import useStyles from "../utils/styles";
 import Productitem from "../components/Productitem";
 
-import Pagination2 from "./pagination";
 import { Pagination } from "@material-ui/lab";
 
 const PAGE_SIZE = 6;
 
-export default function Home(props) {
-  const { topRatedProducts } = props;
+export default function Home() {
   const classes = useStyles();
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
 
   const [products, setProducts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage, setPostPerPage] = useState(6);
+  const [postPerPage] = useState(6);
 
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
