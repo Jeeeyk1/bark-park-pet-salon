@@ -17,7 +17,7 @@ import Aos from "aos";
 export default function Homepage(props) {
   const { featuredProducts } = props;
   useEffect(() => {
-    Aos.init({ duration: 2000 });
+    Aos.init({ duration: 2500 });
   }, []);
   return (
     <div>
