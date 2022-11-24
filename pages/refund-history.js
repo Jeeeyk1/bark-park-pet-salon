@@ -1,5 +1,5 @@
 import axios from "axios";
-import dynamic from "next/dynamic";
+
 import { useRouter } from "next/router";
 import NexLink from "next/link";
 import React, { useEffect, useContext, useReducer } from "react";
@@ -37,7 +37,7 @@ function reducer(state, action) {
   }
 }
 
-function OrderHistory() {
+export default function RefundHistory() {
   const { state } = useContext(Store);
   const router = useRouter();
   const classes = useStyles();
@@ -207,5 +207,3 @@ function OrderHistory() {
     </Layout>
   );
 }
-
-export default dynamic(() => Promise.resolve(OrderHistory), { ssr: false });

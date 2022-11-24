@@ -17,7 +17,7 @@ import {
 } from "@material-ui/core";
 import styles from "../../utils/style.module.css";
 import React, { useContext, useEffect, useReducer } from "react";
-import dynamic from "next/dynamic";
+
 import Layout from "../../components/Layout";
 import { Store } from "../../utils/Store";
 import NextLink from "next/link";
@@ -68,7 +68,7 @@ function reducer(state, action) {
   }
 }
 
-function Order({ params }) {
+export default function RefundInfo({ params }) {
   const { enqueueSnackbar } = useSnackbar();
   const orderId = params.id;
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
@@ -470,5 +470,3 @@ function Order({ params }) {
 export async function getServerSideProps({ params }) {
   return { props: { params } };
 }
-
-export default dynamic(() => Promise.resolve(Order), { ssr: false });

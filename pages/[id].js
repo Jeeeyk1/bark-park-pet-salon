@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
 import Layout from "../components/Layout";
-import dynamic from "next/dynamic";
+
 import { Store } from "../utils/Store";
 import Cookies from "js-cookie";
 import {
@@ -30,7 +30,7 @@ function reducer(state, action) {
       state;
   }
 }
-function Gcash({ params }) {
+export default function Gcash({ params }) {
   const orderId = params.id;
   const { state } = useContext(Store);
   const { userInfo } = state;
@@ -155,5 +155,3 @@ function Gcash({ params }) {
 export async function getServerSideProps({ params }) {
   return { props: { params } };
 }
-
-export default dynamic(() => Promise.resolve(Gcash), { ssr: false });

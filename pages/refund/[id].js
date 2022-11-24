@@ -10,7 +10,7 @@ import {
 import { Controller, useForm } from "react-hook-form";
 
 import React, { useContext, useEffect, useReducer } from "react";
-import dynamic from "next/dynamic";
+
 import Layout from "../../components/Layout";
 import { Store } from "../../utils/Store";
 
@@ -34,7 +34,7 @@ function reducer(state, action) {
   }
 }
 
-function Order({ params }) {
+export default function RefundRequest({ params }) {
   const {
     handleSubmit,
     control,
@@ -189,5 +189,3 @@ function Order({ params }) {
 export async function getServerSideProps({ params }) {
   return { props: { params } };
 }
-
-export default dynamic(() => Promise.resolve(Order), { ssr: false });
