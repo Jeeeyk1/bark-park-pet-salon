@@ -20,7 +20,7 @@ handler.put(async (req, res) => {
     res.send({ message: "Refund request submitted!", order: description });
   } else {
     await db.disconnect();
-    res.status(404).send({ message: "order not found" });
+    res.status(404).send({ message: "refund not found" });
   }
 });
 
