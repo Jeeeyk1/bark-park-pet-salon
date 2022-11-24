@@ -20,6 +20,7 @@ import useStyles from "../../utils/styles";
 import { getError } from "../../utils/error";
 import axios from "axios";
 import { useSnackbar } from "notistack";
+import dynamic from "next/dynamic";
 function reducer(state, action) {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -34,7 +35,7 @@ function reducer(state, action) {
   }
 }
 
-export default function RefundRequest({ params }) {
+function RefundRequest({ params }) {
   const {
     handleSubmit,
     control,
@@ -186,6 +187,7 @@ export default function RefundRequest({ params }) {
     </Layout>
   );
 }
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
   return { props: { params } };
 }
+export default dynamic(() => Promise.resolve(RefundRequest), { ssr: false });

@@ -29,6 +29,7 @@ import { getError } from "../../utils/error";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import { usePayPalScriptReducer, PayPalButtons } from "@paypal/react-paypal-js";
+import dynamic from "next/dynamic";
 function reducer(state, action) {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -68,7 +69,7 @@ function reducer(state, action) {
   }
 }
 
-export default function RefundInfo({ params }) {
+function RefundInfo({ params }) {
   const { enqueueSnackbar } = useSnackbar();
   const orderId = params.id;
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
@@ -470,3 +471,4 @@ export default function RefundInfo({ params }) {
 export async function getServerSideProps({ params }) {
   return { props: { params } };
 }
+export default dynamic(() => Promise.resolve(RefundInfo), { ssr: false });

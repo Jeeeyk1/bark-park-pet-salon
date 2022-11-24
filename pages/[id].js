@@ -152,6 +152,6 @@ export default function Gcash({ params }) {
   );
 }
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
   return { props: { params } };
 }
