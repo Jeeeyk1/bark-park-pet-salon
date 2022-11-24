@@ -186,3 +186,6 @@ export default function RefundRequest({ params }) {
     </Layout>
   );
 }
+export async function getServerSideProps({ params }) {
+  return { props: { params } };
+}

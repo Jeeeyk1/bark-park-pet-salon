@@ -151,3 +151,7 @@ export default function Gcash({ params }) {
     </Layout>
   );
 }
+
+export async function getServerSideProps({ params }) {
+  return { props: { params } };
+}
