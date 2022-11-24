@@ -184,7 +184,7 @@ export default function RefundHistory() {
                               <TableCell>
                                 {" "}
                                 <NexLink
-                                  href={`/refundPage/${order._id}`}
+                                  href={`/refund/refundPage/${order._id}`}
                                   passHref
                                 >
                                   <Button variant="contained">Details </Button>

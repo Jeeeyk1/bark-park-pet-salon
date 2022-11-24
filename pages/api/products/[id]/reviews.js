@@ -1,4 +1,3 @@
-// /api/products/:id/reviews
 import mongoose from "mongoose";
 import nextConnect from "next-connect";
 import { onError } from "../../../../utils/error";
