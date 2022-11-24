@@ -16,6 +16,7 @@ import { getError } from "../utils/error";
 import styles from "../utils/style.module.css";
 import { Controller, useForm } from "react-hook-form";
 import { useSnackbar } from "notistack";
+import dynamic from "next/dynamic";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -30,7 +31,7 @@ function reducer(state, action) {
       state;
   }
 }
-export default function Gcash({ params }) {
+function Gcash({ params }) {
   const orderId = params.id;
   const { state } = useContext(Store);
   const { userInfo } = state;
@@ -152,6 +153,8 @@ export default function Gcash({ params }) {
   );
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   return { props: { params } };
 }
+
+export default dynamic(() => Promise.resolve(Gcash), { ssr: false });

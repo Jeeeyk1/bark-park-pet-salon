@@ -471,4 +471,4 @@ function RefundInfo({ params }) {
 export async function getServerSideProps({ params }) {
   return { props: { params } };
 }
-export default dynamic(() => Promise.resolve(RefundInfo), { ssr: false });
+export default dynamic(() => Promise.resolve(RefundInfo), { ssr: true });
