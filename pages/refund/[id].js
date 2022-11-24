@@ -187,7 +187,7 @@ function RefundRequest({ params }) {
     </Layout>
   );
 }
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   return { props: { params } };
 }
 export default dynamic(() => Promise.resolve(RefundRequest), { ssr: false });
