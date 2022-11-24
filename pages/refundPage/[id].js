@@ -467,6 +467,3 @@ export default function RefundInfo({ params }) {
     </Layout>
   );
 }
-export async function getServerSideProps({ params }) {
-  return { props: { params } };
-}
