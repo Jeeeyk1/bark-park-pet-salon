@@ -82,6 +82,11 @@ function OrderHistory() {
                   <ListItemText primary="Order History"></ListItemText>
                 </ListItem>
               </NexLink>
+              <NexLink href="/refund-history" passHref>
+                <ListItem button component="a">
+                  <ListItemText primary="Refund History"></ListItemText>
+                </ListItem>
+              </NexLink>
             </List>
           </Card>
         </Grid>
@@ -103,12 +108,48 @@ function OrderHistory() {
                     <Table>
                       <TableHead>
                         <TableRow>
-                          <TableCell>ID</TableCell>
-                          <TableCell>DATE</TableCell>
-                          <TableCell>TOTAL</TableCell>
-                          <TableCell>PAID</TableCell>
-                          <TableCell>DELIVERED</TableCell>
-                          <TableCell>ACTION</TableCell>
+                          <TableCell
+                            style={{
+                              fontWeight: "bold",
+                            }}
+                          >
+                            ID
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              fontWeight: "bold",
+                            }}
+                          >
+                            DATE
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              fontWeight: "bold",
+                            }}
+                          >
+                            TOTAL
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              fontWeight: "bold",
+                            }}
+                          >
+                            PAID
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              fontWeight: "bold",
+                            }}
+                          >
+                            DELIVERED
+                          </TableCell>
+                          <TableCell
+                            style={{
+                              fontWeight: "bold",
+                            }}
+                          >
+                            ACTION
+                          </TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>

@@ -109,7 +109,9 @@ export default function ProductScreen(props) {
               </Typography>
             </ListItem>
             <ListItem>
-              <Typography>Category: {product.category}</Typography>
+              <Typography>
+                <strong>Category</strong>: {product.category}
+              </Typography>
             </ListItem>
             <ListItem>
               <Rating value={product.rating} readOnly></Rating>
@@ -119,7 +121,9 @@ export default function ProductScreen(props) {
             </ListItem>
 
             <ListItem>
-              <Typography>Description: {product.description}</Typography>
+              <Typography>
+                <strong>Description</strong>: The best food for your pets!
+              </Typography>
             </ListItem>
           </List>
         </Grid>
@@ -132,7 +136,7 @@ export default function ProductScreen(props) {
                     <Typography>Price</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography>{product.price}</Typography>
+                    <strong>{product.price}</strong>
                   </Grid>
                 </Grid>
               </ListItem>

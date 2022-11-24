@@ -9,11 +9,18 @@ import {
 import React from "react";
 import NextLink from "next/link";
 import styles from "../utils/style.module.css";
+import Aos from "aos";
+import "aos/dist/aos.css";
+import { useEffect } from "react";
+
 function Services() {
+  useEffect(() => {
+    Aos.init({ duration: 2500 });
+  }, []);
   return (
-    <Container className={styles.services}>
+    <Container className={styles.services} data-aos="flip-down">
       <Card className={styles.box}>
-        <NextLink href="" passHref>
+        <NextLink href="../boarding" passHref>
           <CardActionArea>
             <CardMedia
               style={{
@@ -32,7 +39,7 @@ function Services() {
         </NextLink>
       </Card>
       <Card className={styles.box}>
-        <NextLink href="" passHref>
+        <NextLink href="../grooming" passHref>
           <CardActionArea>
             <CardMedia
               style={{

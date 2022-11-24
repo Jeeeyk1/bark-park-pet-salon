@@ -28,6 +28,7 @@ const Aboutus = () => {
         online and physical store to provide and ensure everything that a pet
         owners need for a long and happy life.
         <br /> nextline
+        <br />
       </Typography>
     </div>
   );

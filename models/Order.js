@@ -15,21 +15,39 @@ const orderSchema = new mongoose.Schema(
         price: { type: Number, required: true },
       },
     ],
-    shippingAdress: {
-      fullName: { type: String, required: false },
-      address: { type: String, required: false },
-      zipCode: { type: Number, required: false },
+    shippingAddress: {
+      fullName: { type: String, required: true },
+      address: { type: String, required: true },
+      zipCode: { type: Number, required: true },
+      contactNumber: { type: Number, required: true },
+      city: { type: String, reuireq: true },
+      barangay: { type: String, required: true },
     },
 
     paymentMethod: { type: String, required: true },
+    paymentResult: { id: String, status: String, email_address: String },
     itemsPrice: { type: Number, required: true },
     shippingPrice: { type: Number, required: true },
     totalPrice: { type: Number, required: true },
+    totalSales: { type: Number, required: false },
     isPaid: { type: Boolean, required: true, default: false },
     isDelivered: { type: Boolean, required: true, default: false },
-    paidAt: { type: Date },
     deliveredAt: { type: Date },
+    paidAt: { type: Date },
+    isApproved: { type: Boolean, required: false, default: false },
+    numberOfRefundRequests: { type: Number, required: false, default: 0 },
+    approvedAt: { type: Date },
+    applyRefund: { type: Boolean, required: true, default: false },
+    appliedAt: { type: Date, required: false },
+    description: { type: String, required: false },
+    status: { type: String, required: true, default: "pending" },
+
+    referenceNumber: {
+      type: Number,
+      required: false,
+    },
   },
+
   {
     timestamps: true,
   }

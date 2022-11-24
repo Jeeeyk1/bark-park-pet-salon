@@ -25,18 +25,19 @@ export default function Footer() {
           </a>{" "}
         </li>
       </ul>
+
       <ul className={styles.menu}>
         <li>
-          <a href="#">Home</a>
+          <a href="\">Home</a>
         </li>
         <li>
-          <a href="#">Products</a>
+          <a href="\product">Products</a>
         </li>
         <li>
-          <a href="#">Categories</a>
+          <a href="\search">Categories</a>
         </li>
         <li>
-          <a href="#">Services</a>
+          <a href="\services">Services</a>
         </li>
       </ul>
       <p className={styles.p1}>

@@ -23,13 +23,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
     textAlign: "center",
   },
-  navbar: {
-    backgroundColor: "#4fa8bd",
-    "& a": {
-      color: "#ffffff",
-      marginLeft: 10,
-    },
-  },
+
   brand1: {
     fontWeight: "bold",
     fontSize: "1.5rem",
@@ -54,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 10,
     textAlign: "center",
   },
+  fullWidth: {
+    width: "100%",
+  },
   section: {
     marginTop: 10,
     marginBottom: 10,
@@ -62,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   section2: {
     marginTop: 10,
     marginBottom: 10,
-    color: "#088F8F",
+
     fontWeight: "bold",
   },
   form: {
@@ -146,19 +143,13 @@ const useStyles = makeStyles((theme) => ({
       alignItems: "center",
     },
   },
-  boxC: {
-    display: "flex",
-    alignText: "right",
-    flexDirection: "column",
-    justifyContent: "right",
-    maWidth: 420,
-    padding: "30px",
-  },
+
   boxD: {
     alignText: "center",
-    marginTop: "100px",
-    [theme.breakpoints.up("md")]: {
-      padding: "40px 0px 40px 0px",
+    marginBottom: "100px",
+
+    [theme.breakpoints.down("md")]: {
+      display: "none",
     },
     display: "flex",
     justifyContent: "center",
@@ -166,8 +157,6 @@ const useStyles = makeStyles((theme) => ({
     padding: "20px 0px 20px 0px",
 
     background: "rgba(91, 218, 255, .1)",
-
-    height: "100%",
   },
   titleB: {
     textAlign: "center",
@@ -184,9 +173,10 @@ const useStyles = makeStyles((theme) => ({
   message: {
     fontSize: "1.5rem",
     fontFamily: "Bebas Neue",
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.down("md")]: {
       fontSize: "3rem",
       textAlign: "center",
+      display: "none",
     },
     [theme.breakpoints.up("sm")]: {
       fontSize: "2rem",

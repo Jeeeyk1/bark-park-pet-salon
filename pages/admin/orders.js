@@ -3,6 +3,11 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
 import React, { useEffect, useContext, useReducer } from "react";
+import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import Inventory2Icon from "@mui/icons-material/Inventory2";
+import LocalShippingSharpIcon from "@mui/icons-material/LocalShippingSharp";
 import {
   CircularProgress,
   Grid,
@@ -70,26 +75,50 @@ function AdminOrders() {
     <Layout title="Orders">
       <Grid container spacing={1}>
         <Grid item md={3} xs={12}>
-          <Card className={classes.section}>
+          <br />
+          <br />
+
+          {userInfo ? (
+            <Typography variant="h1">
+              <AdminPanelSettingsIcon />
+              <span style={{ fontWeight: "bold" }}>Admin:</span> {userInfo.name}
+            </Typography>
+          ) : (
+            <Typography>Logging out.....</Typography>
+          )}
+          <br />
+
+          <Card className={classes.section2}>
             <List>
+              <br />
               <NextLink href="/admin/dashboard" passHref>
                 <ListItem button component="a">
+                  <DashboardCustomizeIcon />
                   <ListItemText primary="Admin Dashboard"></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href="/admin/orders" passHref>
                 <ListItem selected button component="a">
+                  <LocalShippingSharpIcon />
                   <ListItemText primary="Orders"></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href="/admin/products" passHref>
                 <ListItem button component="a">
+                  <Inventory2Icon />
                   <ListItemText primary="Products"></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href="/admin/users" passHref>
                 <ListItem button component="a">
+                  <PeopleAltIcon />
                   <ListItemText primary="Users"></ListItemText>
+                </ListItem>
+              </NextLink>
+              <NextLink href="/admin/refund" passHref>
+                <ListItem button component="a">
+                  <PeopleAltIcon />
+                  <ListItemText primary="Refund requests"></ListItemText>
                 </ListItem>
               </NextLink>
             </List>
@@ -125,7 +154,6 @@ function AdminOrders() {
                           <TableCell
                             style={{
                               fontWeight: "bold",
-                              fontSize: "1rem",
                             }}
                           >
                             USER
@@ -133,7 +161,6 @@ function AdminOrders() {
                           <TableCell
                             style={{
                               fontWeight: "bold",
-                              fontSize: "1rem",
                             }}
                           >
                             DATE
@@ -175,48 +202,20 @@ function AdminOrders() {
                       <TableBody>
                         {orders.map((order) => (
                           <TableRow key={order._id}>
-                            <TableCell
-                              style={{
-                                fontWeight: "bold",
-                              }}
-                            >
+                            <TableCell style={{}}>
                               {order._id.substring(20, 24)}
                             </TableCell>
-                            <TableCell
-                              style={{
-                                fontWeight: "bold",
-                              }}
-                            >
+                            <TableCell style={{}}>
                               {order.user ? order.user.name : "DELETED USER"}
                             </TableCell>
-                            <TableCell
-                              style={{
-                                fontWeight: "bold",
-                              }}
-                            >
-                              {order.createdAt}
-                            </TableCell>
-                            <TableCell
-                              style={{
-                                fontWeight: "bold",
-                              }}
-                            >
-                              {order.totalPrice}
-                            </TableCell>
-                            <TableCell
-                              style={{
-                                fontWeight: "bold",
-                              }}
-                            >
+                            <TableCell style={{}}>{order.createdAt}</TableCell>
+                            <TableCell style={{}}>{order.totalPrice}</TableCell>
+                            <TableCell style={{}}>
                               {order.isPaid
                                 ? `paid at ${order.paidAt}`
                                 : "not paid"}
                             </TableCell>
-                            <TableCell
-                              style={{
-                                fontWeight: "bold",
-                              }}
-                            >
+                            <TableCell>
                               {order.isDelivered
                                 ? `delivered at ${order.deliveredAt}`
                                 : "not delivered"}
@@ -229,9 +228,11 @@ function AdminOrders() {
                               <NextLink href={`/order/${order._id}`} passHref>
                                 <Button
                                   style={{
-                                    fontWeight: "bold",
+                                    fontWeight: "bolder",
+                                    backgroundColor: "#24a0ed",
+                                    color: "#ffff",
                                   }}
-                                  variant="contained"
+                                  variant="outlined"
                                 >
                                   Details
                                 </Button>

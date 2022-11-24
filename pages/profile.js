@@ -80,6 +80,11 @@ function Profile() {
                   <ListItemText primary="Order History"></ListItemText>
                 </ListItem>
               </NexLink>
+              <NexLink href="/refund-history" passHref>
+                <ListItem button component="a">
+                  <ListItemText primary="Refund History"></ListItemText>
+                </ListItem>
+              </NexLink>
             </List>
           </Card>
         </Grid>

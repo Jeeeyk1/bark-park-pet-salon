@@ -13,6 +13,7 @@ import Aboutus from "../homepage/aboutus";
 import Navbar from "../homepage/navbar";
 import Location from "../homepage/location";
 import Aos from "aos";
+import Header1 from "../homepage/header1";
 
 export default function Homepage(props) {
   const { featuredProducts } = props;
@@ -24,9 +25,8 @@ export default function Homepage(props) {
       <Navbar />
 
       <Header />
-
+      <Header1 />
       <Box
-        data-aos="flip-right"
         justifyContent={"center"}
         style={{
           display: "contents",
@@ -35,18 +35,19 @@ export default function Homepage(props) {
           marginBottom: "150px",
         }}
       >
-        <Typography className={styles.text}>Top rated Products</Typography>
+        <Typography data-aos="flip-right" className={styles.text}>
+          Top rated Products
+        </Typography>
       </Box>
-      <div
+      <Box
         style={{
           display: "contents",
           textAlign: "center",
           p: 4,
           marginBottom: "150px",
         }}
-        data-aos="flip-right"
       >
-        <Carousel animation="slide">
+        <Carousel animation="fade">
           {featuredProducts.map((products) => (
             <NextLink
               key={products._id}
@@ -55,18 +56,21 @@ export default function Homepage(props) {
             >
               <Link>
                 <img
+                  data-aos="flip-right"
                   src={products.image}
                   alt={products.slug}
                   layout="responsive"
                   className={styles.img2}
                 />
 
-                <Typography className={styles.text}>{products.name}</Typography>
+                <Typography data-aos="flip-right" className={styles.text}>
+                  {products.name}
+                </Typography>
               </Link>
             </NextLink>
           ))}
         </Carousel>
-      </div>
+      </Box>
 
       <Box
         display="flex"
@@ -74,6 +78,7 @@ export default function Homepage(props) {
         style={{
           textAlign: "center",
           p: 4,
+          marginTop: "100px",
         }}
       >
         <Typography className={styles.text}> About us</Typography>
@@ -85,10 +90,17 @@ export default function Homepage(props) {
         justifyContent={"center"}
         style={{
           textAlign: "center",
-          marginTop: "100px",
+          marginTop: "250px",
         }}
       >
-        <Typography className={styles.text}>Located Us</Typography>
+        <Typography
+          className={styles.text}
+          styles={{
+            marginTop: "100px",
+          }}
+        >
+          Locate Us
+        </Typography>
       </Box>
 
       <Box>

@@ -13,6 +13,11 @@ import {
   Menu,
   MenuItem,
 } from "@material-ui/core";
+import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import PersonPinIcon from "@mui/icons-material/PersonPin";
+import LogoutIcon from "@mui/icons-material/Logout";
+import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
 import { FaPaw } from "react-icons/fa";
 import NextLink from "next/link";
 import styles from "../utils/style.module.css";
@@ -44,7 +49,7 @@ export default function Layout({ title, description, children }) {
     palette: {
       type: darkMode ? "dark" : "light",
       primary: {
-        main: "#4fa8bd",
+        main: "#24a0ed",
       },
       secondary: {
         main: "#208080",
@@ -86,7 +91,7 @@ export default function Layout({ title, description, children }) {
       <ThemeProvider theme={theme}>
         <CssBaseline />
 
-        <AppBar position="static" className={classes.navbar}>
+        <AppBar position="static" className={styles.navbar1}>
           <Toolbar>
             <NextLink href="/" passHref>
               <Link>
@@ -97,7 +102,7 @@ export default function Layout({ title, description, children }) {
               </Link>
             </NextLink>
             <div className={classes.grow}></div>
-            <div className={styles.icons1}>
+            <div>
               <NextLink href="/cart" passHref>
                 <Link>
                   {cart.cartItems.length > 0 && userInfo ? (
@@ -105,10 +110,10 @@ export default function Layout({ title, description, children }) {
                       color="secondary"
                       badgeContent={cart.cartItems.length}
                     >
-                      <HiShoppingCart className={styles.icons2} />
+                      <HiShoppingCart className={styles.icon} />
                     </Badge>
                   ) : (
-                    <HiShoppingCart className={styles.icons3} />
+                    <HiShoppingCart className={styles.icons0} />
                   )}
                 </Link>
               </NextLink>
@@ -119,7 +124,7 @@ export default function Layout({ title, description, children }) {
                     aria-haspopup="true"
                     onClick={loginClickHandler}
                   >
-                    <CgProfile className={styles.icons2} />
+                    <CgProfile className={styles.icon} />
                   </Button>
                   <Menu
                     id="simple-menu"
@@ -131,6 +136,7 @@ export default function Layout({ title, description, children }) {
                     <MenuItem
                       onClick={(e) => loginMenuCloseHandler(e, "/profile")}
                     >
+                      <PersonPinIcon />
                       Profile
                     </MenuItem>
                     <MenuItem
@@ -138,24 +144,39 @@ export default function Layout({ title, description, children }) {
                         loginMenuCloseHandler(e, "/order-history")
                       }
                     >
+                      <WorkHistoryIcon />
                       Order History
                     </MenuItem>
+                    {!userInfo.isAdmin && (
+                      <MenuItem
+                        onClick={(e) =>
+                          loginMenuCloseHandler(e, "/refund-history")
+                        }
+                      >
+                        <AssignmentReturnIcon />
+                        Refund History
+                      </MenuItem>
+                    )}
+
                     {userInfo.isAdmin && (
                       <MenuItem
                         onClick={(e) =>
                           loginMenuCloseHandler(e, "/admin/dashboard")
                         }
                       >
-                        Admin Dashboard
+                        <AdminPanelSettingsIcon /> Admin Dashboard
                       </MenuItem>
                     )}
-                    <MenuItem onClick={logoutMenuCloseHandler}>Logout</MenuItem>
+                    <MenuItem onClick={logoutMenuCloseHandler}>
+                      <LogoutIcon />
+                      Logout
+                    </MenuItem>
                   </Menu>
                 </>
               ) : (
                 <NextLink href="/login" passHref>
                   <Link>
-                    <CgProfile className={styles.icons3} />
+                    <CgProfile className={styles.icons0} />
                   </Link>
                 </NextLink>
               )}

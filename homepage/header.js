@@ -3,7 +3,6 @@
 import {
   Box,
   Button,
-  Collapse,
   Container,
   Link,
   Slide,
@@ -15,7 +14,7 @@ import NextLink from "next/link";
 import styles from "../utils/style.module.css";
 function Header() {
   const classes = useStyles();
-  const [checked, setChecked] = useState(false);
+
   const messages = [
     "Welcome to Bark Park Pet Salon Baguio!",
     "Hope you enjoy our first Official Website",
@@ -39,11 +38,31 @@ function Header() {
       clearInterval(intervalId);
     };
   }, []);
-  useEffect(() => {
-    setChecked(true);
-  }, []);
+
   return (
-    <div style={{ marginTop: "100px" }}>
+    <div>
+      <Container maxWidth="100vh" className={styles.section1}>
+        <img
+          src="images/landing-3.png"
+          alt="homepage"
+          className={styles.homeImg}
+        ></img>{" "}
+        <div className={styles.boxC}>
+          <Typography className={styles.bppsb}>
+            Bark Park Pet Salon Baguio
+          </Typography>
+          <h1 className={styles.textP}>The best place for your pets! </h1>
+          <h4 className={styles.textP}>
+            BARKPACK OFFERS A COMPLETE PACKAGE FOR YOUR PET.
+          </h4>
+
+          <Link>
+            <NextLink href="/product" passHref>
+              <Button className={styles.btn1}>Shop Now</Button>
+            </NextLink>
+          </Link>
+        </div>
+      </Container>
       <Box className={classes.boxD}>
         <Slide
           in={show}
@@ -60,27 +79,6 @@ function Header() {
           </Box>
         </Slide>
       </Box>
-
-      <Container maxWidth="100vh" className={styles.section1}>
-        <Box className={classes.boxC}>
-          <Collapse
-            in={checked}
-            {...(checked ? { timeout: 2000 } : {})}
-            collapsedHeight={15}
-          >
-            <Typography className={styles.bppsb}>
-              Bark Park Pet Salon Baguio
-            </Typography>
-          </Collapse>
-          <Link>
-            <NextLink href="/product" passHref>
-              <Button className={styles.btn1}>Shop Now</Button>
-            </NextLink>
-          </Link>
-        </Box>
-      </Container>
-
-      <img src="/images/bottom_wave.png" className={styles.wave} alt=""></img>
     </div>
   );
 }

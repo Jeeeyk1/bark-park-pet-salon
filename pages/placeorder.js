@@ -40,7 +40,8 @@ function Placeorder() {
   const itemsPrice = round2(
     cartItems.reduce((a, c) => a + c.price * c.quantity, 0)
   );
-  const shippingPrice = itemsPrice > 200 ? 0 : 15;
+
+  const shippingPrice = 75;
   const totalPrice = round2(itemsPrice + shippingPrice);
 
   useEffect(() => {
@@ -55,11 +56,7 @@ function Placeorder() {
   const [loading, setLoading] = useState(false);
   const placeOrderHandler = async () => {
     closeSnackbar();
-    console.log(
-      shippingAddress.fullName,
-      shippingAddress.zipCode,
-      shippingAddress.address
-    );
+
     try {
       setLoading(true);
       const { data } = await axios.post(
@@ -113,6 +110,9 @@ function Placeorder() {
                 {shippingAddress.fullName},{shippingAddress.address},
                 {shippingAddress.zipCode}, {shippingAddress.barangay},
                 {shippingAddress.city}
+              </ListItem>
+              <ListItem>
+                Contact number : {shippingAddress.contactNumber}
               </ListItem>
             </List>
           </Card>

@@ -19,7 +19,7 @@ function Productitem({ product, addToCartHandler }) {
           <CardActionArea>
             <CardMedia
               style={{
-                borderRadius: 20,
+                borderRadius: "30px",
               }}
               component="img"
               image={product.image}

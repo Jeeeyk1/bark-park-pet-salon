@@ -2,7 +2,12 @@ import axios from "axios";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
-import React, { useEffect, useContext, useReducer } from "react";
+import React, { useEffect, useContext, useReducer, useState } from "react";
+import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import Inventory2Icon from "@mui/icons-material/Inventory2";
+import LocalShippingSharpIcon from "@mui/icons-material/LocalShippingSharp";
 import {
   CircularProgress,
   Grid,
@@ -24,6 +29,7 @@ import { Store } from "../../utils/Store";
 import Layout from "../../components/Layout";
 import useStyles from "../../utils/styles";
 import { useSnackbar } from "notistack";
+import { Pagination } from "@material-ui/lab";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -78,6 +84,7 @@ function AdminProducts() {
           headers: { authorization: `Bearer ${userInfo.token}` },
         });
         dispatch({ type: "FETCH_SUCCESS", payload: data });
+        setProductz(data);
       } catch (err) {
         dispatch({ type: "FETCH_FAIL", payload: getError(err) });
       }
@@ -127,30 +134,66 @@ function AdminProducts() {
       enqueueSnackbar(getError(err), { variant: "error" });
     }
   };
+  const [productz, setProductz] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postPerPage] = useState(9);
+  const pageNumbers = Math.ceil(products.length / postPerPage);
+  const indexOfLastPost = currentPage * postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
+  const currentProducts = productz.slice(indexOfFirstPost, indexOfLastPost);
+  const paginateOnchange = (e, value) => {
+    setCurrentPage(value);
+    console.log(indexOfFirstPost, indexOfLastPost);
+    console.log(currentProducts);
+  };
   return (
     <Layout title="Products">
       <Grid container spacing={1}>
         <Grid item md={3} xs={12}>
-          <Card className={classes.section}>
+          <br />
+          <br />
+
+          {userInfo ? (
+            <Typography variant="h1">
+              <AdminPanelSettingsIcon />
+              <span style={{ fontWeight: "bold" }}>Admin:</span> {userInfo.name}
+            </Typography>
+          ) : (
+            <Typography>Logging out.....</Typography>
+          )}
+          <br />
+
+          <Card className={classes.section2}>
             <List>
+              <br />
               <NextLink href="/admin/dashboard" passHref>
                 <ListItem button component="a">
+                  <DashboardCustomizeIcon />
                   <ListItemText primary="Admin Dashboard"></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href="/admin/orders" passHref>
                 <ListItem button component="a">
+                  <LocalShippingSharpIcon />
                   <ListItemText primary="Orders"></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href="/admin/products" passHref>
                 <ListItem selected button component="a">
+                  <Inventory2Icon />
                   <ListItemText primary="Products"></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href="/admin/users" passHref>
                 <ListItem button component="a">
+                  <PeopleAltIcon />
                   <ListItemText primary="Users"></ListItemText>
+                </ListItem>
+              </NextLink>
+              <NextLink href="/admin/refund" passHref>
+                <ListItem button component="a">
+                  <PeopleAltIcon />
+                  <ListItemText primary="Refund requests"></ListItemText>
                 </ListItem>
               </NextLink>
             </List>
@@ -170,8 +213,9 @@ function AdminProducts() {
                   <Grid align="right" item xs={6}>
                     <Button
                       style={{
-                        backgroundColor: "primary",
-                        fontWeight: "bold",
+                        fontWeight: "bolder",
+                        backgroundColor: "#24a0ed",
+                        color: "#ffff",
                       }}
                       color="primary"
                       onClick={createHandler}
@@ -205,7 +249,7 @@ function AdminProducts() {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {products.map((product) => (
+                        {currentProducts.map((product) => (
                           <TableRow key={product._id}>
                             <TableCell>
                               {product._id.substring(20, 24)}
@@ -222,12 +266,11 @@ function AdminProducts() {
                               >
                                 <Button
                                   style={{
-                                    backgroundColor: "#088F8F",
-                                    borderRadius: 10,
-                                    fontSize: "15px",
-                                    fontWeight: "bold",
+                                    fontWeight: "bolder",
+                                    backgroundColor: "#24a0ed",
+                                    color: "#ffff",
                                   }}
-                                  size="small"
+                                  size="medium"
                                   variant="contained"
                                   color="red"
                                 >
@@ -236,13 +279,13 @@ function AdminProducts() {
                               </NextLink>{" "}
                               <Button
                                 style={{
-                                  backgroundColor: "gray",
-                                  borderRadius: 10,
+                                  backgroundColor: "red",
+                                  color: "#fff",
                                   fontSize: "15px",
                                   fontWeight: "bold",
                                 }}
                                 onClick={() => deleteHandler(product._id)}
-                                size="small"
+                                size="medium"
                                 variant="contained"
                               >
                                 Delete
@@ -255,6 +298,11 @@ function AdminProducts() {
                   </TableContainer>
                 )}
               </ListItem>
+              <Pagination
+                color="primary"
+                count={pageNumbers}
+                onChange={paginateOnchange}
+              ></Pagination>
             </List>
           </Card>
         </Grid>

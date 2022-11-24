@@ -1,13 +1,14 @@
 .h2 {
-  justify-content: right;
+  justify-content: center;
   text-align: right;
-  color: #fff;
+  color: black;
+  margin-left: 50px;
 }
 
 .footer {
   position: relative;
 
-  background: #4fa8bd;
+  background: linear-gradient(35deg, #54f6ff, white);
   min-height: 100px;
   padding: 20px 50px;
   display: flex;
@@ -29,13 +30,13 @@
 
 .social_icon li a {
   font-size: 2em;
-  color: #fff;
+  color: black;
   margin: 0 10px;
   display: inline-block;
   transition: 0.5s;
 }
 .social_icon li a:hover {
-  color: black;
+  color: #fcd01c;
   transform: translateY(-10px);
 }
 
@@ -44,18 +45,19 @@
 }
 .menu li a {
   font-size: 1.2em;
-  color: #fff;
+  color: black;
   margin: 0 10px;
   display: inline-block;
-  opacity: 0.75;
+  opacity: 0.7;
   text-decoration: none;
 }
 .menu li a:hover {
   opacity: 1;
+  color: #fcd01c;
 }
 
 .p1 {
-  color: #fff;
+  color: black;
   text-align: center;
   margin-top: 15px;
   margin-bottom: 10px;
@@ -64,6 +66,17 @@
 
 @media (max-width: 500px) {
   .footer {
-    width: 500px;
+    width: auto;
+  }
+}
+@media (max-width: 440px) {
+  .h2 {
+    font-size: 12px;
+    margin-left: 30px;
+  }
+  .menu li a {
+    font-size: 10px;
+    text-align: center;
+    margin-left: 0px;
   }
 }

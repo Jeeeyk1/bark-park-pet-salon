@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import {
   Card,
   CircularProgress,
@@ -12,7 +13,9 @@ import {
   TableHead,
   TableRow,
   Typography,
+  Button,
 } from "@material-ui/core";
+import styles from "../../utils/style.module.css";
 import React, { useContext, useEffect, useReducer } from "react";
 import dynamic from "next/dynamic";
 import Layout from "../../components/Layout";
@@ -24,7 +27,8 @@ import useStyles from "../../utils/styles";
 import CheckoutWizard from "../../components/CheckoutWizard";
 import { getError } from "../../utils/error";
 import axios from "axios";
-
+import { useSnackbar } from "notistack";
+import { usePayPalScriptReducer, PayPalButtons } from "@paypal/react-paypal-js";
 function reducer(state, action) {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -33,27 +37,56 @@ function reducer(state, action) {
       return { ...state, loading: false, order: action.payload, error: "" };
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
+    case "PAY_REQUEST":
+      return { ...state, loadingPay: true };
+    case "PAY_SUCCESS":
+      return { ...state, loadingPay: false, sucessPay: "true" };
+    case "PAY_FAIL":
+      return { ...state, loadingPay: false, errorPay: action.payload };
+    case "PAY_RESET":
+      return { ...state, loadingPay: false, successPay: false, errorPay: "" };
+    case "DELIVER_REQUEST":
+      return { ...state, loadingDeliver: true };
+    case "DELIVER_SUCCESS":
+      return {
+        ...state,
+        loadingDeliver: false,
+        successDeliver: true,
+        sucessPay: "true",
+      };
+    case "DELIVER_FAIL":
+      return { ...state, loadingDeliver: false, errorDeliver: action.payload };
+    case "DELIVER_RESET":
+      return {
+        ...state,
+        loadingDeliver: false,
+        successDeliver: false,
+        errorDeliver: "",
+      };
     default:
       state;
   }
 }
 
 function Order({ params }) {
+  const { enqueueSnackbar } = useSnackbar();
   const orderId = params.id;
+  const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
   const classes = useStyles();
   const router = useRouter();
   const { state } = useContext(Store);
-  const {
-    userInfo,
-    cart: { shippingAddress },
-  } = state;
+  const { userInfo } = state;
 
-  const [{ loading, error, order }, dispatch] = useReducer(reducer, {
+  const [
+    { loading, error, order, successPay, loadingDeliver, successDeliver },
+    dispatch,
+  ] = useReducer(reducer, {
     loading: true,
     order: {},
     error: "",
   });
   const {
+    shippingAddress,
     paymentMethod,
     orderItems,
     itemsPrice,
@@ -63,20 +96,15 @@ function Order({ params }) {
     paidAt,
     isDelivered,
     deliveredAt,
-    sales,
+    referenceNumber,
+    applyRefund,
   } = order;
 
-  if (!order.isPaid) {
-    order.sales = order.totalPrice;
-  }
   useEffect(() => {
-    if (!order.isPaid) {
-      order.sales = order.totalPrice;
-    }
-
     if (!userInfo) {
       return router.push("/login");
     }
+    console.log(referenceNumber);
     const fetchOrder = async () => {
       try {
         dispatch({ type: "FETCH_REQUEST" });
@@ -88,11 +116,86 @@ function Order({ params }) {
         dispatch({ type: "FETCH_FAIL", payload: getError(err) });
       }
     };
-    if (!order._id || (order._id && order._id !== orderId)) {
+    if (
+      !order._id ||
+      successPay ||
+      successDeliver ||
+      (order._id && order._id !== orderId)
+    ) {
       fetchOrder();
+      if (successPay) {
+        dispatch({ type: "PAY_RESET" });
+      }
+      if (successDeliver) {
+        dispatch({ type: "DELIVER_RESET" });
+      }
+    } else {
+      const loadPaypalScript = async () => {
+        const { data: clientId } = await axios.get("/api/keys/paypal", {
+          headers: { authorization: `Bearer ${userInfo.token}` },
+        });
+        paypalDispatch({
+          type: "resetOptions",
+          value: { "client-id": clientId, currency: "PHP" },
+        });
+        paypalDispatch({ type: "setLoadingStatus", value: "pending" });
+      };
+      loadPaypalScript();
     }
-    console.log(sales);
-  }, [order]);
+  }, [order, successPay, successDeliver]);
+  function createOrder(data, actions) {
+    return actions.order
+      .create({
+        purchase_units: [
+          {
+            amount: { value: totalPrice },
+          },
+        ],
+      })
+      .then((orderID) => {
+        return orderID;
+      });
+  }
+  function onApprove(data, actions) {
+    return actions.order.capture().then(async function (details) {
+      try {
+        dispatch({ type: "PAY_REQUEST" });
+        const { data } = await axios.put(
+          `/api/orders/${order._id}/pay`,
+          details,
+          {
+            headers: { authorization: `Bearer ${userInfo.token}` },
+          }
+        );
+        dispatch({ type: "PAY_SUCCESS", payload: data });
+        enqueueSnackbar("Order is paid", { variant: "success" });
+      } catch (err) {
+        dispatch({ type: "PAY_FAIL", payload: getError(err) });
+        enqueueSnackbar(getError(err), { variant: "error" });
+      }
+    });
+  }
+
+  function onError(err) {
+    enqueueSnackbar(getError(err), { variant: "error" });
+  }
+
+  async function deliverOrderHandler() {
+    try {
+      dispatch({ type: "DELIVER_REQUEST" });
+      const { data } = await axios.put(
+        `/api/orders/${order._id}/deliver`,
+        {},
+        {
+          headers: { authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+      dispatch({ type: "DELIVER_SUCCESS", payload: data });
+      enqueueSnackbar("Order is delivered", { variant: "success" });
+    } catch (err) {
+      dispatch({ type: "DELIVER_FAIL", payload: getError(err) });
+    }
+  }
 
   return (
     <Layout title={`Order ${orderId}`}>
@@ -153,6 +256,11 @@ function Order({ params }) {
                 <ListItem>
                   Status: {isPaid ? `paid at ${paidAt}` : "not paid"}
                 </ListItem>
+                {paymentMethod === "Gcash" && referenceNumber ? (
+                  <ListItem>ReferenceNumber: {referenceNumber}</ListItem>
+                ) : (
+                  <br />
+                )}
               </List>
             </Card>
 
@@ -257,6 +365,69 @@ function Order({ params }) {
                     </Grid>
                   </Grid>
                 </ListItem>
+                {!isPaid && !userInfo.isAdmin && !isDelivered && (
+                  <ListItem>
+                    {isPending ? (
+                      <CircularProgress />
+                    ) : (
+                      <div className={classes.fullWidth}>
+                        <PayPalButtons
+                          createOrder={createOrder}
+                          onApprove={onApprove}
+                          onError={onError}
+                        ></PayPalButtons>
+                        <div className={styles.gcash}>
+                          <Button
+                            onClick={() => {
+                              router.push(`../${orderId}`);
+                            }}
+                          >
+                            <Typography className={styles.gcashButton}>
+                              Gcash Payment
+                            </Typography>
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                  </ListItem>
+                )}
+                {isPaid && !userInfo.isAdmin && isDelivered && !applyRefund && (
+                  <ListItem>
+                    {isPending ? (
+                      <CircularProgress />
+                    ) : (
+                      <div className={classes.fullWidth}>
+                        <div className={styles.refund}>
+                          <Button
+                            onClick={() => {
+                              router.push(`../../refund/${orderId}`);
+                            }}
+                          >
+                            <Typography className={styles.refundBox}>
+                              Refund
+                            </Typography>
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                  </ListItem>
+                )}
+                {userInfo.isAdmin && !order.isDelivered && (
+                  <ListItem>
+                    {loadingDeliver && <CircularProgress />}
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      onClick={deliverOrderHandler}
+                      style={{
+                        fontWeight: "bolder",
+                        backgroundColor: "#fcd01c",
+                      }}
+                    >
+                      Ship Out Order
+                    </Button>
+                  </ListItem>
+                )}
               </List>
             </Card>
           </Grid>

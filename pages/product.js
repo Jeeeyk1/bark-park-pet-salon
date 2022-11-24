@@ -127,7 +127,11 @@ export default function Home() {
           ))}
         </Grid>
       </div>
-      <Pagination count={pageNumbers} onChange={paginateOnchange}></Pagination>
+      <Pagination
+        color="primary"
+        count={pageNumbers}
+        onChange={paginateOnchange}
+      ></Pagination>
     </Layout>
   );
 }

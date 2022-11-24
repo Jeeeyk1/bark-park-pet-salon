@@ -13,29 +13,41 @@ handler.use(isAuth, isAdmin);
 
 handler.get(async (req, res) => {
   await db.connect();
+
   const ordersCount = await Order.countDocuments();
   const productsCount = await Product.countDocuments();
   const usersCount = await User.countDocuments();
+
   const ordersPriceGroup = await Order.aggregate([
     {
       $group: {
         _id: null,
-        sales: { $sum: "$totalPrice" },
+        sales: { $sum: "$totalSales" },
+        numberOfRefundRequest: { $sum: "$numberOfRefundRequests" },
       },
     },
   ]);
   const ordersPrice =
     ordersPriceGroup.length > 0 ? ordersPriceGroup[0].sales : 0;
+  const refundRequestNum =
+    ordersPriceGroup.length > 0 ? ordersPriceGroup[0].numberOfRefundRequest : 0;
   const salesData = await Order.aggregate([
     {
       $group: {
         _id: { $dateToString: { format: "%Y-%m", date: "$createdAt" } },
-        totalSales: { $sum: "$totalPrice" },
+        totalSales: { $sum: "$totalSales" },
       },
     },
   ]);
   await db.disconnect();
-  res.send({ ordersCount, productsCount, usersCount, ordersPrice, salesData });
+  res.send({
+    ordersCount,
+    productsCount,
+    usersCount,
+    ordersPrice,
+    salesData,
+    refundRequestNum,
+  });
 });
 
 export default handler;

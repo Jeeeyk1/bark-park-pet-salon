@@ -24,7 +24,11 @@ import { Store } from "../../utils/Store";
 import Layout from "../../components/Layout";
 import useStyles from "../../utils/styles";
 import { useSnackbar } from "notistack";
-
+import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import Inventory2Icon from "@mui/icons-material/Inventory2";
+import LocalShippingSharpIcon from "@mui/icons-material/LocalShippingSharp";
 function reducer(state, action) {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -103,26 +107,51 @@ function AdminUsers() {
     <Layout title="Users">
       <Grid container spacing={1}>
         <Grid item md={3} xs={12}>
-          <Card className={classes.section}>
+          <br />
+          <br />
+          <br />
+          {userInfo ? (
+            <Typography variant="h1">
+              <AdminPanelSettingsIcon />
+              <span style={{ fontWeight: "bold" }}>Admin:</span> {userInfo.name}
+            </Typography>
+          ) : (
+            <Typography>Logging out.....</Typography>
+          )}
+
+          <br />
+
+          <Card className={classes.section2}>
             <List>
+              <br />
               <NextLink href="/admin/dashboard" passHref>
                 <ListItem button component="a">
+                  <DashboardCustomizeIcon />
                   <ListItemText primary="Admin Dashboard"></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href="/admin/orders" passHref>
                 <ListItem button component="a">
+                  <LocalShippingSharpIcon />
                   <ListItemText primary="Orders"></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href="/admin/products" passHref>
                 <ListItem button component="a">
+                  <Inventory2Icon />
                   <ListItemText primary="Products"></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href="/admin/users" passHref>
                 <ListItem selected button component="a">
+                  <PeopleAltIcon />
                   <ListItemText primary="Users"></ListItemText>
+                </ListItem>
+              </NextLink>
+              <NextLink href="/admin/refund" passHref>
+                <ListItem button component="a">
+                  <PeopleAltIcon />
+                  <ListItemText primary="Refund requests"></ListItemText>
                 </ListItem>
               </NextLink>
             </List>
@@ -170,11 +199,11 @@ function AdminUsers() {
                               >
                                 <Button
                                   style={{
-                                    backgroundColor: "#088F8F",
-                                    borderRadius: 10,
-                                    fontSize: "15px",
+                                    fontWeight: "bolder",
+                                    backgroundColor: "#24a0ed",
+                                    color: "#ffff",
                                   }}
-                                  size="small"
+                                  size="medium"
                                   variant="contained"
                                   color="red"
                                 >
@@ -184,11 +213,12 @@ function AdminUsers() {
                               <Button
                                 style={{
                                   backgroundColor: "red",
-                                  borderRadius: 10,
+                                  fontWeight: "bolder",
+                                  color: "#fff",
                                   fontSize: "15px",
                                 }}
                                 onClick={() => deleteHandler(user._id)}
-                                size="small"
+                                size="medium"
                                 variant="contained"
                               >
                                 Delete

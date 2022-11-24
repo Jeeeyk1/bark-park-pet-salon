@@ -18,7 +18,7 @@ import {
 import { useSnackbar } from "notistack";
 
 export default function Payment() {
-  const { enqueueSnackBar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const classes = useStyles();
   const router = useRouter();
   const [paymentMethod, setPaymentMethod] = useState("");
@@ -37,7 +37,7 @@ export default function Payment() {
     closeSnackbar();
     e.preventDefault();
     if (!paymentMethod) {
-      enqueueSnackBar("Payment method is required", { variant: "error" });
+      enqueueSnackbar("Payment method is required", { variant: "error" });
     } else {
       dispatch({ type: "SAVE_PAYMENT_METHOD", payload: paymentMethod });
       Cookies.set("paymentMethod", paymentMethod);
@@ -55,7 +55,7 @@ export default function Payment() {
           <ListItem>
             <FormControl component="fieldset">
               <RadioGroup
-                arial-labe="Payment Method"
+                arial-label="Payment Method"
                 name="paymentMethod"
                 value={paymentMethod}
                 onChange={(e) => setPaymentMethod(e.target.value)}

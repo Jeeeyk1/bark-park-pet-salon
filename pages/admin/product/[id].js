@@ -20,6 +20,11 @@ import Layout from "../../../components/Layout";
 import useStyles from "../../../utils/styles";
 import { Controller, useForm } from "react-hook-form";
 import { useSnackbar } from "notistack";
+import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import Inventory2Icon from "@mui/icons-material/Inventory2";
+import LocalShippingSharpIcon from "@mui/icons-material/LocalShippingSharp";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -155,25 +160,39 @@ function ProductEdit({ params }) {
     <Layout title={`Edit Product ${productId}`}>
       <Grid container spacing={1}>
         <Grid item md={3} xs={12}>
-          <Card className={classes.section}>
+          <br />
+          <br />
+
+          <Typography variant="h1">
+            <AdminPanelSettingsIcon />
+            <span style={{ fontWeight: "bold" }}>Admin:</span> {userInfo.name}
+          </Typography>
+          <br />
+
+          <Card className={classes.section2}>
             <List>
+              <br />
               <NextLink href="/admin/dashboard" passHref>
                 <ListItem button component="a">
+                  <DashboardCustomizeIcon />
                   <ListItemText primary="Admin Dashboard"></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href="/admin/orders" passHref>
                 <ListItem button component="a">
+                  <LocalShippingSharpIcon />
                   <ListItemText primary="Orders"></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href="/admin/products" passHref>
                 <ListItem selected button component="a">
+                  <Inventory2Icon />
                   <ListItemText primary="Products"></ListItemText>
                 </ListItem>
               </NextLink>
               <NextLink href="/admin/users" passHref>
                 <ListItem button component="a">
+                  <PeopleAltIcon />
                   <ListItemText primary="Users"></ListItemText>
                 </ListItem>
               </NextLink>
@@ -285,7 +304,15 @@ function ProductEdit({ params }) {
                       ></Controller>
                     </ListItem>
                     <ListItem>
-                      <Button variant="contained" component="label">
+                      <Button
+                        variant="contained"
+                        component="label"
+                        style={{
+                          fontWeight: "bolder",
+                          backgroundColor: "#24a0ed",
+                          color: "#ffff",
+                        }}
+                      >
                         Upload file
                         <input type="file" onChange={uploadHandler} hidden />
                       </Button>
@@ -371,21 +398,9 @@ function ProductEdit({ params }) {
                     <ListItem>
                       <Button
                         style={{
+                          fontWeight: "bolder",
                           backgroundColor: "red",
-                          fontWeightMedium: 1000,
-                          fontFamily: [
-                            "-apple-system",
-                            "BlinkMacSystemFont",
-                            '"Segoe UI"',
-                            "Roboto",
-                            '"Helvetica Neue"',
-                            "Arial",
-                            "sans-serif",
-                            '"Apple Color Emoji"',
-                            '"Segoe UI Emoji"',
-                            '"Segoe UI Symbol"',
-                          ].join(","),
-                          fontSize: "18px",
+                          color: "#ffff",
                         }}
                         variant="contained"
                         type="submit"

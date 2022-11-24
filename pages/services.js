@@ -1,15 +1,22 @@
 import { Box, Typography } from "@material-ui/core";
-import React from "react";
-
+import Aos from "aos";
+import "aos/dist/aos.css";
+import React, { useEffect } from "react";
+import styles from "../utils/style.module.css";
 import Navbar from "../homepage/navbar";
 import Services from "../homepage/services";
 import Footer from "./footer";
 
-const services = () => {
+export default function Services2() {
+  useEffect(() => {
+    Aos.init({ duration: 2500 });
+  }, []);
+
   return (
     <div>
       <Navbar />
       <Box
+        data-aos="fade-right"
         display="flex"
         justifyContent={"center"}
         style={{
@@ -17,16 +24,7 @@ const services = () => {
           p: 4,
         }}
       >
-        <Typography
-          style={{
-            marginTop: "100px",
-            marginBottom: "100px",
-            fontSize: "75px",
-            fontFamily: "Bebas Neue",
-          }}
-        >
-          Our Services
-        </Typography>
+        <Typography className={styles.petBoardingText}>Our Services</Typography>
       </Box>
       <Services />
       <br />
@@ -35,6 +33,4 @@ const services = () => {
       <Footer />
     </div>
   );
-};
-
-export default services;
+}
