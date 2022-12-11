@@ -172,7 +172,7 @@ export default function ProductScreen(props) {
             Customer Reviews
           </Typography>
         </ListItem>
-        {reviews.length === 0 && <ListItem>No review</ListItem>}
+        {reviews.length === 0 && <ListItem>No reviews</ListItem>}
         {reviews.map((review) => (
           <ListItem key={review._id}>
             <Grid container>
@@ -183,9 +183,8 @@ export default function ProductScreen(props) {
                 <Typography>{review.createdAt.substring(0, 10)}</Typography>
               </Grid>
               <Grid item>
-                <Rating value={review.rating} readyOnly>
-                  <Typography>{review.comment}</Typography>
-                </Rating>
+                <Rating value={review.rating} readyOnly></Rating>
+                <Typography>{review.comment}</Typography>
               </Grid>
             </Grid>
           </ListItem>
@@ -252,11 +251,11 @@ export async function getServerSideProps(context) {
   const { slug } = params;
   await db.connect();
 
-  const products = await Product.findOne({ slug }, "-reviews").lean();
+  const product = await Product.findOne({ slug }, "-reviews").lean();
   await db.disconnect();
   return {
     props: {
-      product: db.convertDocToObj(products),
+      product: db.convertDocToObj(product),
     },
   };
 }

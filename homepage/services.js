@@ -18,7 +18,7 @@ function Services() {
     Aos.init({ duration: 2500 });
   }, []);
   return (
-    <Container className={styles.services} data-aos="flip-down">
+    <Container className={styles.services} data-aos="flip-right">
       <Card className={styles.box}>
         <NextLink href="../boarding" passHref>
           <CardActionArea>

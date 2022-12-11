@@ -28,7 +28,7 @@ export default function Footer() {
 
       <ul className={styles.menu}>
         <li>
-          <a href="\">Home</a>
+          <a href="\index">Home</a>
         </li>
         <li>
           <a href="\product">Products</a>

@@ -3,25 +3,32 @@ import Head from "next/head";
 import {
   AppBar,
   Toolbar,
-  Typography,
   Container,
   Link,
   createTheme,
   ThemeProvider,
   CssBaseline,
-  Switch,
   Badge,
   Button,
   Menu,
   MenuItem,
 } from "@material-ui/core";
-import useStyles from "../utils/styles";
+import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import PersonPinIcon from "@mui/icons-material/PersonPin";
+import LogoutIcon from "@mui/icons-material/Logout";
+import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
+import { FaPaw } from "react-icons/fa";
 import NextLink from "next/link";
-import { Store } from "../utils/Store";
+import styles from "../utils/style.module.css";
 import Cookies from "js-cookie";
 import { useRouter } from "next/router";
 import { red } from "@material-ui/core/colors";
-
+import { Store } from "../utils/Store";
+import useStyles from "../utils/styles";
+import Footer from "../pages/footer1";
+import { HiShoppingCart } from "react-icons/hi";
+import { CgProfile } from "react-icons/cg";
 export default function Layout({ title, description, children }) {
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
@@ -30,19 +37,19 @@ export default function Layout({ title, description, children }) {
     typography: {
       h1: {
         fontSize: "1.6rem",
-        fontWeight: 1000,
+        fontWeight: 100,
         margin: "1rem 0",
       },
       h2: {
         fontSize: "1.4rem",
-        fontWeight: 400,
+        fontWeight: 200,
         margin: "1rem 0",
       },
     },
     palette: {
       type: darkMode ? "dark" : "light",
       primary: {
-        main: "#088F8F",
+        main: "#24a0ed",
       },
       secondary: {
         main: "#208080",
@@ -53,11 +60,7 @@ export default function Layout({ title, description, children }) {
     },
   });
   const classes = useStyles();
-  const darkModeChangeHandler = () => {
-    dispatch({ type: darkMode ? "DARK_MODE_OFF" : "DARK_MODE_ON" });
-    const newDarkMode = !darkMode;
-    Cookies.set("darkMode", newDarkMode ? "ON" : "OFF");
-  };
+
   const [anchorEl, setAnchorEl] = useState(null);
   const loginClickHandler = (e) => {
     setAnchorEl(e.currentTarget);
@@ -87,32 +90,30 @@ export default function Layout({ title, description, children }) {
       </Head>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <AppBar position="static" className={classes.navbar}>
+
+        <AppBar position="static" className={styles.navbar1}>
           <Toolbar>
             <NextLink href="/" passHref>
               <Link>
-                <Typography className={classes.brand}>
+                <i className={styles.logo1}>
+                  <FaPaw />
                   Bark Park Pet Salon
-                </Typography>
+                </i>
               </Link>
             </NextLink>
             <div className={classes.grow}></div>
             <div>
-              <Switch
-                checked={darkMode}
-                onChange={darkModeChangeHandler}
-              ></Switch>
               <NextLink href="/cart" passHref>
                 <Link>
-                  {cart.cartItems.length > 0 ? (
+                  {cart.cartItems.length > 0 && userInfo ? (
                     <Badge
                       color="secondary"
                       badgeContent={cart.cartItems.length}
                     >
-                      Cart
+                      <HiShoppingCart className={styles.icon} />
                     </Badge>
                   ) : (
-                    "Cart"
+                    <HiShoppingCart className={styles.icons0} />
                   )}
                 </Link>
               </NextLink>
@@ -122,9 +123,8 @@ export default function Layout({ title, description, children }) {
                     aria-controls="simple-menu"
                     aria-haspopup="true"
                     onClick={loginClickHandler}
-                    className={classes.navbarButton}
                   >
-                    {userInfo.name}{" "}
+                    <CgProfile className={styles.icon} />
                   </Button>
                   <Menu
                     id="simple-menu"
@@ -136,6 +136,7 @@ export default function Layout({ title, description, children }) {
                     <MenuItem
                       onClick={(e) => loginMenuCloseHandler(e, "/profile")}
                     >
+                      <PersonPinIcon />
                       Profile
                     </MenuItem>
                     <MenuItem
@@ -143,40 +144,48 @@ export default function Layout({ title, description, children }) {
                         loginMenuCloseHandler(e, "/order-history")
                       }
                     >
+                      <WorkHistoryIcon />
                       Order History
                     </MenuItem>
+                    {!userInfo.isAdmin && (
+                      <MenuItem
+                        onClick={(e) =>
+                          loginMenuCloseHandler(e, "/refund-history")
+                        }
+                      >
+                        <AssignmentReturnIcon />
+                        Refund History
+                      </MenuItem>
+                    )}
+
                     {userInfo.isAdmin && (
                       <MenuItem
                         onClick={(e) =>
                           loginMenuCloseHandler(e, "/admin/dashboard")
                         }
                       >
-                        Admin Dashboard
+                        <AdminPanelSettingsIcon /> Admin Dashboard
                       </MenuItem>
                     )}
-                    <MenuItem onClick={logoutMenuCloseHandler}>Logout</MenuItem>
+                    <MenuItem onClick={logoutMenuCloseHandler}>
+                      <LogoutIcon />
+                      Logout
+                    </MenuItem>
                   </Menu>
                 </>
               ) : (
                 <NextLink href="/login" passHref>
-                  <Link>Login</Link>
+                  <Link>
+                    <CgProfile className={styles.icons0} />
+                  </Link>
                 </NextLink>
               )}
             </div>
           </Toolbar>
         </AppBar>
-        <div className={classes.container}>
-          <h1 className={classes.root}>
-            Welcome to <br />
-            Bark Park Pet Salon Baguio <br />
-          </h1>
-          <Button variant="contained" className={classes.root1}>
-            Shop Now!
-          </Button>
-        </div>
-
         <Container className={classes.main}>{children}</Container>
       </ThemeProvider>
+      <Footer />
     </div>
   );
 }

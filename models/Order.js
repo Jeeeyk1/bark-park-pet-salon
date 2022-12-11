@@ -41,7 +41,7 @@ const orderSchema = new mongoose.Schema(
     appliedAt: { type: Date, required: false },
     description: { type: String, required: false },
     status: { type: String, required: true, default: "pending" },
-
+    imageRefund: { type: String, required: false },
     referenceNumber: {
       type: Number,
       required: false,

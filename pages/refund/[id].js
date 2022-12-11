@@ -29,7 +29,22 @@ function reducer(state, action) {
       return { ...state, loading: false, order: action.payload, error: "" };
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
-
+    case "UPDATE_REQUEST":
+      return { ...state, loadingUpdate: true, errorUpdate: "" };
+    case "UPDATE_SUCCESS":
+      return { ...state, loadingUpdate: false, errorUpdate: "" };
+    case "UPDATE_FAIL":
+      return { ...state, loadingUpdate: false, errorUpdate: action.payload };
+    case "UPLOAD_REQUEST":
+      return { ...state, loadingUpload: true, errorUpload: "" };
+    case "UPLOAD_SUCCESS":
+      return {
+        ...state,
+        loadingUpload: false,
+        errorUpload: "",
+      };
+    case "UPLOAD_FAIL":
+      return { ...state, loadingUpload: false, errorUpload: action.payload };
     default:
       state;
   }
@@ -50,14 +65,16 @@ function RefundRequest({ params }) {
   const { state } = useContext(Store);
   const { userInfo } = state;
 
-  const [{ loading, error, order, successPay, successDeliver }, dispatch] =
-    useReducer(reducer, {
-      loading: true,
-      order: {},
-      error: "",
-    });
+  const [
+    { loading, error, order, successPay, successDeliver, loadingUpload },
+    dispatch,
+  ] = useReducer(reducer, {
+    loading: true,
+    order: {},
+    error: "",
+  });
   const { description } = order;
-  const submitHandler = async ({ description }) => {
+  const submitHandler = async ({ description, imageRefund }) => {
     if (!window.confirm("Are you sure to refund this order?")) {
       return;
     }
@@ -65,6 +82,7 @@ function RefundRequest({ params }) {
     try {
       await axios.put(`/api/orders/${orderId}/refund`, {
         description,
+        imageRefund,
       });
       enqueueSnackbar("Refund request has been successful", {
         variant: "success",
@@ -104,6 +122,27 @@ function RefundRequest({ params }) {
       fetchOrder();
     }
   }, [order, successPay, successDeliver]);
+
+  const uploadHandler = async (e) => {
+    const file = e.target.files[0];
+    const bodyFormData = new FormData();
+    bodyFormData.append("file", file);
+    try {
+      dispatch({ type: "UPLOAD_REQUEST" });
+      const { data } = await axios.post("/api/admin/upload", bodyFormData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          authorization: `Bearer ${userInfo.token}`,
+        },
+      });
+      dispatch({ type: "UPLOAD_SUCCESS" });
+      setValue("imageRefund", data.secure_url);
+      enqueueSnackbar("File uploaded successfully", { variant: "success" });
+    } catch (err) {
+      dispatch({ type: "UPLOAD_FAIL", payload: getError(err) });
+      enqueueSnackbar(getError(err), { variant: "error" });
+    }
+  };
 
   return (
     <Layout title={`Order ${orderId}`}>
@@ -170,7 +209,43 @@ function RefundRequest({ params }) {
                 )}
               ></Controller>
             </ListItem>
+            <ListItem>
+              <Controller
+                name="imageRefund"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                }}
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    id="imageRefund"
+                    label="ImageRefund"
+                    error={Boolean(errors.image)}
+                    helperText={errors.image ? "Image is required" : ""}
+                    {...field}
+                  ></TextField>
+                )}
+              ></Controller>
+            </ListItem>
+            <ListItem>
+              <Button
+                variant="contained"
+                component="label"
+                style={{
+                  fontWeight: "bolder",
+                  backgroundColor: "#24a0ed",
+                  color: "#ffff",
+                }}
+              >
+                Upload file
+                <input type="file" onChange={uploadHandler} hidden />
+              </Button>
 
+              {loadingUpload && <CircularProgress />}
+            </ListItem>
             <ListItem>
               <Button
                 variant="contained"

@@ -103,6 +103,7 @@ function RefundInfo({ params }) {
     description,
     status,
     isApproved,
+    imageRefund,
   } = order;
 
   useEffect(() => {
@@ -110,6 +111,7 @@ function RefundInfo({ params }) {
       return router.push("/login");
     }
     console.log(referenceNumber);
+
     const fetchOrder = async () => {
       try {
         dispatch({ type: "FETCH_REQUEST" });
@@ -185,22 +187,24 @@ function RefundInfo({ params }) {
     enqueueSnackbar(getError(err), { variant: "error" });
   }
 
-  async function deliverOrderHandler() {
-    try {
-      dispatch({ type: "DELIVER_REQUEST" });
-      const { data } = await axios.put(
-        `/api/orders/${order._id}/deliver`,
-        {},
-        {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        }
-      );
-      dispatch({ type: "DELIVER_SUCCESS", payload: data });
-      enqueueSnackbar("Order is delivered", { variant: "success" });
-    } catch (err) {
-      dispatch({ type: "DELIVER_FAIL", payload: getError(err) });
+  const approveRefundHandler = async () => {
+    if (!window.confirm("Are you sure to approve this refund request?")) {
+      return;
     }
-  }
+
+    try {
+      await axios.put(`/api/orders/${orderId}/refundApprvd`, {
+        totalSalesUpdate: 0,
+      });
+      enqueueSnackbar("Refund approve has been successful", {
+        variant: "success",
+      });
+
+      router.push("/");
+    } catch (err) {
+      enqueueSnackbar(getError(err), { variant: "error" });
+    }
+  };
 
   return (
     <Layout title={`Order ${orderId}`}>
@@ -284,7 +288,23 @@ function RefundInfo({ params }) {
                 <ListItem>Status: {status}</ListItem>
 
                 <ListItem>Message: {description}</ListItem>
-                <ListItem>{isApproved ? { approvedAt } : ""}</ListItem>
+                <ListItem>
+                  {" "}
+                  Approved at: {isApproved ? [approvedAt] : "Not approved"}
+                </ListItem>
+                <Link>
+                  <NextLink href="ds" passHref>
+                    <img
+                      src={imageRefund}
+                      alt="test"
+                      className={styles.refundImage}
+                    />
+                  </NextLink>
+                  <br />
+                  <Typography style={{ cursor: "pointer" }}>
+                    View image
+                  </Typography>
+                </Link>
 
                 <br />
               </List>
@@ -444,13 +464,13 @@ function RefundInfo({ params }) {
                   </ListItem>
                 )}
 
-                {userInfo.isAdmin && order.isDelivered && (
+                {userInfo.isAdmin && order.isDelivered && !order.isApproved && (
                   <ListItem>
                     {loadingDeliver && <CircularProgress />}
                     <Button
                       fullWidth
                       variant="contained"
-                      onClick={deliverOrderHandler}
+                      onClick={approveRefundHandler}
                       style={{
                         fontWeight: "bolder",
                         backgroundColor: "#fcd01c",

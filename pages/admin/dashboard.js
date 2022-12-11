@@ -300,7 +300,7 @@ function AdminDashboard() {
                         label: "Sales",
                         backgroundColor: "rgba(138, 182, 219, 1)",
                         data: summary.salesData.map((x) => x.totalSales),
-                        borderWidth: 4,
+                        border3Width: 4,
                       },
                     ],
                   }}

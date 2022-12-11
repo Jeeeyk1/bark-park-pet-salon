@@ -1,17 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Navbar from "../homepage/navbar";
 import Footer from "./footer";
 import styles from "../utils/style.module.css";
 import Carousel from "react-material-ui-carousel";
-import { Box, Button, Collapse, Link } from "@material-ui/core";
+
 import NextLink from "next/link";
 import "aos/dist/aos.css";
+import { Box, Button, Link } from "@material-ui/core";
 export default function Boarding() {
-  const [checked, setChecked] = useState(false);
-  useEffect(() => {
-    setChecked(true);
-  }, []);
+  useEffect(() => {}, []);
   let carousel = [
     { img: "/images/grooming0.jpg", alt: "pet1", key: "1" },
     { img: "/images/grooming2.jpg", alt: "pet2", key: "2" },
@@ -22,13 +20,9 @@ export default function Boarding() {
   return (
     <div>
       <Navbar />
-      <Collapse
-        in={checked}
-        {...(checked ? { timeout: 2000 } : {})}
-        collapsedHeight={10}
-      >
-        <h1 className={styles.petBoardingText}>Grooming</h1>
-      </Collapse>
+
+      <h1 className={styles.petBoardingText}> Bark Park Grooming</h1>
+
       <Box
         justifyContent={"center"}
         style={{
@@ -37,7 +31,7 @@ export default function Boarding() {
           p: 4,
           marginBottom: "150px",
         }}
-        data-aos="flip-up"
+        data-aos="fade-left"
       >
         <Carousel animation="slide">
           {carousel.map((carousels) => (

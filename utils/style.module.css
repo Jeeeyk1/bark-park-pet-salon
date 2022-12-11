@@ -22,7 +22,7 @@
 }
 
 .active {
-  background: #fff;
+  background: #eee;
   box-shadow: box-shadow;
   position: fixed;
   display: -webkit-box;
@@ -36,7 +36,7 @@
   justify-content: space-between;
   padding: 2rem 9%;
   -webkit-box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
-  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0.8rem 1.9rem rgba(0, 0, 0, 0.1);
   position: fixed;
   top: 0;
   left: 0;
@@ -137,7 +137,12 @@
   color: #eee;
   cursor: pointer;
 }
-
+.refundImage {
+  height: 500px;
+  width: 800px;
+  cursor: pointer;
+  margin-left: 20px;
+}
 .icons a:hover,
 .icons:hover {
   color: #fcd01c;
@@ -431,7 +436,7 @@
 
 .services .box:hover {
   border-radius: 0.5rem;
-  background: #4fa8bd;
+  background: #fcd01c;
 }
 
 .image {
@@ -500,6 +505,7 @@
   margin-top: 150px;
   text-decoration: dotted;
   font-size: 80px;
+  font-family: cursive;
 }
 .img3 {
   height: 900px;

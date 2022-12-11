@@ -41,7 +41,7 @@ function Header() {
 
   return (
     <div>
-      <Container maxWidth="100vh" className={styles.section1}>
+      <Container maxWidth="xl" className={styles.section1}>
         <img
           src="images/landing-3.png"
           alt="homepage"

@@ -1,5 +1,4 @@
 import nextConnect from "next-connect";
-import { isAuth, isAdmin } from "../../../utils/auth";
 import { onError } from "../../../utils/error";
 import multer from "multer";
 import { v2 as cloudinary } from "cloudinary";
@@ -20,7 +19,7 @@ export const config = {
 const handler = nextConnect({ onError });
 const upload = multer();
 
-handler.use(isAuth, isAdmin, upload.single("file")).post(async (req, res) => {
+handler.use(upload.single("file")).post(async (req, res) => {
   const streamUpload = (req) => {
     return new Promise((resolve, reject) => {
       const stream = cloudinary.uploader.upload_stream((error, result) => {

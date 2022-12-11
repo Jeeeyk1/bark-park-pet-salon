@@ -8,18 +8,16 @@ handler.put(async (req, res) => {
   await db.connect();
   const order = await Order.findById(req.query.id);
   if (order) {
-    order.numberOfRefundRequests = 1;
-    order.applyRefund = true;
-    order.appliedAt = Date.now();
-    order.description = req.body.description;
-    order.imageRefund = req.body.imageRefund;
-    const description = await order.save();
-    const imageRefund = await order.save();
+    order.isApproved = true;
+    order.approvedAt = Date.now();
+    order.totalSales = req.body.totalSalesUpdate;
+    order.status = "Approved";
+    const totalSales = await order.save();
+    order.save;
     await db.disconnect();
     res.send({
-      message: "Refund request submitted!",
-      order: description,
-      imageRefund,
+      message: "Refund request Approved!",
+      order: totalSales,
     });
   } else {
     await db.disconnect();
