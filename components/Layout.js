@@ -12,6 +12,11 @@ import {
   Button,
   Menu,
   MenuItem,
+  ListItemText,
+  ListItem,
+  List,
+  IconButton,
+  Drawer,
 } from "@material-ui/core";
 import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
@@ -28,7 +33,7 @@ import { Store } from "../utils/Store";
 import useStyles from "../utils/styles";
 import Footer from "../pages/footer1";
 import { HiShoppingCart } from "react-icons/hi";
-import { CgProfile } from "react-icons/cg";
+import { CgMenu, CgProfile } from "react-icons/cg";
 export default function Layout({ title, description, children }) {
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
@@ -78,6 +83,29 @@ export default function Layout({ title, description, children }) {
     Cookies.remove("cartItems");
     router.push("/");
   };
+  const [sidebarVisible, setSidebarVisible] = useState(false);
+  const sidebarOpenHandler = () => {
+    setSidebarVisible(true);
+  };
+  const sidebarCloseHandler = () => {
+    setSidebarVisible(false);
+  };
+  const homeRouter = () => {
+    router.push("/");
+    setSidebarVisible(false);
+  };
+  const productsRouter = () => {
+    router.push("product");
+    setSidebarVisible(false);
+  };
+  const categoriesRouter = () => {
+    router.push("search?category");
+    setSidebarVisible(false);
+  };
+  const servicesRouter = () => {
+    router.push("services");
+    setSidebarVisible(false);
+  };
   return (
     <div>
       <Head>
@@ -101,7 +129,61 @@ export default function Layout({ title, description, children }) {
                 </i>
               </Link>
             </NextLink>
+
             <div className={classes.grow}></div>
+            <div>
+              {" "}
+              <nav className={styles.navbar}>
+                <a href="">Home</a>
+                <a href="product">Products</a>
+                <a href="search?category=">Categories</a>
+                <a href="services">Services</a>
+              </nav>
+            </div>
+
+            <div className={classes.grow}></div>
+            <div>
+              <IconButton
+                edge="start"
+                aria-label="open drawer"
+                onClick={sidebarOpenHandler}
+              >
+                <CgMenu className={styles.menu} />
+              </IconButton>
+              <Drawer
+                anchor="right"
+                open={sidebarVisible}
+                onClose={sidebarCloseHandler}
+              >
+                <List>
+                  <ListItem>
+                    <Button onClick={homeRouter}>
+                      <ListItemText>Home</ListItemText>
+                    </Button>
+                  </ListItem>
+                  <ListItem>
+                    <Button onClick={productsRouter}>
+                      <ListItemText>Products</ListItemText>
+                    </Button>
+                  </ListItem>
+                  <ListItem>
+                    <Button>
+                      <ListItemText onClick={categoriesRouter}>
+                        Categories
+                      </ListItemText>
+                    </Button>
+                  </ListItem>
+                  <ListItem>
+                    <Button>
+                      <ListItemText onClick={servicesRouter}>
+                        Services
+                      </ListItemText>
+                    </Button>
+                  </ListItem>
+                </List>
+              </Drawer>
+            </div>
+
             <div>
               <NextLink href="/cart" passHref>
                 <Link>

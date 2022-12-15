@@ -1,9 +1,14 @@
 import React, { useContext, useState } from "react";
 import styles from "../utils/style.module.css";
-
+import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import PersonPinIcon from "@mui/icons-material/PersonPin";
+import LogoutIcon from "@mui/icons-material/Logout";
+import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
 import { FaPaw } from "react-icons/fa";
 import Head from "next/head";
 import {
+  AppBar,
   Badge,
   Button,
   Drawer,
@@ -14,6 +19,7 @@ import {
   ListItemText,
   Menu,
   MenuItem,
+  Toolbar,
 } from "@material-ui/core";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
@@ -70,7 +76,7 @@ export default function Navbar({ title, description }) {
     setSidebarVisible(false);
   };
   return (
-    <header className={styles.active}>
+    <div>
       <Head>
         <title>
           {title
@@ -79,110 +85,148 @@ export default function Navbar({ title, description }) {
         </title>
         {description && <meta name="description" content={description}></meta>}
       </Head>
-      <a href="./" className={styles.logo}>
-        <FaPaw />
-        <i className="fas fa-paw">Bark Park Pet Salon </i>
-      </a>
 
-      <nav className={styles.navbar}>
-        <a href="">Home</a>
-        <a href="product">Products</a>
-        <a href="search?category=">Categories</a>
-        <a href="services">Services</a>
-      </nav>
-      <div>
-        <IconButton
-          edge="start"
-          aria-label="open drawer"
-          onClick={sidebarOpenHandler}
-        >
-          <CgMenu className={styles.menu} />
-        </IconButton>
-        <Drawer
-          anchor="right"
-          open={sidebarVisible}
-          onClose={sidebarCloseHandler}
-        >
-          <List>
-            <ListItem>
-              <Button onClick={homeRouter}>
-                <ListItemText>Home</ListItemText>
-              </Button>
-            </ListItem>
-            <ListItem>
-              <Button onClick={productsRouter}>
-                <ListItemText>Products</ListItemText>
-              </Button>
-            </ListItem>
-            <ListItem>
-              <Button>
-                <ListItemText onClick={categoriesRouter}>
-                  Categories
-                </ListItemText>
-              </Button>
-            </ListItem>
-            <ListItem>
-              <Button>
-                <ListItemText onClick={servicesRouter}>Services</ListItemText>
-              </Button>
-            </ListItem>
-          </List>
-        </Drawer>
-        <NextLink href="/cart" passHref>
-          <Link style={{ fontSize: "25px" }}>
-            {cart.cartItems.length > 0 && userInfo ? (
-              <Badge color="secondary" badgeContent={cart.cartItems.length}>
-                <HiShoppingCart className={styles.icons1} />
-              </Badge>
-            ) : (
-              <HiShoppingCart className={styles.icons0} />
-            )}
-          </Link>
-        </NextLink>
-        {userInfo ? (
-          <>
-            <Button
-              aria-controls="simple-menu"
-              aria-haspopup="true"
-              onClick={loginClickHandler}
-              className={classes.navbarButton}
-              style={{ fontSize: "1.5rem", marginBottom: "10px" }}
-            >
-              <CgProfile className={styles.icons2} />
-            </Button>
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={loginMenuCloseHandler}
-            >
-              <MenuItem onClick={(e) => loginMenuCloseHandler(e, "/profile")}>
-                Profile
-              </MenuItem>
-              <MenuItem
-                onClick={(e) => loginMenuCloseHandler(e, "/order-history")}
-              >
-                Order History
-              </MenuItem>
-              {userInfo.isAdmin && (
-                <MenuItem
-                  onClick={(e) => loginMenuCloseHandler(e, "/admin/dashboard")}
-                >
-                  Admin Dashboard
-                </MenuItem>
-              )}
-              <MenuItem onClick={logoutMenuCloseHandler}>Logout</MenuItem>
-            </Menu>
-          </>
-        ) : (
-          <NextLink href="/login" passHref>
-            <Link style={{ fontSize: "25px" }}>
-              <CgProfile className={styles.icons0} />
+      <AppBar position="static" className={styles.navbar2}>
+        <Toolbar>
+          <NextLink href="/" passHref>
+            <Link>
+              <i className={styles.logo1}>
+                <FaPaw />
+                Bark Park Pet Salon
+              </i>
             </Link>
           </NextLink>
-        )}
-      </div>
-    </header>
+
+          <div className={classes.grow}></div>
+          <div>
+            {" "}
+            <nav className={styles.navbar}>
+              <a href="\">Home</a>
+              <a href="product">Products</a>
+              <a href="search?category=">Categories</a>
+              <a href="services">Services</a>
+            </nav>
+          </div>
+
+          <div className={classes.grow}></div>
+          <div>
+            <IconButton
+              edge="start"
+              aria-label="open drawer"
+              onClick={sidebarOpenHandler}
+            >
+              <CgMenu className={styles.menu} />
+            </IconButton>
+            <Drawer
+              anchor="right"
+              open={sidebarVisible}
+              onClose={sidebarCloseHandler}
+            >
+              <List>
+                <ListItem>
+                  <Button onClick={homeRouter}>
+                    <ListItemText>Home</ListItemText>
+                  </Button>
+                </ListItem>
+                <ListItem>
+                  <Button onClick={productsRouter}>
+                    <ListItemText>Products</ListItemText>
+                  </Button>
+                </ListItem>
+                <ListItem>
+                  <Button>
+                    <ListItemText onClick={categoriesRouter}>
+                      Categories
+                    </ListItemText>
+                  </Button>
+                </ListItem>
+                <ListItem>
+                  <Button>
+                    <ListItemText onClick={servicesRouter}>
+                      Services
+                    </ListItemText>
+                  </Button>
+                </ListItem>
+              </List>
+            </Drawer>
+          </div>
+
+          <div>
+            <NextLink href="/cart" passHref>
+              <Link>
+                {cart.cartItems.length > 0 && userInfo ? (
+                  <Badge color="secondary" badgeContent={cart.cartItems.length}>
+                    <HiShoppingCart className={styles.icon} />
+                  </Badge>
+                ) : (
+                  <HiShoppingCart className={styles.icons0} />
+                )}
+              </Link>
+            </NextLink>
+            {userInfo ? (
+              <>
+                <Button
+                  aria-controls="simple-menu"
+                  aria-haspopup="true"
+                  onClick={loginClickHandler}
+                >
+                  <CgProfile className={styles.icon} />
+                </Button>
+                <Menu
+                  id="simple-menu"
+                  anchorEl={anchorEl}
+                  keepMounted
+                  open={Boolean(anchorEl)}
+                  onClose={loginMenuCloseHandler}
+                >
+                  <MenuItem
+                    onClick={(e) => loginMenuCloseHandler(e, "/profile")}
+                  >
+                    <PersonPinIcon />
+                    Profile
+                  </MenuItem>
+                  <MenuItem
+                    onClick={(e) => loginMenuCloseHandler(e, "/order-history")}
+                  >
+                    <WorkHistoryIcon />
+                    Order History
+                  </MenuItem>
+                  {!userInfo.isAdmin && (
+                    <MenuItem
+                      onClick={(e) =>
+                        loginMenuCloseHandler(e, "/refund-history")
+                      }
+                    >
+                      <AssignmentReturnIcon />
+                      Refund History
+                    </MenuItem>
+                  )}
+
+                  {userInfo.isAdmin && (
+                    <MenuItem
+                      onClick={(e) =>
+                        loginMenuCloseHandler(e, "/admin/dashboard")
+                      }
+                    >
+                      <AdminPanelSettingsIcon /> Admin Dashboard
+                    </MenuItem>
+                  )}
+                  <MenuItem onClick={logoutMenuCloseHandler}>
+                    <LogoutIcon />
+                    Logout
+                  </MenuItem>
+                </Menu>
+              </>
+            ) : (
+              <NextLink href="/login" passHref>
+                <Link>
+                  <CgProfile className={styles.icons0} />
+                </Link>
+              </NextLink>
+            )}
+          </div>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 }

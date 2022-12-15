@@ -142,7 +142,7 @@ function AdminDashboard() {
                 ) : error ? (
                   <Typography className={classes.error}>{error}</Typography>
                 ) : (
-                  <Grid container spacing={5}>
+                  <Grid container spacing={6}>
                     <Grid item md={3}>
                       <Card raised>
                         <CardContent>
