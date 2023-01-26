@@ -88,27 +88,6 @@ export default function Navbar({ title, description }) {
 
       <AppBar position="static" className={styles.navbar2}>
         <Toolbar>
-          <NextLink href="/" passHref>
-            <Link>
-              <i className={styles.logo1}>
-                <FaPaw />
-                Bark Park Pet Salon
-              </i>
-            </Link>
-          </NextLink>
-
-          <div className={classes.grow}></div>
-          <div>
-            {" "}
-            <nav className={styles.navbar}>
-              <a href="\">Home</a>
-              <a href="product">Products</a>
-              <a href="search?category=">Categories</a>
-              <a href="services">Services</a>
-            </nav>
-          </div>
-
-          <div className={classes.grow}></div>
           <div>
             <IconButton
               edge="start"
@@ -150,6 +129,27 @@ export default function Navbar({ title, description }) {
               </List>
             </Drawer>
           </div>
+          <NextLink href="/" passHref>
+            <Link>
+              <i className={styles.logo1}>
+                <FaPaw />
+                Bark Park Pet Salon
+              </i>
+            </Link>
+          </NextLink>
+
+          <div className={classes.grow}></div>
+          <div>
+            {" "}
+            <nav className={styles.navbar}>
+              <a href="\">Home</a>
+              <a href="product">Products</a>
+              <a href="search?category=">Categories</a>
+              <a href="services">Services</a>
+            </nav>
+          </div>
+
+          <div className={classes.grow}></div>
 
           <div>
             <NextLink href="/cart" passHref>

@@ -607,11 +607,11 @@
   }
 
   .icons01 {
-    font-size: 3rem;
+    font-size: 2.5rem;
     margin-right: 2px;
   }
   .menu {
-    margin-top: 10px;
+    margin-top: 20px;
     font-size: 2rem;
   }
   .menuMain {
@@ -661,11 +661,11 @@
     height: 500px;
   }
   .menu {
-    display: inline-block;
-    font-size: 3rem;
+    display: flex;
+    font-size: 2.5rem;
     margin-left: 2rem;
     margin-right: 20px;
-    margin-bottom: 13px;
+    margin-top: 10px;
     padding-bottom: 10px;
 
     color: black;
@@ -714,13 +714,14 @@
   .icons01,
   .icons2,
   .icons0 {
-    font-size: 2rem;
-    margin-right: 3px;
+    font-size: 3rem;
+    margin-right: 10px;
   }
   .menu {
     padding: 0;
-    margin-bottom: 23px;
-    font-size: 2rem;
+    margin-bottom: 7px;
+    margin-right: 5px;
+    font-size: 3rem;
   }
   .direction {
     margin: auto;
@@ -767,6 +768,7 @@
 @media (max-width: 900px) {
   .icons00 {
     font-size: 3rem;
+    margin-right: 5px;
   }
   .img3 {
     width: fit-content;
@@ -788,18 +790,17 @@
     height: auto;
   }
   .menu {
-    margin-bottom: 33px;
     padding: 0px;
     font-size: 3rem;
-    margin-right: 8px;
+    margin-right: 5px;
   }
   .icons2 {
     font-size: 3rem;
-    margin-right: 0px;
+    margin-right: 5px;
   }
   .icons0 {
     font-size: 3rem;
-    margin-right: 0px;
+    margin-right: 5px;
   }
   .icon {
     font-size: 3rem;
@@ -1147,7 +1148,7 @@
     margin-right: 10px;
   }
   .menu {
-    margin-bottom: 24px;
+    margin-bottom: 10px;
     margin-right: 0;
     font-size: 1.5rem;
   }
