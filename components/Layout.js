@@ -17,6 +17,8 @@ import {
   List,
   IconButton,
   Drawer,
+  Typography,
+  Switch,
 } from "@material-ui/core";
 import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
@@ -32,12 +34,17 @@ import { red } from "@material-ui/core/colors";
 import { Store } from "../utils/Store";
 import useStyles from "../utils/styles";
 import Footer from "../pages/footer1";
-import { HiShoppingCart } from "react-icons/hi";
-import { CgMenu, CgProfile } from "react-icons/cg";
+
+import { CgMenu } from "react-icons/cg";
 export default function Layout({ title, description, children }) {
   const router = useRouter();
   const { state, dispatch } = useContext(Store);
   const { darkMode, cart, userInfo } = state;
+  const darkModeChangeHandler = () => {
+    dispatch({ type: darkMode ? "DARK_MODE_OFF" : "DARK_MODE_ON" });
+    const newDarkMode = !darkMode;
+    Cookies.set("darkMode", newDarkMode ? "ON" : "OFF");
+  };
   const theme = createTheme({
     typography: {
       h1: {
@@ -121,6 +128,45 @@ export default function Layout({ title, description, children }) {
 
         <AppBar position="static" className={styles.navbar1}>
           <Toolbar>
+            <IconButton
+              edge="start"
+              aria-label="open drawer"
+              onClick={sidebarOpenHandler}
+            >
+              <CgMenu className={styles.menu} />
+            </IconButton>
+            <Drawer
+              anchor="right"
+              open={sidebarVisible}
+              onClose={sidebarCloseHandler}
+            >
+              <List>
+                <ListItem>
+                  <Button onClick={homeRouter}>
+                    <ListItemText>Home</ListItemText>
+                  </Button>
+                </ListItem>
+                <ListItem>
+                  <Button onClick={productsRouter}>
+                    <ListItemText>Products</ListItemText>
+                  </Button>
+                </ListItem>
+                <ListItem>
+                  <Button>
+                    <ListItemText onClick={categoriesRouter}>
+                      Categories
+                    </ListItemText>
+                  </Button>
+                </ListItem>
+                <ListItem>
+                  <Button>
+                    <ListItemText onClick={servicesRouter}>
+                      Services
+                    </ListItemText>
+                  </Button>
+                </ListItem>
+              </List>
+            </Drawer>
             <NextLink href="/" passHref>
               <Link>
                 <i className={styles.logo1}>
@@ -142,71 +188,49 @@ export default function Layout({ title, description, children }) {
             </div>
 
             <div className={classes.grow}></div>
-            <div>
-              <IconButton
-                edge="start"
-                aria-label="open drawer"
-                onClick={sidebarOpenHandler}
-              >
-                <CgMenu className={styles.menu} />
-              </IconButton>
-              <Drawer
-                anchor="right"
-                open={sidebarVisible}
-                onClose={sidebarCloseHandler}
-              >
-                <List>
-                  <ListItem>
-                    <Button onClick={homeRouter}>
-                      <ListItemText>Home</ListItemText>
-                    </Button>
-                  </ListItem>
-                  <ListItem>
-                    <Button onClick={productsRouter}>
-                      <ListItemText>Products</ListItemText>
-                    </Button>
-                  </ListItem>
-                  <ListItem>
-                    <Button>
-                      <ListItemText onClick={categoriesRouter}>
-                        Categories
-                      </ListItemText>
-                    </Button>
-                  </ListItem>
-                  <ListItem>
-                    <Button>
-                      <ListItemText onClick={servicesRouter}>
-                        Services
-                      </ListItemText>
-                    </Button>
-                  </ListItem>
-                </List>
-              </Drawer>
-            </div>
 
             <div>
+              <Switch
+                checked={darkMode}
+                onChange={darkModeChangeHandler}
+              ></Switch>
               <NextLink href="/cart" passHref>
                 <Link>
-                  {cart.cartItems.length > 0 && userInfo ? (
-                    <Badge
-                      color="secondary"
-                      badgeContent={cart.cartItems.length}
-                    >
-                      <HiShoppingCart className={styles.icon} />
-                    </Badge>
-                  ) : (
-                    <HiShoppingCart className={styles.icons0} />
-                  )}
+                  <Typography
+                    component="span"
+                    style={{
+                      color: "black",
+                      fontWeight: "bolder",
+                      marginRight: "10px",
+                    }}
+                  >
+                    {cart.cartItems.length > 0 ? (
+                      <Badge
+                        color="primary"
+                        badgeContent={cart.cartItems.length}
+                      >
+                        Cart
+                      </Badge>
+                    ) : (
+                      "Cart"
+                    )}
+                  </Typography>
                 </Link>
               </NextLink>
+
               {userInfo ? (
                 <>
                   <Button
                     aria-controls="simple-menu"
                     aria-haspopup="true"
                     onClick={loginClickHandler}
+                    style={{
+                      color: "black",
+                      fontWeight: "bolder",
+                      marginRight: "10px",
+                    }}
                   >
-                    <CgProfile className={styles.icon} />
+                    {userInfo.name}
                   </Button>
                   <Menu
                     id="simple-menu"
@@ -251,14 +275,30 @@ export default function Layout({ title, description, children }) {
                     )}
                     <MenuItem onClick={logoutMenuCloseHandler}>
                       <LogoutIcon />
-                      Logout
+                      <NextLink href="/login" passHref>
+                        <Link
+                          style={{
+                            color: "black",
+
+                            marginRight: "10px",
+                          }}
+                        >
+                          Logout
+                        </Link>
+                      </NextLink>
                     </MenuItem>
                   </Menu>
                 </>
               ) : (
                 <NextLink href="/login" passHref>
-                  <Link>
-                    <CgProfile className={styles.icons0} />
+                  <Link
+                    style={{
+                      color: "black",
+                      fontWeight: "bolder",
+                      marginRight: "10px",
+                    }}
+                  >
+                    Login
                   </Link>
                 </NextLink>
               )}

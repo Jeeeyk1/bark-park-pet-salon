@@ -20,13 +20,13 @@ import {
   Menu,
   MenuItem,
   Toolbar,
+  Typography,
 } from "@material-ui/core";
 import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import { Store } from "../utils/Store";
 import useStyles from "../utils/styles";
-import { HiShoppingCart } from "react-icons/hi";
-import { CgProfile } from "react-icons/cg";
+
 import NextLink from "next/link";
 import { CgMenu } from "react-icons/cg";
 
@@ -154,23 +154,38 @@ export default function Navbar({ title, description }) {
           <div>
             <NextLink href="/cart" passHref>
               <Link>
-                {cart.cartItems.length > 0 && userInfo ? (
-                  <Badge color="secondary" badgeContent={cart.cartItems.length}>
-                    <HiShoppingCart className={styles.icon} />
-                  </Badge>
-                ) : (
-                  <HiShoppingCart className={styles.icons0} />
-                )}
+                <Typography
+                  component="span"
+                  style={{
+                    color: "black",
+                    fontWeight: "bolder",
+                    marginRight: "10px",
+                  }}
+                >
+                  {cart.cartItems.length > 0 ? (
+                    <Badge color="primary" badgeContent={cart.cartItems.length}>
+                      Cart
+                    </Badge>
+                  ) : (
+                    "Cart"
+                  )}
+                </Typography>
               </Link>
             </NextLink>
+
             {userInfo ? (
               <>
                 <Button
                   aria-controls="simple-menu"
                   aria-haspopup="true"
                   onClick={loginClickHandler}
+                  style={{
+                    color: "black",
+                    fontWeight: "bolder",
+                    marginRight: "10px",
+                  }}
                 >
-                  <CgProfile className={styles.icon} />
+                  {userInfo.name}
                 </Button>
                 <Menu
                   id="simple-menu"
@@ -213,14 +228,30 @@ export default function Navbar({ title, description }) {
                   )}
                   <MenuItem onClick={logoutMenuCloseHandler}>
                     <LogoutIcon />
-                    Logout
+                    <NextLink href="/login" passHref>
+                      <Link
+                        style={{
+                          color: "black",
+
+                          marginRight: "10px",
+                        }}
+                      >
+                        Logout
+                      </Link>
+                    </NextLink>
                   </MenuItem>
                 </Menu>
               </>
             ) : (
               <NextLink href="/login" passHref>
-                <Link>
-                  <CgProfile className={styles.icons0} />
+                <Link
+                  style={{
+                    color: "black",
+                    fontWeight: "bolder",
+                    marginRight: "10px",
+                  }}
+                >
+                  Login
                 </Link>
               </NextLink>
             )}
