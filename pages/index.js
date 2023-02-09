@@ -13,6 +13,7 @@ import Header from "../homepage/header";
 import Navbar from "../homepage/navbar";
 import Location from "../homepage/location";
 import Aos from "aos";
+import Scroll from "./scroll/Scroll";
 
 export default function Homepage(props) {
   const { featuredProducts } = props;
@@ -22,8 +23,8 @@ export default function Homepage(props) {
   return (
     <div>
       <Navbar />
+      <Scroll showBelow={250} />
       <Header />
-
       <Box
         justifyContent={"center"}
         style={{
@@ -114,7 +115,6 @@ export default function Homepage(props) {
           </p>
         </div>
       </div>
-
       <Box
         display="flex"
         justifyContent={"center"}
@@ -132,7 +132,6 @@ export default function Homepage(props) {
           Locate Us
         </Typography>
       </Box>
-
       <Box>
         <Location />
       </Box>

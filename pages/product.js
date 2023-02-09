@@ -11,6 +11,7 @@ import useStyles from "../utils/styles";
 import Productitem from "../components/Productitem";
 
 import { Pagination } from "@material-ui/lab";
+import Scroll from "./scroll/scroll";
 
 const PAGE_SIZE = 6;
 
@@ -66,6 +67,7 @@ export default function Home() {
 
   return (
     <Layout>
+      <Scroll showBelow={250} />
       <div>
         <div
           style={{

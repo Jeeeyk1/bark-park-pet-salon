@@ -26,6 +26,7 @@ import { getError } from "../utils/error";
 import { Store } from "../utils/Store";
 import Layout from "../components/Layout";
 import useStyles from "../utils/styles";
+import Scroll from "./scroll/Scroll";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -71,6 +72,7 @@ function OrderHistory() {
   }, []);
   return (
     <Layout title="Order History">
+      <Scroll showBelow={250} />
       <Grid container spacing={1}>
         <Grid item md={3} xs={12}>
           <Card className={classes.section}>
