@@ -11,7 +11,7 @@ import useStyles from "../utils/styles";
 import Productitem from "../components/Productitem";
 
 import { Pagination } from "@material-ui/lab";
-import Scroll from "./scroll/scroll";
+import Scroll from "./scroll/Scroll";
 
 const PAGE_SIZE = 6;
 
