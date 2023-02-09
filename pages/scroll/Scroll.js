@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import { makeStyles } from "@material-ui/styles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   toTop: {
     zIndex: 2,
     position: "fixed",
