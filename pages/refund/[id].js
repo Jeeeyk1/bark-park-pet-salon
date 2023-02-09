@@ -176,7 +176,10 @@ function RefundRequest({ params }) {
             Refund Request
           </Typography>
           <Typography>Note:</Typography>{" "}
-          <Typography>Please be informed that not all</Typography>
+          <Typography>
+            Please be aware that not all of your requests will be granted, The
+            staff must first review each one before validating it.
+          </Typography>
           <List>
             <ListItem>
               <Controller
@@ -252,6 +255,9 @@ function RefundRequest({ params }) {
                 type="submit"
                 fullWidth
                 color="primary"
+                onClick={() => {
+                  router.push("../");
+                }}
               >
                 Submit Refund Request
               </Button>

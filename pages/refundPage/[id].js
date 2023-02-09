@@ -205,6 +205,22 @@ function RefundInfo({ params }) {
       enqueueSnackbar(getError(err), { variant: "error" });
     }
   };
+  const rejectRefundHandler = async () => {
+    if (!window.confirm("Are you sure to reject this refund request?")) {
+      return;
+    }
+
+    try {
+      await axios.put(`/api/orders/${orderId}/refundRejected`, {});
+      enqueueSnackbar("Rejected refund", {
+        variant: "success",
+      });
+
+      router.push("/");
+    } catch (err) {
+      enqueueSnackbar(getError(err), { variant: "error" });
+    }
+  };
 
   return (
     <Layout title={`Order ${orderId}`}>
@@ -293,7 +309,7 @@ function RefundInfo({ params }) {
                   Approved at: {isApproved ? [approvedAt] : "Not approved"}
                 </ListItem>
                 <Link>
-                  <NextLink href="ds" passHref>
+                  <NextLink href={imageRefund} passHref>
                     <img
                       src={imageRefund}
                       alt="test"
@@ -476,7 +492,23 @@ function RefundInfo({ params }) {
                         backgroundColor: "#fcd01c",
                       }}
                     >
-                      Refund items
+                      Approve
+                    </Button>
+                  </ListItem>
+                )}
+                {userInfo.isAdmin && order.isDelivered && !order.isApproved && (
+                  <ListItem>
+                    {loadingDeliver && <CircularProgress />}
+                    <Button
+                      fullWidth
+                      variant="contained"
+                      onClick={rejectRefundHandler}
+                      style={{
+                        fontWeight: "bolder",
+                        backgroundColor: "#fcd01c",
+                      }}
+                    >
+                      Decline
                     </Button>
                   </ListItem>
                 )}

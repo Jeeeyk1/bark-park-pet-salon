@@ -8,6 +8,7 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import LocalShippingSharpIcon from "@mui/icons-material/LocalShippingSharp";
+import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
 import {
   CircularProgress,
   Grid,
@@ -23,6 +24,7 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  Chip,
 } from "@material-ui/core";
 import { getError } from "../../utils/error";
 import { Store } from "../../utils/Store";
@@ -117,7 +119,7 @@ function AdminOrders() {
               </NextLink>
               <NextLink href="/admin/refund" passHref>
                 <ListItem selected button component="a">
-                  <PeopleAltIcon />
+                  <AssignmentReturnIcon />
                   <ListItemText primary="Refund requests"></ListItemText>
                 </ListItem>
               </NextLink>
@@ -213,7 +215,45 @@ function AdminOrders() {
                               ""
                             )}
                             {order.applyRefund ? (
-                              <TableCell style={{}}>{order.status}</TableCell>
+                              <TableCell>
+                                {console.log(order.status)}{" "}
+                                {order.status == "Approved" ? (
+                                  <Chip
+                                    label={order.status}
+                                    style={{
+                                      backgroundColor: "#08f34b",
+                                      color: "black",
+                                      fontWeight: "bolder",
+                                    }}
+                                  />
+                                ) : (
+                                  ""
+                                )}{" "}
+                                {order.status == "pending" ? (
+                                  <Chip
+                                    label={order.status}
+                                    style={{
+                                      backgroundColor: "#FFA500",
+                                      color: "black",
+                                      fontWeight: "bolder",
+                                    }}
+                                  />
+                                ) : (
+                                  ""
+                                )}
+                                {order.status == "Declined" ? (
+                                  <Chip
+                                    label={order.status}
+                                    style={{
+                                      backgroundColor: "red",
+                                      color: "black",
+                                      fontWeight: "bolder",
+                                    }}
+                                  />
+                                ) : (
+                                  ""
+                                )}
+                              </TableCell>
                             ) : (
                               ""
                             )}

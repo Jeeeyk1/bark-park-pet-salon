@@ -7,6 +7,9 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
 import { FaPaw } from "react-icons/fa";
 import Head from "next/head";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import Inventory2Icon from "@mui/icons-material/Inventory2";
+import LocalShippingSharpIcon from "@mui/icons-material/LocalShippingSharp";
 import {
   AppBar,
   Badge,
@@ -200,12 +203,50 @@ export default function Navbar({ title, description }) {
                     <PersonPinIcon />
                     Profile
                   </MenuItem>
-                  <MenuItem
-                    onClick={(e) => loginMenuCloseHandler(e, "/order-history")}
-                  >
-                    <WorkHistoryIcon />
-                    Order History
-                  </MenuItem>
+                  {!userInfo.isAdmin && (
+                    <MenuItem
+                      onClick={(e) =>
+                        loginMenuCloseHandler(e, "/order-history")
+                      }
+                    >
+                      <WorkHistoryIcon />
+                      Order History
+                    </MenuItem>
+                  )}
+                  {userInfo.isAdmin && (
+                    <MenuItem
+                      onClick={(e) => loginMenuCloseHandler(e, "/admin/orders")}
+                    >
+                      <LocalShippingSharpIcon />
+                      Orders
+                    </MenuItem>
+                  )}
+                  {userInfo.isAdmin && (
+                    <MenuItem
+                      onClick={(e) =>
+                        loginMenuCloseHandler(e, "/admin/products")
+                      }
+                    >
+                      <Inventory2Icon />
+                      Products
+                    </MenuItem>
+                  )}
+                  {userInfo.isAdmin && (
+                    <MenuItem
+                      onClick={(e) => loginMenuCloseHandler(e, "/admin/user")}
+                    >
+                      <PeopleAltIcon />
+                      Users
+                    </MenuItem>
+                  )}
+                  {userInfo.isAdmin && (
+                    <MenuItem
+                      onClick={(e) => loginMenuCloseHandler(e, "/admin/refund")}
+                    >
+                      <AssignmentReturnIcon />
+                      Refund Requests
+                    </MenuItem>
+                  )}
                   {!userInfo.isAdmin && (
                     <MenuItem
                       onClick={(e) =>

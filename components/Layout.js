@@ -1,5 +1,10 @@
 import React, { useContext, useState } from "react";
 import Head from "next/head";
+import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
+import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
+import Inventory2Icon from "@mui/icons-material/Inventory2";
+import LocalShippingSharpIcon from "@mui/icons-material/LocalShippingSharp";
 import {
   AppBar,
   Toolbar,
@@ -21,10 +26,10 @@ import {
   Switch,
 } from "@material-ui/core";
 import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
-import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+
 import PersonPinIcon from "@mui/icons-material/PersonPin";
 import LogoutIcon from "@mui/icons-material/Logout";
-import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
+
 import { FaPaw } from "react-icons/fa";
 import NextLink from "next/link";
 import styles from "../utils/style.module.css";
@@ -68,6 +73,9 @@ export default function Layout({ title, description, children }) {
       },
       tertiary: {
         main: red,
+      },
+      pending: {
+        main: "#90EE90",
       },
     },
   });
@@ -180,10 +188,10 @@ export default function Layout({ title, description, children }) {
             <div>
               {" "}
               <nav className={styles.navbar}>
-                <a href="">Home</a>
-                <a href="product">Products</a>
-                <a href="search?category=">Categories</a>
-                <a href="services">Services</a>
+                <a href="../">Home</a>
+                <a href="../product">Products</a>
+                <a href="../search?category=">Categories</a>
+                <a href="../services">Services</a>
               </nav>
             </div>
 
@@ -245,14 +253,54 @@ export default function Layout({ title, description, children }) {
                       <PersonPinIcon />
                       Profile
                     </MenuItem>
-                    <MenuItem
-                      onClick={(e) =>
-                        loginMenuCloseHandler(e, "/order-history")
-                      }
-                    >
-                      <WorkHistoryIcon />
-                      Order History
-                    </MenuItem>
+                    {!userInfo.isAdmin && (
+                      <MenuItem
+                        onClick={(e) =>
+                          loginMenuCloseHandler(e, "/order-history")
+                        }
+                      >
+                        <WorkHistoryIcon />
+                        Order History
+                      </MenuItem>
+                    )}
+                    {userInfo.isAdmin && (
+                      <MenuItem
+                        onClick={(e) =>
+                          loginMenuCloseHandler(e, "/admin/orders")
+                        }
+                      >
+                        <LocalShippingSharpIcon />
+                        Orders
+                      </MenuItem>
+                    )}
+                    {userInfo.isAdmin && (
+                      <MenuItem
+                        onClick={(e) =>
+                          loginMenuCloseHandler(e, "/admin/products")
+                        }
+                      >
+                        <Inventory2Icon />
+                        Products
+                      </MenuItem>
+                    )}
+                    {userInfo.isAdmin && (
+                      <MenuItem
+                        onClick={(e) => loginMenuCloseHandler(e, "/admin/user")}
+                      >
+                        <PeopleAltIcon />
+                        Users
+                      </MenuItem>
+                    )}
+                    {userInfo.isAdmin && (
+                      <MenuItem
+                        onClick={(e) =>
+                          loginMenuCloseHandler(e, "/admin/refund")
+                        }
+                      >
+                        <AssignmentReturnIcon />
+                        Refund Requests
+                      </MenuItem>
+                    )}
                     {!userInfo.isAdmin && (
                       <MenuItem
                         onClick={(e) =>

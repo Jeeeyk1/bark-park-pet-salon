@@ -17,7 +17,7 @@
 .p1,
 .p2,
 .p3 {
-  font-weight: bold;
+  font-weight: 100;
   font-size: 20px;
 }
 
@@ -87,12 +87,14 @@
 
 .payment {
   margin-bottom: 100px;
+  margin-right: 100px;
 }
 .submitStyle {
   padding: 10px 20px 20px;
   justify-items: center;
   display: flex;
-  margin-left: 430px;
+  text-align: center;
+  justify-content: center;
 }
 .userGcash {
   text-align: center;
@@ -322,6 +324,7 @@
   font-size: 25px;
   font-weight: bolder;
   text-decoration: none;
+  text-transform: none;
 }
 .dm1 {
   display: flex;
@@ -447,7 +450,7 @@
 
 .services .box:hover {
   border-radius: 0.5rem;
-  background: #fcd01c;
+  background: #54f6ff;
 }
 
 .image {
@@ -1078,8 +1081,8 @@
     width: 505px;
   }
   .logo1 {
-    margin-left: 1px;
-    font-size: 1.3rem;
+    margin-left: 5px;
+    font-size: 11px;
     color: black;
     font-weight: bolder;
     position: left;
@@ -1190,6 +1193,9 @@
   .image {
     margin-bottom: 25px;
   }
+  .logo1 {
+    font-size: 10px;
+  }
 }
 @media (max-width: 360px) {
   .icons0 {
@@ -1211,7 +1217,10 @@
     font-size: 12px;
   }
   .logo i {
-    font-size: 12px;
+    font-size: 10px;
+  }
+  .logo1 {
+    font-size: 9px;
   }
 }
 

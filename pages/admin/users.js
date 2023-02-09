@@ -2,6 +2,7 @@ import axios from "axios";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
+import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
 import React, { useEffect, useContext, useReducer } from "react";
 import {
   CircularProgress,
@@ -150,7 +151,7 @@ function AdminUsers() {
               </NextLink>
               <NextLink href="/admin/refund" passHref>
                 <ListItem button component="a">
-                  <PeopleAltIcon />
+                  <AssignmentReturnIcon />
                   <ListItemText primary="Refund requests"></ListItemText>
                 </ListItem>
               </NextLink>

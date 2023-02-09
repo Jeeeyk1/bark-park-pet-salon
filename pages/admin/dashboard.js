@@ -5,6 +5,7 @@ import NexLink from "next/link";
 import React, { useEffect, useContext, useReducer } from "react";
 import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
+import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import LocalShippingSharpIcon from "@mui/icons-material/LocalShippingSharp";
@@ -126,7 +127,7 @@ function AdminDashboard() {
               </NexLink>
               <NexLink href="/admin/refund" passHref>
                 <ListItem button component="a">
-                  <PeopleAltIcon />
+                  <AssignmentReturnIcon />
                   <ListItemText primary="Refund requests"></ListItemText>
                 </ListItem>
               </NexLink>

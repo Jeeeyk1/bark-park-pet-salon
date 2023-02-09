@@ -19,6 +19,9 @@ import {
   Button,
   ListItemText,
 } from "@material-ui/core";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
+import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
 import { getError } from "../utils/error";
 import { Store } from "../utils/Store";
 import Layout from "../components/Layout";
@@ -74,16 +77,21 @@ function OrderHistory() {
             <List>
               <NexLink href="/profile" passHref>
                 <ListItem button component="a">
+                  <AccountCircleIcon />
                   <ListItemText primary="User Profile"></ListItemText>
                 </ListItem>
               </NexLink>
+
               <NexLink href="/order-history" passHref>
                 <ListItem selected button component="a">
+                  <WorkHistoryIcon />
                   <ListItemText primary="Order History"></ListItemText>
                 </ListItem>
               </NexLink>
+
               <NexLink href="/refund-history" passHref>
                 <ListItem button component="a">
+                  <AssignmentReturnIcon />
                   <ListItemText primary="Refund History"></ListItemText>
                 </ListItem>
               </NexLink>
@@ -170,7 +178,16 @@ function OrderHistory() {
                             </TableCell>
                             <TableCell>
                               <NexLink href={`/order/${order._id}`} passHref>
-                                <Button variant="contained">Details</Button>
+                                <Button
+                                  variant="contained"
+                                  style={{
+                                    fontWeight: "bolder",
+                                    backgroundColor: "#87CEEB ",
+                                  }}
+                                >
+                                  {" "}
+                                  Details
+                                </Button>
                               </NexLink>
                             </TableCell>
                           </TableRow>

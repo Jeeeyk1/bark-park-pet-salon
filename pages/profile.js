@@ -3,6 +3,9 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import NexLink from "next/link";
 import React, { useEffect, useContext } from "react";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
+import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
 import {
   Grid,
   List,
@@ -72,16 +75,19 @@ function Profile() {
             <List>
               <NexLink href="/profile" passHref>
                 <ListItem selected button component="a">
+                  <AccountCircleIcon />
                   <ListItemText primary="User Profile"></ListItemText>
                 </ListItem>
               </NexLink>
               <NexLink href="/order-history" passHref>
                 <ListItem button component="a">
+                  <WorkHistoryIcon />
                   <ListItemText primary="Order History"></ListItemText>
                 </ListItem>
               </NexLink>
               <NexLink href="/refund-history" passHref>
                 <ListItem button component="a">
+                  <AssignmentReturnIcon />
                   <ListItemText primary="Refund History"></ListItemText>
                 </ListItem>
               </NexLink>
@@ -224,6 +230,7 @@ function Profile() {
                         type="submit"
                         fullWidth
                         color="primary"
+                        style={{ fontWeight: "Bolder" }}
                       >
                         Update
                       </Button>

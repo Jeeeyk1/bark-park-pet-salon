@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useReducer, useState } from "react";
-import Layout from "../components/Layout";
 
-import { Store } from "../utils/Store";
+import Layout from "../../components/Layout";
+import { Store } from "../../utils/Store";
 import Cookies from "js-cookie";
 import {
   Button,
@@ -12,8 +12,8 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { getError } from "../utils/error";
-import styles from "../utils/style.module.css";
+import { getError } from "../../utils/error";
+import styles from "../../utils/style.module.css";
 import { Controller, useForm } from "react-hook-form";
 import { useSnackbar } from "notistack";
 import dynamic from "next/dynamic";
@@ -95,7 +95,18 @@ function Gcash({ params }) {
   return (
     <Layout title="Gcash Payment">
       <div className={styles.payment}>
-        <Typography className={styles.orderID}>Order {orderId}</Typography>
+        <br />
+        <br />
+        <br />
+        <Typography
+          component="h1"
+          style={{ fontSize: "25px", fontWeight: "bolder" }}
+        >
+          {" "}
+          Order {orderId}
+        </Typography>
+        <br />
+        <br />
         {userInfo ? (
           <Typography className={styles.userGcash}>
             Hello, {userInfo.name} Please pay ₱{totalPrice}{" "}
@@ -105,7 +116,7 @@ function Gcash({ params }) {
         )}
         <div className={styles.QR}>
           {" "}
-          <img alt="qr" src="../images/QR.png" />
+          <img alt="qr" src="../images/QR_CODE.png" />
         </div>
         <div className={styles.submitStyle}>
           {" "}
@@ -143,7 +154,12 @@ function Gcash({ params }) {
                 ></Controller>
               </ListItem>
             </List>
-            <Button color="black" variant="contained" type="submit">
+            <Button
+              variant="contained"
+              type="submit"
+              fullWidth
+              style={{ backgroundColor: "#24a0ed", fontWeight: "bolder" }}
+            >
               Submit
             </Button>
           </form>

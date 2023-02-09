@@ -379,7 +379,7 @@ function Order({ params }) {
                         <div className={styles.gcash}>
                           <Button
                             onClick={() => {
-                              router.push(`../${orderId}`);
+                              router.push(`../gcash/${orderId}`);
                             }}
                           >
                             <Typography className={styles.gcashButton}>
@@ -397,15 +397,19 @@ function Order({ params }) {
                       <CircularProgress />
                     ) : (
                       <div className={classes.fullWidth}>
-                        <div className={styles.refund}>
+                        <div>
                           <Button
+                            fullWidth
+                            variant="contained"
+                            style={{
+                              fontWeight: "bolder",
+                              backgroundColor: "#fcd01c",
+                            }}
                             onClick={() => {
                               router.push(`../../refund/${orderId}`);
                             }}
                           >
-                            <Typography className={styles.refundBox}>
-                              Refund
-                            </Typography>
+                            Request Refund
                           </Button>
                         </div>
                       </div>

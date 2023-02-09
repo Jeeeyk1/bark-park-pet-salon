@@ -8,6 +8,7 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import LocalShippingSharpIcon from "@mui/icons-material/LocalShippingSharp";
+import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
 import {
   CircularProgress,
   Grid,
@@ -192,7 +193,7 @@ function AdminProducts() {
               </NextLink>
               <NextLink href="/admin/refund" passHref>
                 <ListItem button component="a">
-                  <PeopleAltIcon />
+                  <AssignmentReturnIcon />
                   <ListItemText primary="Refund requests"></ListItemText>
                 </ListItem>
               </NextLink>

@@ -3,6 +3,9 @@ import axios from "axios";
 import { useRouter } from "next/router";
 import NexLink from "next/link";
 import React, { useEffect, useContext, useReducer } from "react";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import WorkHistoryIcon from "@mui/icons-material/WorkHistory";
+import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
 import {
   CircularProgress,
   Grid,
@@ -18,6 +21,7 @@ import {
   TableBody,
   Button,
   ListItemText,
+  Chip,
 } from "@material-ui/core";
 import { getError } from "../utils/error";
 import { Store } from "../utils/Store";
@@ -53,6 +57,7 @@ export default function RefundHistory() {
     if (!userInfo) {
       router.push("/login");
     }
+
     const fetchOrders = async () => {
       try {
         dispatch({ type: "FETCH_REQUEST" });
@@ -66,6 +71,7 @@ export default function RefundHistory() {
     };
     fetchOrders();
   }, []);
+
   return (
     <Layout title="Order History">
       <Grid container spacing={1}>
@@ -74,16 +80,19 @@ export default function RefundHistory() {
             <List>
               <NexLink href="/profile" passHref>
                 <ListItem button component="a">
+                  <AccountCircleIcon />
                   <ListItemText primary="User Profile"></ListItemText>
                 </ListItem>
               </NexLink>
               <NexLink href="/order-history" passHref>
                 <ListItem button component="a">
+                  <WorkHistoryIcon />
                   <ListItemText primary="Order History"></ListItemText>
                 </ListItem>
               </NexLink>
               <NexLink href="/refund-history" passHref>
                 <ListItem selected button component="a">
+                  <AssignmentReturnIcon />
                   <ListItemText primary="Refund History"></ListItemText>
                 </ListItem>
               </NexLink>
@@ -176,7 +185,44 @@ export default function RefundHistory() {
                               ""
                             )}
                             {order.applyRefund ? (
-                              <TableCell>{order.status}</TableCell>
+                              <TableCell>
+                                {order.status == "Approved" ? (
+                                  <Chip
+                                    label={order.status}
+                                    style={{
+                                      backgroundColor: "#08f34b",
+                                      color: "black",
+                                      fontWeight: "bolder",
+                                    }}
+                                  />
+                                ) : (
+                                  ""
+                                )}{" "}
+                                {order.status == "pending" ? (
+                                  <Chip
+                                    label={order.status}
+                                    style={{
+                                      backgroundColor: "#FFA500",
+                                      color: "black",
+                                      fontWeight: "bolder",
+                                    }}
+                                  />
+                                ) : (
+                                  ""
+                                )}
+                                {order.status == "Declined" ? (
+                                  <Chip
+                                    label={order.status}
+                                    style={{
+                                      backgroundColor: "red",
+                                      color: "black",
+                                      fontWeight: "bolder",
+                                    }}
+                                  />
+                                ) : (
+                                  ""
+                                )}
+                              </TableCell>
                             ) : (
                               ""
                             )}
@@ -187,7 +233,15 @@ export default function RefundHistory() {
                                   href={`/refundPage/${order._id}`}
                                   passHref
                                 >
-                                  <Button variant="contained">Details </Button>
+                                  <Button
+                                    variant="contained"
+                                    style={{
+                                      fontWeight: "bolder",
+                                      backgroundColor: "#87CEEB ",
+                                    }}
+                                  >
+                                    Details{" "}
+                                  </Button>
                                 </NexLink>
                               </TableCell>
                             ) : (
