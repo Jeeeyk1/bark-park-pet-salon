@@ -809,6 +809,11 @@
     font-size: 3rem;
   }
 }
+/* @media (max-width: 550px) {
+  .logo1 {
+    font-size: 15px;
+  }
+} */
 @media (max-width: 768px) {
   .icons00 {
     font-size: 2.5rem;
@@ -833,6 +838,9 @@
   }
   .logo {
     font-size: 30px;
+  }
+  .logo1 {
+    font-size: 20px;
   }
   .navbar {
     position: absolute;
@@ -990,7 +998,7 @@
     font-size: 18px;
   }
   .logo1 {
-    font-size: 20px;
+    font-size: 15px;
   }
   .bppsb {
     font-size: 30px;
@@ -1035,7 +1043,9 @@
   }
   .menu {
     font-size: 2rem;
-    margin-top: 15px;
+    margin-top: 5px;
+    margin-right: 0;
+    margin-left: 5px;
   }
   .lezg {
     width: auto;
@@ -1151,8 +1161,9 @@
     margin-right: 10px;
   }
   .menu {
-    margin-bottom: 10px;
-    margin-right: 0;
+    margin-bottom: 17px;
+    margin-right: 8px;
+    margin-left: 0;
     font-size: 1.5rem;
   }
   .icons2 {
@@ -1187,9 +1198,7 @@
 
     margin-left: 0px;
   }
-  .menu {
-    margin-bottom: 26px;
-  }
+
   .image {
     margin-bottom: 25px;
   }

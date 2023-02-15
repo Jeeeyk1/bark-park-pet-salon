@@ -93,44 +93,47 @@ export default function Navbar({ title, description }) {
         <Toolbar>
           <div>
             <IconButton
+              className={styles.menu}
               edge="start"
               aria-label="open drawer"
               onClick={sidebarOpenHandler}
             >
-              <CgMenu className={styles.menu} />
+              <CgMenu className={styles.menu}>
+                {" "}
+                <Drawer
+                  anchor="right"
+                  open={sidebarVisible}
+                  onClose={sidebarCloseHandler}
+                >
+                  <List>
+                    <ListItem>
+                      <Button onClick={homeRouter}>
+                        <ListItemText>Home</ListItemText>
+                      </Button>
+                    </ListItem>
+                    <ListItem>
+                      <Button onClick={productsRouter}>
+                        <ListItemText>Products</ListItemText>
+                      </Button>
+                    </ListItem>
+                    <ListItem>
+                      <Button>
+                        <ListItemText onClick={categoriesRouter}>
+                          Categories
+                        </ListItemText>
+                      </Button>
+                    </ListItem>
+                    <ListItem>
+                      <Button>
+                        <ListItemText onClick={servicesRouter}>
+                          Services
+                        </ListItemText>
+                      </Button>
+                    </ListItem>
+                  </List>
+                </Drawer>
+              </CgMenu>
             </IconButton>
-            <Drawer
-              anchor="right"
-              open={sidebarVisible}
-              onClose={sidebarCloseHandler}
-            >
-              <List>
-                <ListItem>
-                  <Button onClick={homeRouter}>
-                    <ListItemText>Home</ListItemText>
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button onClick={productsRouter}>
-                    <ListItemText>Products</ListItemText>
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button>
-                    <ListItemText onClick={categoriesRouter}>
-                      Categories
-                    </ListItemText>
-                  </Button>
-                </ListItem>
-                <ListItem>
-                  <Button>
-                    <ListItemText onClick={servicesRouter}>
-                      Services
-                    </ListItemText>
-                  </Button>
-                </ListItem>
-              </List>
-            </Drawer>
           </div>
           <NextLink href="/" passHref>
             <Link>
@@ -233,7 +236,7 @@ export default function Navbar({ title, description }) {
                   )}
                   {userInfo.isAdmin && (
                     <MenuItem
-                      onClick={(e) => loginMenuCloseHandler(e, "/admin/user")}
+                      onClick={(e) => loginMenuCloseHandler(e, "/admin/users")}
                     >
                       <PeopleAltIcon />
                       Users

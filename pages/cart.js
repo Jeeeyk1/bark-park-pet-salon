@@ -130,17 +130,10 @@ function CartScreen() {
             <Card>
               <List>
                 <ListItem>
-                  <Typography
-                    variant="h2"
-                    style={{
-                      fontSize: "30px",
-                      fontWeight: "bolder",
-                      marginTop: "20px",
-                    }}
-                  >
-                    Subtotal ({cartItems.reduce((a, c) => a + c.quantity, 0)}
-                    {""}
-                    Items) :{" "}
+                  <Typography variant="h1">
+                    <strong>Subtotal</strong> (
+                    {cartItems.reduce((a, c) => a + c.quantity, 0)}&nbsp; items)
+                    :&nbsp;
                     {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
                   </Typography>
                 </ListItem>
@@ -151,7 +144,7 @@ function CartScreen() {
                     color="primary"
                     fullWidth
                   >
-                    Check Out
+                    <strong> Check Out</strong>
                   </Button>
                 </ListItem>
               </List>

@@ -108,7 +108,7 @@ function RefundInfo({ params }) {
 
   useEffect(() => {
     if (!userInfo) {
-      return router.push("/login");
+      return router.push("../login");
     }
     console.log(referenceNumber);
 

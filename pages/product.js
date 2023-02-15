@@ -101,7 +101,7 @@ export default function Home() {
             />
             <IconButton
               style={{
-                backgroundColor: "#088F8F",
+                backgroundColor: "#54f6ff",
                 padding: 5,
                 borderRadius: "0 5px 5px 0",
                 "& span": {
@@ -118,7 +118,7 @@ export default function Home() {
         </div>
 
         <h1>Products</h1>
-        <Grid container spacing={1}>
+        <Grid container spacing={6}>
           {currentProducts.map((product) => (
             <Grid item md={4} key={product.name}>
               <Productitem

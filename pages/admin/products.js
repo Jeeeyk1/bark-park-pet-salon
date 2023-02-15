@@ -239,14 +239,29 @@ function AdminProducts() {
                     <Table>
                       <TableHead>
                         <TableRow>
-                          <TableCell>ID</TableCell>
-                          <TableCell>NAME</TableCell>
-                          <TableCell>PRICE</TableCell>
-                          <TableCell>CATEGORY</TableCell>
-                          <TableCell>STOCKS</TableCell>
-                          <TableCell>RATING</TableCell>
+                          <TableCell>
+                            <strong>ID</strong>
+                          </TableCell>
+                          <TableCell>
+                            <strong>NAME</strong>
+                          </TableCell>
+                          <TableCell>
+                            <strong>PRICE</strong>
+                          </TableCell>
+                          <TableCell>
+                            <strong>CATEGORY</strong>
+                          </TableCell>
+                          <TableCell>
+                            <strong>STOCKS</strong>
+                          </TableCell>
+                          <TableCell>
+                            <strong>RATING</strong>
+                          </TableCell>
 
-                          <TableCell> ACTION</TableCell>
+                          <TableCell>
+                            {" "}
+                            <strong>ACTION</strong>
+                          </TableCell>
                         </TableRow>
                       </TableHead>
                       <TableBody>

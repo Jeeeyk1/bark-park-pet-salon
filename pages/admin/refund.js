@@ -265,7 +265,7 @@ function AdminOrders() {
                                 }}
                               >
                                 <NextLink
-                                  href={`/refundPage/${order._id}`}
+                                  href={`../refundPage/${order._id}`}
                                   passHref
                                 >
                                   <Button

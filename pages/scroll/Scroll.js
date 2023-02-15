@@ -43,6 +43,7 @@ const Scroll = ({ showBelow }) => {
     <div>
       {show && (
         <IconButton onClick={handleClick} className={classes.toTop}>
+          {""}
           <ExpandLessIcon />
         </IconButton>
       )}

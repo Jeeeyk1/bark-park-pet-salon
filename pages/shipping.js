@@ -288,7 +288,7 @@ export default function Shipping() {
 
           <ListItem>
             <Button variant="contained" type="submit" fullWidth color="primary">
-              Continue
+              <strong>Continue</strong>
             </Button>
           </ListItem>
         </List>

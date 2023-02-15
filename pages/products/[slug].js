@@ -12,6 +12,7 @@ import {
   TextField,
   CircularProgress,
 } from "@material-ui/core";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Rating from "@material-ui/lab/Rating";
 import Layout from "../../components/Layout";
 import db from "../../utils/db";
@@ -159,7 +160,8 @@ export default function ProductScreen(props) {
                   color="primary"
                   onClick={addToCartHandler}
                 >
-                  Add to cart
+                  <strong>Add to cart </strong> &nbsp; &nbsp; <br />
+                  <AddShoppingCartIcon />
                 </Button>
               </ListItem>
             </List>

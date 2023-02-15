@@ -140,6 +140,7 @@ export default function Layout({ title, description, children }) {
               edge="start"
               aria-label="open drawer"
               onClick={sidebarOpenHandler}
+              className={styles.menu}
             >
               <CgMenu className={styles.menu} />
             </IconButton>
@@ -285,7 +286,9 @@ export default function Layout({ title, description, children }) {
                     )}
                     {userInfo.isAdmin && (
                       <MenuItem
-                        onClick={(e) => loginMenuCloseHandler(e, "/admin/user")}
+                        onClick={(e) =>
+                          loginMenuCloseHandler(e, "/admin/users")
+                        }
                       >
                         <PeopleAltIcon />
                         Users
