@@ -16,11 +16,12 @@ import { withStyles } from "@material-ui/styles";
 function Productitem({ product, addToCartHandler }) {
   const StyledButton = withStyles({
     root: {
-      backgroundColor: "black",
-      color: "white",
+      height: "50px",
+      backgroundColor: "#1A2421",
+      color: "#fcd01c",
       "&:hover": {
-        backgroundColor: "#54f6ff",
-        color: "black",
+        backgroundColor: "#1A2421",
+        color: "#fcd01c",
       },
     },
   })(Button);
@@ -59,7 +60,10 @@ function Productitem({ product, addToCartHandler }) {
             onClick={() => addToCartHandler(product)}
             fullWidth
           >
-            <strong styles={{ texTransformation: "none" }}>Add to cart </strong>{" "}
+            <AddShoppingCartIcon /> &nbsp; &nbsp;
+            <strong styles={{ texTransformation: "none" }}>
+              Add to cart{" "}
+            </strong>{" "}
             &nbsp; &nbsp; <br />
             <AddShoppingCartIcon />
           </StyledButton>

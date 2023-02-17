@@ -6,6 +6,7 @@ import {
   Typography,
   Button,
   TextField,
+  withStyles,
 } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
 
@@ -122,7 +123,17 @@ function RefundRequest({ params }) {
       fetchOrder();
     }
   }, [order, successPay, successDeliver]);
-
+  const StyledButton = withStyles({
+    root: {
+      height: "50px",
+      backgroundColor: "#1A2421",
+      color: "#fcd01c",
+      "&:hover": {
+        backgroundColor: "#1A2421",
+        color: "#fcd01c",
+      },
+    },
+  })(Button);
   const uploadHandler = async (e) => {
     const file = e.target.files[0];
     const bodyFormData = new FormData();
@@ -250,7 +261,7 @@ function RefundRequest({ params }) {
               {loadingUpload && <CircularProgress />}
             </ListItem>
             <ListItem>
-              <Button
+              <StyledButton
                 variant="contained"
                 type="submit"
                 fullWidth
@@ -260,7 +271,7 @@ function RefundRequest({ params }) {
                 }}
               >
                 Submit Refund Request
-              </Button>
+              </StyledButton>
             </ListItem>
           </List>
         </form>

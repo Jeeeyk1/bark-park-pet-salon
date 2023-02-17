@@ -14,6 +14,7 @@ import {
   TableRow,
   Typography,
   Button,
+  withStyles,
 } from "@material-ui/core";
 import styles from "../../utils/style.module.css";
 import React, { useContext, useEffect, useReducer } from "react";
@@ -76,7 +77,17 @@ function Order({ params }) {
   const router = useRouter();
   const { state } = useContext(Store);
   const { userInfo } = state;
-
+  const StyledButton = withStyles({
+    root: {
+      height: "50px",
+      backgroundColor: "#1A2421",
+      color: "#fcd01c",
+      "&:hover": {
+        backgroundColor: "#1A2421",
+        color: "#fcd01c",
+      },
+    },
+  })(Button);
   const [
     { loading, error, order, successPay, loadingDeliver, successDeliver },
     dispatch,
@@ -239,6 +250,9 @@ function Order({ params }) {
                     ? `delivered at ${deliveredAt}`
                     : "not delivered"}
                 </ListItem>
+                <ListItem>
+                  {isDelivered ? `Shipped out by: ${userInfo.name}` : ""}
+                </ListItem>
               </List>
             </Card>
 
@@ -398,7 +412,7 @@ function Order({ params }) {
                     ) : (
                       <div className={classes.fullWidth}>
                         <div>
-                          <Button
+                          <StyledButton
                             fullWidth
                             variant="contained"
                             style={{
@@ -410,7 +424,7 @@ function Order({ params }) {
                             }}
                           >
                             Request Refund
-                          </Button>
+                          </StyledButton>
                         </div>
                       </div>
                     )}
@@ -419,7 +433,7 @@ function Order({ params }) {
                 {userInfo.isAdmin && !order.isDelivered && (
                   <ListItem>
                     {loadingDeliver && <CircularProgress />}
-                    <Button
+                    <StyledButton
                       fullWidth
                       variant="contained"
                       onClick={deliverOrderHandler}
@@ -429,7 +443,7 @@ function Order({ params }) {
                       }}
                     >
                       Ship Out Order
-                    </Button>
+                    </StyledButton>
                   </ListItem>
                 )}
               </List>

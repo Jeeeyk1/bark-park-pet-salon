@@ -14,6 +14,7 @@ import {
   TableRow,
   Typography,
   Button,
+  withStyles,
 } from "@material-ui/core";
 import styles from "../../utils/style.module.css";
 import React, { useContext, useEffect, useReducer } from "react";
@@ -182,7 +183,17 @@ function RefundInfo({ params }) {
       }
     });
   }
-
+  const StyledButton = withStyles({
+    root: {
+      height: "50px",
+      backgroundColor: "#1A2421",
+      color: "#fcd01c",
+      "&:hover": {
+        backgroundColor: "#1A2421",
+        color: "#fcd01c",
+      },
+    },
+  })(Button);
   function onError(err) {
     enqueueSnackbar(getError(err), { variant: "error" });
   }
@@ -483,33 +494,25 @@ function RefundInfo({ params }) {
                 {userInfo.isAdmin && order.isDelivered && !order.isApproved && (
                   <ListItem>
                     {loadingDeliver && <CircularProgress />}
-                    <Button
+                    <StyledButton
                       fullWidth
                       variant="contained"
                       onClick={approveRefundHandler}
-                      style={{
-                        fontWeight: "bolder",
-                        backgroundColor: "#fcd01c",
-                      }}
                     >
-                      Approve
-                    </Button>
+                      <strong>Approve</strong>
+                    </StyledButton>
                   </ListItem>
                 )}
                 {userInfo.isAdmin && order.isDelivered && !order.isApproved && (
                   <ListItem>
                     {loadingDeliver && <CircularProgress />}
-                    <Button
+                    <StyledButton
                       fullWidth
                       variant="contained"
                       onClick={rejectRefundHandler}
-                      style={{
-                        fontWeight: "bolder",
-                        backgroundColor: "#fcd01c",
-                      }}
                     >
-                      Decline
-                    </Button>
+                      <strong>Decline</strong>
+                    </StyledButton>
                   </ListItem>
                 )}
               </List>

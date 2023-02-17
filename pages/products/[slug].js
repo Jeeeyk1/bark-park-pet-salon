@@ -11,6 +11,7 @@ import {
   Typography,
   TextField,
   CircularProgress,
+  withStyles,
 } from "@material-ui/core";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import Rating from "@material-ui/lab/Rating";
@@ -83,6 +84,17 @@ export default function ProductScreen(props) {
     dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity } });
     router.push("/cart");
   };
+  const StyledButton = withStyles({
+    root: {
+      height: "50px",
+      backgroundColor: "#1A2421",
+      color: "#fcd01c",
+      "&:hover": {
+        backgroundColor: "#1A2421",
+        color: "#fcd01c",
+      },
+    },
+  })(Button);
   return (
     <Layout title={product.name} description={product.description}>
       <div className={classes.section}>
@@ -154,7 +166,7 @@ export default function ProductScreen(props) {
                 </Grid>
               </ListItem>
               <ListItem>
-                <Button
+                <StyledButton
                   fullWidth
                   variant="contained"
                   color="primary"
@@ -162,7 +174,7 @@ export default function ProductScreen(props) {
                 >
                   <strong>Add to cart </strong> &nbsp; &nbsp; <br />
                   <AddShoppingCartIcon />
-                </Button>
+                </StyledButton>
               </ListItem>
             </List>
           </Card>
