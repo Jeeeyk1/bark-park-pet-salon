@@ -20,7 +20,11 @@
   font-weight: 100;
   font-size: 20px;
 }
-
+.bgImg {
+  background-image: url("/images/hey.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .active {
   background: #eee;
   box-shadow: box-shadow;
@@ -224,18 +228,21 @@
   color: #fcd01c;
 }
 .logo1 {
-  margin-left: 30px;
+  margin-left: 2px;
   font-size: 2.5rem;
-  color: #130f40;
+  color: black;
   font-weight: bolder;
   position: left;
   position: 100px;
   text-decoration: none;
   font-family: Georgia, "Times New Roman", Times, serif;
+  text-transform: none;
 }
 
 .logo1:hover {
   color: #fcd01c;
+  text-decoration: none;
+  text-transform: none;
 }
 .navbar1 {
   background: linear-gradient(35deg, #54f6ff, white);
@@ -318,6 +325,11 @@
 
   background-color: #54f6ff;
   text-decoration: none;
+}
+.justify {
+  text-align: justify;
+  text-decoration: none;
+  text-transform: none;
 }
 .refundBox {
   color: black;
@@ -1161,8 +1173,8 @@
     margin-right: 10px;
   }
   .menu {
-    margin-bottom: 17px;
-    margin-right: 8px;
+    margin-bottom: 6px;
+
     margin-left: 0;
     font-size: 1.5rem;
   }
@@ -1217,7 +1229,7 @@
     margin-left: 0px;
   }
   .menu {
-    margin-bottom: 23px;
+    margin-bottom: 6px;
   }
   .image {
     margin-bottom: 25px;

@@ -177,7 +177,7 @@ export default function Layout({ title, description, children }) {
               </List>
             </Drawer>
             <NextLink href="/" passHref>
-              <Link>
+              <Link className={styles.logo1}>
                 <i className={styles.logo1}>
                   <FaPaw />
                   Bark Park Pet Salon

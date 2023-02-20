@@ -136,7 +136,7 @@ export default function Navbar({ title, description }) {
             </IconButton>
           </div>
           <NextLink href="/" passHref>
-            <Link>
+            <Link className={styles.logo1}>
               <i className={styles.logo1}>
                 <FaPaw />
                 Bark Park Pet Salon

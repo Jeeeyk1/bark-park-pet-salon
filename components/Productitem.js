@@ -65,7 +65,6 @@ function Productitem({ product, addToCartHandler }) {
               Add to cart{" "}
             </strong>{" "}
             &nbsp; &nbsp; <br />
-            <AddShoppingCartIcon />
           </StyledButton>
         </CardActions>
       </Card>
