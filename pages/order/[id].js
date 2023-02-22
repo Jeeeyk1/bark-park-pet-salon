@@ -109,6 +109,7 @@ function Order({ params }) {
     deliveredAt,
     referenceNumber,
     applyRefund,
+    shippedOutBy,
   } = order;
 
   useEffect(() => {
@@ -153,6 +154,12 @@ function Order({ params }) {
       };
       loadPaypalScript();
     }
+    console.log(
+      order.id +
+        order.shippedOutBy +
+        order.referenceNumber +
+        " reference number"
+    );
   }, [order, successPay, successDeliver]);
   function createOrder(data, actions) {
     return actions.order
@@ -196,7 +203,7 @@ function Order({ params }) {
       dispatch({ type: "DELIVER_REQUEST" });
       const { data } = await axios.put(
         `/api/orders/${order._id}/deliver`,
-        {},
+        { name: userInfo.name },
         {
           headers: { authorization: `Bearer ${userInfo.token}` },
         }
@@ -251,7 +258,7 @@ function Order({ params }) {
                     : "not delivered"}
                 </ListItem>
                 <ListItem>
-                  {isDelivered ? `Shipped out by: ${userInfo.name}` : ""}
+                  {isDelivered ? `Shipped out by: ${shippedOutBy}` : ""}
                 </ListItem>
               </List>
             </Card>
@@ -415,10 +422,6 @@ function Order({ params }) {
                           <StyledButton
                             fullWidth
                             variant="contained"
-                            style={{
-                              fontWeight: "bolder",
-                              backgroundColor: "#fcd01c",
-                            }}
                             onClick={() => {
                               router.push(`../../refund/${orderId}`);
                             }}
@@ -437,12 +440,8 @@ function Order({ params }) {
                       fullWidth
                       variant="contained"
                       onClick={deliverOrderHandler}
-                      style={{
-                        fontWeight: "bolder",
-                        backgroundColor: "#fcd01c",
-                      }}
                     >
-                      Ship Out Order
+                      <strong>Ship out order</strong>
                     </StyledButton>
                   </ListItem>
                 )}

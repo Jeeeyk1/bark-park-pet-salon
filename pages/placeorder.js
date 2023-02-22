@@ -13,6 +13,7 @@ import {
   TableHead,
   TableRow,
   Typography,
+  withStyles,
 } from "@material-ui/core";
 import React, { useContext, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
@@ -84,6 +85,17 @@ function Placeorder() {
       enqueueSnackbar(getError(err), { variant: "error" });
     }
   };
+  const StyledButton = withStyles({
+    root: {
+      height: "50px",
+      backgroundColor: "#1A2421",
+      color: "#fcd01c",
+      "&:hover": {
+        backgroundColor: "#1A2421",
+        color: "#fcd01c",
+      },
+    },
+  })(Button);
   return (
     <Layout title="Place order">
       <CheckoutWizard activeStep={4}></CheckoutWizard>
@@ -234,14 +246,14 @@ function Placeorder() {
               </ListItem>
 
               <ListItem>
-                <Button
+                <StyledButton
                   onClick={placeOrderHandler}
                   variant="contained"
                   color="primary"
                   fullWidth
                 >
                   Place Order
-                </Button>
+                </StyledButton>
               </ListItem>
               {loading && (
                 <ListItem>

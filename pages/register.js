@@ -18,7 +18,7 @@ import useStyles from "../utils/styles";
 import Cookies from "js-cookie";
 import { Controller, useForm } from "react-hook-form";
 import { useSnackbar } from "notistack";
-import { getError } from "../utils/error";
+// import { getError } from "../utils/error";
 import { FaPaw } from "react-icons/fa";
 import { withStyles } from "@material-ui/styles";
 export default function Register() {
@@ -55,7 +55,7 @@ export default function Register() {
       Cookies.set("userInfo", data);
       router.push(redirect || "/");
     } catch (err) {
-      enqueueSnackbar(getError(err), { variant: "error" });
+      enqueueSnackbar("Email already exist", { variant: "error" });
     }
   };
   const paperStyle = {

@@ -46,6 +46,7 @@ const orderSchema = new mongoose.Schema(
       type: Number,
       required: false,
     },
+    shippedOutBy: { type: String, required: false },
   },
 
   {

@@ -9,6 +9,7 @@ import {
   ListItem,
   TextField,
   Typography,
+  withStyles,
 } from "@material-ui/core";
 import axios from "axios";
 import { useRouter } from "next/router";
@@ -89,9 +90,18 @@ function Gcash({ params }) {
     } catch (err) {
       enqueueSnackbar(getError(err), { variant: "error" });
     }
-    console.log("Reference Number added successfully" + referenceNumber);
   };
-
+  const StyledButton = withStyles({
+    root: {
+      height: "50px",
+      backgroundColor: "#1A2421",
+      color: "#fcd01c",
+      "&:hover": {
+        backgroundColor: "#1A2421",
+        color: "#fcd01c",
+      },
+    },
+  })(Button);
   return (
     <Layout title="Gcash Payment">
       <div className={styles.payment}>
@@ -154,14 +164,9 @@ function Gcash({ params }) {
                 ></Controller>
               </ListItem>
             </List>
-            <Button
-              variant="contained"
-              type="submit"
-              fullWidth
-              style={{ backgroundColor: "#24a0ed", fontWeight: "bolder" }}
-            >
-              Submit
-            </Button>
+            <StyledButton variant="contained" type="submit" fullWidth>
+              <strong>Submit</strong>
+            </StyledButton>
           </form>
         </div>
       </div>

@@ -14,6 +14,7 @@ import {
   TableHead,
   TableRow,
   Typography,
+  withStyles,
 } from "@material-ui/core";
 import React, { useContext } from "react";
 import dynamic from "next/dynamic";
@@ -44,6 +45,17 @@ function CartScreen() {
   const checkOutHandler = () => {
     router.push("shipping");
   };
+  const StyledButton = withStyles({
+    root: {
+      height: "50px",
+      backgroundColor: "#1A2421",
+      color: "#fcd01c",
+      "&:hover": {
+        backgroundColor: "#1A2421",
+        color: "#fcd01c",
+      },
+    },
+  })(Button);
   return (
     <Layout title="Shopping Cart">
       <Typography
@@ -138,14 +150,14 @@ function CartScreen() {
                   </Typography>
                 </ListItem>
                 <ListItem>
-                  <Button
+                  <StyledButton
                     onClick={checkOutHandler}
                     variant="contained"
                     color="primary"
                     fullWidth
                   >
                     <strong> Check Out</strong>
-                  </Button>
+                  </StyledButton>
                 </ListItem>
               </List>
             </Card>
