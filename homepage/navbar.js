@@ -81,6 +81,7 @@ export default function Navbar({ title, description }) {
   return (
     <div>
       <Head>
+        <link rel="shortcut icon" href="/favicon.ico" />
         <title>
           {title
             ? `${title}- Bark Park Pet Salon Baguio`
@@ -98,41 +99,39 @@ export default function Navbar({ title, description }) {
               aria-label="open drawer"
               onClick={sidebarOpenHandler}
             >
-              <CgMenu className={styles.menu}>
-                {" "}
-                <Drawer
-                  anchor="right"
-                  open={sidebarVisible}
-                  onClose={sidebarCloseHandler}
-                >
-                  <List>
-                    <ListItem>
-                      <Button onClick={homeRouter}>
-                        <ListItemText>Home</ListItemText>
-                      </Button>
-                    </ListItem>
-                    <ListItem>
-                      <Button onClick={productsRouter}>
-                        <ListItemText>Products</ListItemText>
-                      </Button>
-                    </ListItem>
-                    <ListItem>
-                      <Button>
-                        <ListItemText onClick={categoriesRouter}>
-                          Categories
-                        </ListItemText>
-                      </Button>
-                    </ListItem>
-                    <ListItem>
-                      <Button>
-                        <ListItemText onClick={servicesRouter}>
-                          Services
-                        </ListItemText>
-                      </Button>
-                    </ListItem>
-                  </List>
-                </Drawer>
-              </CgMenu>
+              <CgMenu className={styles.menu} />{" "}
+              <Drawer
+                anchor="right"
+                open={sidebarVisible}
+                onClose={sidebarCloseHandler}
+              >
+                <List>
+                  <ListItem>
+                    <Button onClick={homeRouter}>
+                      <ListItemText>Home</ListItemText>
+                    </Button>
+                  </ListItem>
+                  <ListItem>
+                    <Button onClick={productsRouter}>
+                      <ListItemText>Products</ListItemText>
+                    </Button>
+                  </ListItem>
+                  <ListItem>
+                    <Button>
+                      <ListItemText onClick={categoriesRouter}>
+                        Categories
+                      </ListItemText>
+                    </Button>
+                  </ListItem>
+                  <ListItem>
+                    <Button>
+                      <ListItemText onClick={servicesRouter}>
+                        Services
+                      </ListItemText>
+                    </Button>
+                  </ListItem>
+                </List>
+              </Drawer>
             </IconButton>
           </div>
           <NextLink href="/" passHref>

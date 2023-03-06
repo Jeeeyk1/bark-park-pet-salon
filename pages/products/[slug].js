@@ -135,7 +135,7 @@ export default function ProductScreen(props) {
 
             <ListItem>
               <Typography>
-                <strong>Description</strong>: The best food for your pets!
+                <strong>Description</strong>: {product.description}
               </Typography>
             </ListItem>
           </List>
