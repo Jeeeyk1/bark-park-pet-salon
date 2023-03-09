@@ -49,7 +49,7 @@ function Header() {
         ></img>{" "}
         <div className={styles.boxC}>
           <Typography className={styles.bppsb}>
-            Bark Park Pet Salon Baguio
+            Bark Pack Pet Salon Baguio
           </Typography>
           <h1 className={styles.textP}>The best place for your pets! </h1>
           <h4 className={styles.textP}>

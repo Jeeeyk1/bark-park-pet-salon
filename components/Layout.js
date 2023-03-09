@@ -126,8 +126,8 @@ export default function Layout({ title, description, children }) {
       <Head>
         <title>
           {title
-            ? `${title}- Bark Park Pet Salon Baguio`
-            : "Bark Park Pet Salon Baguio"}
+            ? `${title}- Bark Pack Pet Salon Baguio`
+            : "Bark Pack Pet Salon Baguio"}
         </title>
         {description && <meta name="description" content={description}></meta>}
       </Head>
@@ -180,7 +180,7 @@ export default function Layout({ title, description, children }) {
               <Link className={styles.logo1}>
                 <i className={styles.logo1}>
                   <FaPaw />
-                  Bark Park Pet Salon
+                  Bark Pack Pet Salon
                 </i>
               </Link>
             </NextLink>
