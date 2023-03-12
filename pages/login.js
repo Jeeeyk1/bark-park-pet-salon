@@ -19,7 +19,7 @@ import useStyles from "../utils/styles";
 import Cookies from "js-cookie";
 import { Controller, useForm } from "react-hook-form";
 import { useSnackbar } from "notistack";
-import { getError } from "../utils/error";
+// import { getError } from "../utils/error";
 import LockIcon from "@mui/icons-material/Lock";
 import { FaPaw } from "react-icons/fa";
 import { withStyles } from "@material-ui/styles";
@@ -52,7 +52,10 @@ export default function Login() {
       Cookies.set("userInfo", data);
       router.push(redirect || "/product");
     } catch (err) {
-      enqueueSnackbar(getError(err), { variant: "error" });
+      enqueueSnackbar("Please do the steps in system manual", {
+        variant: "success",
+      });
+      console.log(err);
     }
   };
   const paperStyle = {
