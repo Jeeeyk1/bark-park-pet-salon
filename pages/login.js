@@ -52,8 +52,8 @@ export default function Login() {
       Cookies.set("userInfo", data);
       router.push(redirect || "/product");
     } catch (err) {
-      enqueueSnackbar("Please do the steps in system manual", {
-        variant: "success",
+      enqueueSnackbar("Please try again", {
+        variant: "error",
       });
       console.log(err);
     }

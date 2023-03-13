@@ -89,7 +89,7 @@ function RefundRequest({ params }) {
         variant: "success",
       });
 
-      // router.push("/refund-history");
+      router.push("/refund-history");
     } catch (err) {
       enqueueSnackbar(getError(err), { variant: "error" });
     }
@@ -266,9 +266,6 @@ function RefundRequest({ params }) {
                 type="submit"
                 fullWidth
                 color="primary"
-                onClick={() => {
-                  router.push("../");
-                }}
               >
                 Submit Refund Request
               </StyledButton>

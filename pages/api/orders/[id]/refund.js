@@ -15,7 +15,7 @@ handler.put(async (req, res) => {
     order.imageRefund = req.body.imageRefund;
     const description = await order.save();
     const imageRefund = await order.save();
-    await db.disconnect();
+
     res.send({
       message: "Refund request submitted!",
       order: description,

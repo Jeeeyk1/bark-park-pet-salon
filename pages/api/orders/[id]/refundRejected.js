@@ -14,7 +14,7 @@ handler.put(async (req, res) => {
     order.status = "Declined";
     const totalSales = await order.save();
     order.save;
-    await db.disconnect();
+
     res.send({
       message: "Refund request Declined!",
       order: totalSales,

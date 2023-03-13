@@ -27,7 +27,7 @@ export default function Boarding() {
         {...(checked ? { timeout: 2000 } : {})}
         collapsedHeight={10}
       >
-        <h1 className={styles.petBoardingText}>Bark Park Pet Boarding</h1>
+        <h1 className={styles.petBoardingText}>Bark Pack Pet Boarding</h1>
       </Collapse>
       <Box
         justifyContent={"center"}

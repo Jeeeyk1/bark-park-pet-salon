@@ -3,6 +3,10 @@ import mongoose from "mongoose";
 const connection = {};
 
 async function connect() {
+  const db = await mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
   if (connection.isConnected) {
     console.log("already connected");
     return;
@@ -15,11 +19,7 @@ async function connect() {
     }
     await mongoose.disconnect();
   }
-  const db = await mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    connectTimeoutMS: 1000,
-  });
+
   console.log("new connection");
   connection.isConnected = db.connections[0].readyState;
 }

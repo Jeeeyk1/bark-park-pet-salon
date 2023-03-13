@@ -16,7 +16,6 @@ handler.post(async (req, res) => {
     isAdmin: false,
   });
   const user = await newUser.save();
-  await db.disconnect();
 
   const token = signToken(user);
   res.send({
