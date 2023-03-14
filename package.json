@@ -36,7 +36,8 @@
     "react-icons": "^4.4.0",
     "react-material-ui-carousel": "^3.4.2",
     "sharp": "^0.31.2",
-    "streamifier": "^0.1.1"
+    "streamifier": "^0.1.1",
+    "sweetalert": "^2.1.2"
   },
   "devDependencies": {
     "eslint": "8.11.0",

@@ -24,6 +24,7 @@ import { getError } from "../../utils/error";
 import Product from "../../models/Product";
 import { useRouter } from "next/router";
 import { useSnackbar } from "notistack";
+import Alert from "@material-ui/lab/Alert";
 
 export default function ProductScreen(props) {
   const router = useRouter();
@@ -84,6 +85,7 @@ export default function ProductScreen(props) {
     dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity } });
     router.push("/cart");
   };
+
   const StyledButton = withStyles({
     root: {
       height: "50px",
@@ -95,6 +97,7 @@ export default function ProductScreen(props) {
       },
     },
   })(Button);
+
   return (
     <Layout title={product.name} description={product.description}>
       <div className={classes.section}>
@@ -104,7 +107,7 @@ export default function ProductScreen(props) {
           </Link>
         </NextLink>
       </div>
-      <Grid className={classes.brand1} container spacing={1}>
+      <Grid className={classes.brand1} container spacing={2}>
         <Grid item md={6} xs={12}>
           <Image
             src={product.image}
@@ -134,7 +137,7 @@ export default function ProductScreen(props) {
             </ListItem>
 
             <ListItem>
-              <Typography>
+              <Typography align="justify">
                 <strong>Description</strong>: {product.description}
               </Typography>
             </ListItem>
@@ -206,7 +209,7 @@ export default function ProductScreen(props) {
         <ListItem>
           {userInfo ? (
             <form
-              style={{ border: "5px solid", borderColor: "#088F8F" }}
+              style={{ border: "5px solid", borderColor: "#1A2421" }}
               onSubmit={submitHandler}
               className={classes.reviewForm}
             >
@@ -226,10 +229,12 @@ export default function ProductScreen(props) {
                   />
                 </ListItem>
                 <ListItem>
+                  <Typography component="legend">Rating</Typography>
                   <Rating
-                    name="simple-controlled"
+                    name="rating"
                     value={rating}
-                    onChange={(e) => setRating(e.target.value)}
+                    precision={0.5}
+                    onChange={(e, newValue) => setRating(newValue)}
                   />
                 </ListItem>
                 <ListItem>
@@ -237,7 +242,11 @@ export default function ProductScreen(props) {
                     type="submit"
                     fullWidth
                     variant="contained"
-                    color="primary"
+                    style={{
+                      fontWeight: "bolder",
+                      color: "#fcd01c",
+                      backgroundColor: "#1A2421",
+                    }}
                   >
                     Submit
                   </Button>
@@ -247,13 +256,13 @@ export default function ProductScreen(props) {
               </List>
             </form>
           ) : (
-            <Typography variant="h2">
+            <Alert severity="warning">
               Please{" "}
-              <Link href={`/login?redirect=/product/${product.slug}`}>
+              <Link href={`/login?redirect=/products/${product.slug}`}>
                 Login
               </Link>{" "}
               to write a review
-            </Typography>
+            </Alert>
           )}
         </ListItem>
       </List>

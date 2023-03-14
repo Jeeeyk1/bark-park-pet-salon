@@ -464,7 +464,7 @@ function RefundInfo({ params }) {
                     </Grid>
                   </Grid>
                 </ListItem>
-                {!isPaid && !userInfo.isAdmin && !isDelivered && (
+                {!isPaid && !isDelivered && (
                   <ListItem>
                     {isPending ? (
                       <CircularProgress />

@@ -90,7 +90,8 @@ function AdminDashboard() {
           {userInfo ? (
             <Typography variant="h1">
               <AdminPanelSettingsIcon />
-              <span style={{ fontWeight: "bold" }}>Admin:</span> {userInfo.name}
+              <span style={{ fontWeight: "bold" }}>Admin:</span>{" "}
+              {userInfo.isAdmin ? `${userInfo.name}` : ""}
             </Typography>
           ) : (
             <Typography></Typography>

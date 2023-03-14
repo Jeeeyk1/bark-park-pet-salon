@@ -176,6 +176,7 @@ export default function Layout({ title, description, children }) {
                 </ListItem>
               </List>
             </Drawer>
+
             <NextLink href="/" passHref>
               <Link className={styles.logo1}>
                 <i className={styles.logo1}>
@@ -247,6 +248,7 @@ export default function Layout({ title, description, children }) {
                     keepMounted
                     open={Boolean(anchorEl)}
                     onClose={loginMenuCloseHandler}
+                    disableBackdropClick={true}
                   >
                     <MenuItem
                       onClick={(e) => loginMenuCloseHandler(e, "/profile")}

@@ -22,6 +22,7 @@ import { getError } from "../../utils/error";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 import dynamic from "next/dynamic";
+import { Alert } from "@material-ui/lab";
 function reducer(state, action) {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -186,11 +187,16 @@ function RefundRequest({ params }) {
           >
             Refund Request
           </Typography>
-          <Typography>Note:</Typography>{" "}
-          <Typography>
-            Please be aware that not all of your requests will be granted, The
-            staff must first review each one before validating it.
-          </Typography>
+
+          <Typography className={classes.warningText}></Typography>
+          <Alert severity="warning" style={{ textTransform: "none" }}>
+            <strong>
+              {" "}
+              Note : Please be aware that not all of your requests will be
+              granted, The staff must first review each one before validating
+              it. Thank you!
+            </strong>
+          </Alert>
           <List>
             <ListItem>
               <Controller
@@ -208,6 +214,7 @@ function RefundRequest({ params }) {
                     id="description"
                     fullWidth
                     multiline
+                    rows={6}
                     label="Please enter details why do you want to refund or return this item"
                     inputProps={{ type: "text", sx: { height: 300 } }}
                     error={Boolean(errors.description)}
@@ -233,6 +240,7 @@ function RefundRequest({ params }) {
                 }}
                 render={({ field }) => (
                   <TextField
+                    margin="normal"
                     variant="outlined"
                     fullWidth
                     id="imageRefund"

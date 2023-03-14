@@ -16,7 +16,7 @@ import {
   Button,
   withStyles,
 } from "@material-ui/core";
-import styles from "../../utils/style.module.css";
+
 import React, { useContext, useEffect, useReducer } from "react";
 import dynamic from "next/dynamic";
 import Layout from "../../components/Layout";
@@ -109,7 +109,6 @@ function Order({ params }) {
     deliveredAt,
     referenceNumber,
     applyRefund,
-    shippedOutBy,
   } = order;
 
   useEffect(() => {
@@ -257,9 +256,6 @@ function Order({ params }) {
                     ? `delivered at ${deliveredAt}`
                     : "not delivered"}
                 </ListItem>
-                <ListItem>
-                  {isDelivered ? `Shipped out by: ${shippedOutBy}` : ""}
-                </ListItem>
               </List>
             </Card>
 
@@ -386,7 +382,8 @@ function Order({ params }) {
                     </Grid>
                   </Grid>
                 </ListItem>
-                {!isPaid && !userInfo.isAdmin && !isDelivered && (
+
+                {!isPaid && !userInfo.isAdmin && !isDelivered && userInfo && (
                   <ListItem>
                     {isPending ? (
                       <CircularProgress />
@@ -397,42 +394,50 @@ function Order({ params }) {
                           onApprove={onApprove}
                           onError={onError}
                         ></PayPalButtons>
-                        <div className={styles.gcash}>
-                          <Button
-                            onClick={() => {
-                              router.push(`../gcash/${orderId}`);
-                            }}
-                          >
-                            <Typography className={styles.gcashButton}>
-                              Gcash Payment
-                            </Typography>
-                          </Button>
-                        </div>
+
+                        <Button
+                          className={classes.button}
+                          onClick={() => {
+                            router.push(`../gcash/${orderId}`);
+                          }}
+                          fullWidth
+                        >
+                          <img
+                            src="https://www.gcash.com/wp-content/uploads/2019/07/gcash-logo.png"
+                            alt="GCash"
+                            className={classes.icon}
+                          />
+                          <span className={classes.label}>Pay with GCash</span>
+                        </Button>
                       </div>
                     )}
                   </ListItem>
                 )}
-                {isPaid && !userInfo.isAdmin && isDelivered && !applyRefund && (
-                  <ListItem>
-                    {isPending ? (
-                      <CircularProgress />
-                    ) : (
-                      <div className={classes.fullWidth}>
-                        <div>
-                          <StyledButton
-                            fullWidth
-                            variant="contained"
-                            onClick={() => {
-                              router.push(`../../refund/${orderId}`);
-                            }}
-                          >
-                            Request Refund
-                          </StyledButton>
+                {isPaid &&
+                  !userInfo.isAdmin &&
+                  isDelivered &&
+                  !applyRefund &&
+                  userInfo && (
+                    <ListItem>
+                      {isPending ? (
+                        <CircularProgress />
+                      ) : (
+                        <div className={classes.fullWidth}>
+                          <div>
+                            <StyledButton
+                              fullWidth
+                              variant="contained"
+                              onClick={() => {
+                                router.push(`../../refund/${orderId}`);
+                              }}
+                            >
+                              Request Refund
+                            </StyledButton>
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </ListItem>
-                )}
+                      )}
+                    </ListItem>
+                  )}
                 {userInfo.isAdmin && !order.isDelivered && (
                   <ListItem>
                     {loadingDeliver && <CircularProgress />}

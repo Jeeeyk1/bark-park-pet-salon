@@ -12,6 +12,41 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     fontSize: "5rem",
   },
+  payment: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    paddingTop: theme.spacing(6),
+  },
+  title: {
+    fontSize: "25px",
+    fontWeight: "bold",
+    marginBottom: theme.spacing(2),
+  },
+  userGcash: {
+    fontSize: "18px",
+    textAlign: "center",
+    marginBottom: theme.spacing(2),
+  },
+  qrCode: {
+    marginBottom: theme.spacing(4),
+    "& img": {
+      width: "auto",
+      height: "500px",
+      objectFit: "contain",
+    },
+  },
+  warningText: {
+    color: theme.palette.warning.main,
+    fontWeight: "bold",
+    textTransform: "none",
+  },
+  form: {
+    width: "100%",
+  },
+  referenceNumber: {
+    marginBottom: theme.spacing(2),
+  },
   root1: {
     justifyContent: "center",
     alignItems: "center",
@@ -62,7 +97,28 @@ const useStyles = makeStyles((theme) => ({
 
     fontWeight: "bold",
   },
-  form: {
+  button: {
+    backgroundColor: "#00AEEF",
+    color: "#FFFFFF",
+    borderRadius: 4,
+    padding: "12px 16px",
+    display: "flex",
+    alignItems: "center",
+    "&:hover": {
+      backgroundColor: "#0089C4",
+    },
+  },
+  icon: {
+    height: 30,
+    width: 50,
+    marginRight: theme.spacing(1),
+  },
+  label: {
+    fontWeight: 700,
+    fontSize: "1rem",
+    textTransform: "uppercase",
+  },
+  form2: {
     width: "100%",
     maxWidth: 800,
     margin: "0 auto",

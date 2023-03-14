@@ -6,17 +6,17 @@ import {
   Container,
   Typography,
 } from "@material-ui/core";
-import React from "react";
+import React, { useEffect } from "react";
 import NextLink from "next/link";
 import styles from "../utils/style.module.css";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { useEffect } from "react";
 
 function Services() {
   useEffect(() => {
     Aos.init({ duration: 2500 });
   }, []);
+
   return (
     <Container className={styles.services} data-aos="flip-right">
       <Card className={styles.box}>
@@ -25,14 +25,24 @@ function Services() {
             <CardMedia
               style={{
                 borderRadius: 20,
+                height: 250,
               }}
               component="img"
               image="/images/pethotell.jpeg"
-              title="Try"
+              title="Pet Boarding"
             ></CardMedia>
             <CardContent>
-              <Typography variant="h3" style={{ fontFamily: "Anton" }}>
+              <Typography
+                variant="h4"
+                component="h2"
+                style={{ fontFamily: "Anton" }}
+              >
                 Pet Boarding
+              </Typography>
+              <Typography variant="body1" color="textSecondary">
+                We offer top-quality pet boarding services for your furry
+                friend. Our experienced staff will make sure your pet is
+                comfortable and happy during their stay with us.
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -44,14 +54,24 @@ function Services() {
             <CardMedia
               style={{
                 borderRadius: 20,
+                height: 250,
               }}
               component="img"
               image="/images/Grooming.jpg"
-              title="Try"
+              title="Grooming"
             ></CardMedia>
             <CardContent>
-              <Typography variant="h3" style={{ fontFamily: "Anton" }}>
+              <Typography
+                variant="h4"
+                component="h2"
+                style={{ fontFamily: "Anton" }}
+              >
                 Grooming
+              </Typography>
+              <Typography variant="body1" color="textSecondary">
+                Our professional grooming services will leave your pet looking
+                and feeling their best. We offer a variety of grooming packages
+                to fit your pet&apos;s needs.
               </Typography>
             </CardContent>
           </CardActionArea>

@@ -20,16 +20,27 @@ function Productitem({ product, addToCartHandler }) {
       backgroundColor: "#1A2421",
       color: "#fcd01c",
       "&:hover": {
-        backgroundColor: "#1A2421",
+        backgroundColor: "#0D1411",
         color: "#fcd01c",
+        boxShadow: "none",
       },
     },
   })(Button);
+
+  const StyledCardActionArea = withStyles({
+    root: {
+      "&:hover": {
+        transform: "scale(1.05)",
+        transition: "all 0.3s ease-in-out",
+      },
+    },
+  })(CardActionArea);
+
   return (
     <div>
       <Card>
         <NextLink href={`/products/${product.slug}`} passHref>
-          <CardActionArea>
+          <StyledCardActionArea>
             <CardMedia
               style={{
                 borderRadius: "30px",
@@ -46,7 +57,7 @@ function Productitem({ product, addToCartHandler }) {
               </Typography>
               <Rating value={product.rating} readOnly></Rating>
             </CardContent>
-          </CardActionArea>
+          </StyledCardActionArea>
         </NextLink>
         <CardActions>
           <Typography style={{ fontSize: "20px", fontWeight: "bolder" }}>

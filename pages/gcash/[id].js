@@ -14,10 +14,11 @@ import {
 import axios from "axios";
 import { useRouter } from "next/router";
 import { getError } from "../../utils/error";
-import styles from "../../utils/style.module.css";
+
 import { Controller, useForm } from "react-hook-form";
 import { useSnackbar } from "notistack";
 import dynamic from "next/dynamic";
+import useStyles from "../../utils/styles";
 
 function reducer(state, action) {
   switch (action.type) {
@@ -33,6 +34,7 @@ function reducer(state, action) {
   }
 }
 function Gcash({ params }) {
+  const classes = useStyles();
   const orderId = params.id;
   const { state } = useContext(Store);
   const { userInfo } = state;
@@ -78,13 +80,13 @@ function Gcash({ params }) {
     fetchOrder();
   }, []);
 
-  const submitHandler = async ({ referenceNumber }) => {
+  const submitHandler = async ({ referenceNum }) => {
     if (!window.confirm("Are you sure with your Reference Number?")) {
       return;
     }
     closeSnackbar();
     try {
-      await axios.put(`/api/orders/${orderId}/reference`, { referenceNumber });
+      await axios.put(`/api/orders/${orderId}/reference`, { referenceNum });
       enqueueSnackbar("Paid successfully", { variant: "success" });
       router.push("/product");
     } catch (err) {
@@ -104,71 +106,58 @@ function Gcash({ params }) {
   })(Button);
   return (
     <Layout title="Gcash Payment">
-      <div className={styles.payment}>
-        <br />
-        <br />
-        <br />
-        <Typography
-          component="h1"
-          style={{ fontSize: "25px", fontWeight: "bolder" }}
-        >
-          {" "}
+      <div className={classes.payment}>
+        <Typography component="h1" className={classes.title}>
           Order {orderId}
         </Typography>
-        <br />
-        <br />
         {userInfo ? (
-          <Typography className={styles.userGcash}>
-            Hello, {userInfo.name} Please pay ₱{totalPrice}{" "}
+          <Typography className={classes.userGcash}>
+            Hello, {userInfo.name} Please pay ₱{totalPrice}
           </Typography>
         ) : (
-          <h1>Logging out.....</h1>
+          <Typography variant="h5">Logging out...</Typography>
         )}
-        <div className={styles.QR}>
-          {" "}
+        <div className={classes.qrCode}>
           <img alt="qr" src="../images/QR_CODE.png" />
         </div>
-        <div className={styles.submitStyle}>
-          {" "}
-          <form onSubmit={handleSubmit(submitHandler)}>
-            <List>
-              <ListItem>
-                <Controller
-                  name="referenceNumber"
-                  control={control}
-                  defaultValue=""
-                  rules={{
-                    required: true,
-                    minLength: 10,
-                  }}
-                  render={({ field }) => (
-                    <TextField
-                      variant="outlined"
-                      fullWidth
-                      value={referenceNumber}
-                      onChange={(e) => setReferenceNum(e.target.value)}
-                      id="referenceNumber"
-                      label="Reference Number"
-                      inputProps={{ type: "numbers" }}
-                      error={Boolean(errors.referenceNumber)}
-                      helperText={
-                        errors.referenceNumber
-                          ? errors.referenceNumber.type === "minLength"
-                            ? "Reference Number length is more than 9"
-                            : "Reference Number is required"
-                          : ""
-                      }
-                      {...field}
-                    ></TextField>
-                  )}
-                ></Controller>
-              </ListItem>
-            </List>
-            <StyledButton variant="contained" type="submit" fullWidth>
-              <strong>Submit</strong>
-            </StyledButton>
-          </form>
-        </div>
+        <form className={classes.form} onSubmit={handleSubmit(submitHandler)}>
+          <List>
+            <ListItem className={classes.referenceNum}>
+              <Controller
+                name="referenceNum"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  minLength: 10,
+                }}
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    value={referenceNum}
+                    onChange={(e) => setReferenceNum(e.target.value)}
+                    label="Reference Number"
+                    error={Boolean(errors.referenceNum)}
+                    helperText={
+                      errors.referenceNum
+                        ? errors.referenceNum.type === "minLength"
+                          ? "Reference Number length is more than 9"
+                          : "Reference Number is required"
+                        : ""
+                    }
+                    {...field}
+                  />
+                )}
+              />
+            </ListItem>
+          </List>
+          <StyledButton variant="contained" type="submit" fullWidth>
+            <strong>Submit</strong>
+          </StyledButton>
+        </form>
+        <br></br>
+        <br />
       </div>
     </Layout>
   );
