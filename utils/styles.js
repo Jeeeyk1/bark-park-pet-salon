@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     textTransform: "none",
   },
+  textDescription: {
+    textTransform: "none",
+  },
   form: {
     width: "100%",
   },

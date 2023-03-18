@@ -137,7 +137,7 @@ export default function ProductScreen(props) {
             </ListItem>
 
             <ListItem>
-              <Typography align="justify">
+              <Typography align="justify" className={classes.textDescription}>
                 <strong>Description</strong>: {product.description}
               </Typography>
             </ListItem>

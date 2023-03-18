@@ -52,7 +52,7 @@ export default function Login() {
       Cookies.set("userInfo", data);
       router.push(redirect || "/product");
     } catch (err) {
-      enqueueSnackbar("Please try again", {
+      enqueueSnackbar("Invalid Credentials, Please Try again", {
         variant: "error",
       });
       console.log(err);
