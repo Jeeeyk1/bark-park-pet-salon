@@ -110,15 +110,15 @@ export default function Layout({ title, description, children }) {
     setSidebarVisible(false);
   };
   const productsRouter = () => {
-    router.push("product");
+    router.push("../product");
     setSidebarVisible(false);
   };
   const categoriesRouter = () => {
-    router.push("search?category");
+    router.push("../search?category");
     setSidebarVisible(false);
   };
   const servicesRouter = () => {
-    router.push("services");
+    router.push("../services");
     setSidebarVisible(false);
   };
   return (
