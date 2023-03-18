@@ -8,7 +8,7 @@ handler.get(async (req, res) => {
   await db.connect();
   try {
     const product = await Product.findById(req.query.id);
-    // db.disconnect();
+    await db.disconnect();
     res.send(product);
   } catch (error) {
     console.error(error);

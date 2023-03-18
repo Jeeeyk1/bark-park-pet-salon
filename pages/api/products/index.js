@@ -8,7 +8,7 @@ handler.get(async (req, res) => {
   await db.connect();
   try {
     const products = await Product.find({});
-
+    await db.disconnect();
     res.send(products);
   } catch (error) {
     console.error(error);
