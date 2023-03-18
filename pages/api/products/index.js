@@ -5,8 +5,8 @@ import db from "../../../utils/db";
 const handler = nc();
 
 handler.get(async (req, res) => {
-  await db.connect();
   try {
+    await db.connect();
     const products = await Product.find({});
     await db.disconnect();
     res.send(products);
