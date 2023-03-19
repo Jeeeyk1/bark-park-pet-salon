@@ -68,7 +68,7 @@ export default function Navbar({ title, description }) {
     setSidebarVisible(false);
   };
   const productsRouter = () => {
-    router.push("../product");
+    router.push("/");
     setSidebarVisible(false);
   };
   const categoriesRouter = () => {
@@ -149,7 +149,7 @@ export default function Navbar({ title, description }) {
             {" "}
             <nav className={styles.navbar}>
               <a href="\">Home</a>
-              <a href="product">Products</a>
+              <a href="\">Products</a>
               <a href="search?category=">Categories</a>
               <a href="services">Services</a>
             </nav>
