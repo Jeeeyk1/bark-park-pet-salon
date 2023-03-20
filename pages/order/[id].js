@@ -16,7 +16,7 @@ import {
   Button,
   withStyles,
 } from "@material-ui/core";
-
+import Alert from "@material-ui/lab/Alert";
 import React, { useContext, useEffect, useReducer } from "react";
 import dynamic from "next/dynamic";
 import Layout from "../../components/Layout";
@@ -280,7 +280,20 @@ function Order({ params }) {
                 )}
               </List>
             </Card>
-
+            {isDelivered && !userInfo.isAdmin ? (
+              <Alert severity="info" style={{ textTransform: "none" }}>
+                If your product has already been delivered and you would like to
+                share your thoughts on it, leaving a review is easy.{" "}
+                <strong>
+                  Simply click on the image or name of the product and you will
+                  be taken to the review section
+                </strong>
+                , where you can leave your feedback and help others make
+                informed decisions.
+              </Alert>
+            ) : (
+              ""
+            )}
             <Card className={classes.section}>
               <List>
                 <ListItem>
@@ -301,30 +314,201 @@ function Order({ params }) {
                         {orderItems.map((item) => (
                           <TableRow key={item._id}>
                             <TableCell>
-                              <NextLink
-                                href={`/products/${item.slug}`}
-                                passHref
-                              >
-                                <Link>
-                                  <Image
-                                    src={item.image}
-                                    alt={item.name}
-                                    width={50}
-                                    height={50}
-                                  ></Image>
-                                </Link>
-                              </NextLink>
+                              {isDelivered ? (
+                                <NextLink
+                                  href={
+                                    item.name === "Top ration Tasty Bites"
+                                      ? "/review/trtb"
+                                      : item.name === "Power Kitten 7kg"
+                                      ? "/review/pk7kg"
+                                      : item.name === "Dentasix"
+                                      ? "/review/denta"
+                                      : item.name === "Brit Premium Turkey"
+                                      ? "/review/bpt"
+                                      : item.name === "Brit Premium"
+                                      ? "/review/bp"
+                                      : item.name === "Meat Jerky"
+                                      ? "/review/mj"
+                                      : item.name === "Dental Chew Milk"
+                                      ? "/review/dcm"
+                                      : item.name === "Brit Fish"
+                                      ? "/review/bf"
+                                      : item.name === "Teo Junior"
+                                      ? "/review/tj"
+                                      : item.name === "Brit fresh fish"
+                                      ? "/review/fresh fish"
+                                      : item.name === "Brit Premium Pork"
+                                      ? "/review/pork brit"
+                                      : item.name === "Pedigree Meat Jerky"
+                                      ? "/review/pedigreeMeatJerky"
+                                      : item.name === "Feline Nutrition 6kg"
+                                      ? "/review/feline-nut-7kg"
+                                      : item.name === "Kitkat Complete Cuisine"
+                                      ? "/review/kitkta cuisine"
+                                      : item.name === "Zert Cheesecake Gellato"
+                                      ? "/review/cheesecake"
+                                      : item.name === "Whiskas Tuna 1kg"
+                                      ? "/review/whiskas-1kg"
+                                      : item.name === "Power Kitten"
+                                      ? "/review/pkitten"
+                                      : item.name === "Pedigree Adult 1kg"
+                                      ? "/review/pedigree1kg"
+                                      : item.name === "Pedigree puppy 1kg"
+                                      ? "/review/pedigreepuppy"
+                                      : item.name === "Tasty Bites 6kg"
+                                      ? "/review/tb6kg"
+                                      : item.name ===
+                                        "Top ration High-Nutrition 6kg"
+                                      ? "/review/trhn"
+                                      : item.name === "Brit Premium Lamb"
+                                      ? "/review/bplflrv"
+                                      : item.name === "Brit Premium Beef"
+                                      ? "/review/beef flavor"
+                                      : item.name === "Brit Premium Pork"
+                                      ? "/review/Pork Flavor"
+                                      : item.name === "Pedigree Puppy 15kg"
+                                      ? "/review/15kgpp"
+                                      : item.name ===
+                                        "Carnilove Soft Snack Carp"
+                                      ? "/review/holistic-adul-1kg"
+                                      : item.name ===
+                                        "Carnilove Soft Snack Sardines"
+                                      ? "/review/sardinessnack"
+                                      : item.name === "Brit Pate Salmon"
+                                      ? "/review/dog-adult-sack"
+                                      : item.name === "Carnilove Salmon"
+                                      ? "/review/for kitten"
+                                      : item.name === "Brit Premium Adult 2kg"
+                                      ? "/brit premium 2kg"
+                                      : item.name === "Kit Cat Tuna Hairball"
+                                      ? "/catHairdball"
+                                      : item.name === "Special Dog Adult 9kg"
+                                      ? "/dog-special-sack"
+                                      : item.name === "Aozi Dog Puppy 1kg"
+                                      ? "/dog-aozi-sack-1kg"
+                                      : item.name ===
+                                        "Brit Premium Dog in can Pork"
+                                      ? "/review/Brit-premium"
+                                      : item.name ===
+                                        "Brit Premium Dog in Can Fish"
+                                      ? "/review/Brit-premium-cat"
+                                      : "/review/denta"
+                                  }
+                                  passHref
+                                >
+                                  <Link>
+                                    <Image
+                                      src={item.image}
+                                      alt={item.slug}
+                                      width={50}
+                                      height={50}
+                                    ></Image>
+                                  </Link>
+                                </NextLink>
+                              ) : (
+                                <NextLink href={"/"} passHref>
+                                  <Link>
+                                    <Image
+                                      src={item.image}
+                                      alt={item.slug}
+                                      width={50}
+                                      height={50}
+                                    ></Image>
+                                  </Link>
+                                </NextLink>
+                              )}
                             </TableCell>
 
                             <TableCell>
-                              <NextLink
-                                href={`/products/${item.slug}`}
-                                passHref
-                              >
-                                <Link>
-                                  <Typography>{item.name}</Typography>
-                                </Link>
-                              </NextLink>
+                              {isDelivered ? (
+                                <NextLink
+                                  href={
+                                    item.name === "Top ration Tasty Bites"
+                                      ? "/review/trtb"
+                                      : item.name === "Power Kitten 7kg"
+                                      ? "/review/pk7kg"
+                                      : item.name === "Dentasix"
+                                      ? "/review/denta"
+                                      : item.name === "Brit Premium Turkey"
+                                      ? "/review/bpt"
+                                      : item.name === "Brit Premium"
+                                      ? "/review/bp"
+                                      : item.name === "Meat Jerky"
+                                      ? "/review/mj"
+                                      : item.name === "Dental Chew Milk"
+                                      ? "/review/dcm"
+                                      : item.name === "Brit Fish"
+                                      ? "/review/bf"
+                                      : item.name === "Teo Junior"
+                                      ? "/review/tj"
+                                      : item.name === "Brit fresh fish"
+                                      ? "/review/fresh fish"
+                                      : item.name === "Brit Premium Pork"
+                                      ? "/review/pork brit"
+                                      : item.name === "Pedigree Meat Jerky"
+                                      ? "/review/pedigreeMeatJerky"
+                                      : item.name === "Feline Nutrition 6kg"
+                                      ? "/review/feline-nut-7kg"
+                                      : item.name === "Kitkat Complete Cuisine"
+                                      ? "/review/kitkta cuisine"
+                                      : item.name === "Zert Cheesecake Gellato"
+                                      ? "/review/cheesecake"
+                                      : item.name === "Whiskas Tuna 1kg"
+                                      ? "/review/whiskas-1kg"
+                                      : item.name === "Power Kitten"
+                                      ? "/review/pkitten"
+                                      : item.name === "Pedigree Adult 1kg"
+                                      ? "/review/pedigree1kg"
+                                      : item.name === "Pedigree puppy 1kg"
+                                      ? "/review/pedigreepuppy"
+                                      : item.name === "Tasty Bites 6kg"
+                                      ? "/review/tb6kg"
+                                      : item.name ===
+                                        "Top ration High-Nutrition 6kg"
+                                      ? "/review/trhn"
+                                      : item.name === "Brit Premium Lamb"
+                                      ? "/review/bplflrv"
+                                      : item.name === "Brit Premium Beef"
+                                      ? "/review/beef flavor"
+                                      : item.name === "Brit Premium Pork"
+                                      ? "/review/Pork Flavor"
+                                      : item.name === "Pedigree Puppy 15kg"
+                                      ? "/review/15kgpp"
+                                      : item.name ===
+                                        "Carnilove Soft Snack Carp"
+                                      ? "/review/holistic-adul-1kg"
+                                      : item.name ===
+                                        "Carnilove Soft Snack Sardines"
+                                      ? "/review/sardinessnack"
+                                      : item.name === "Brit Pate Salmon"
+                                      ? "/review/dog-adult-sack"
+                                      : item.name === "Carnilove Salmon"
+                                      ? "/review/for kitten"
+                                      : item.name === "Brit Premium Adult 2kg"
+                                      ? "/brit premium 2kg"
+                                      : item.name === "Kit Cat Tuna Hairball"
+                                      ? "/catHairdball"
+                                      : item.name === "Special Dog Adult 9kg"
+                                      ? "/dog-special-sack"
+                                      : item.name === "Aozi Dog Puppy 1kg"
+                                      ? "/dog-aozi-sack-1kg"
+                                      : item.name ===
+                                        "Brit Premium Dog in can Pork"
+                                      ? "/review/Brit-premium"
+                                      : item.name ===
+                                        "Brit Premium Dog in Can Fish"
+                                      ? "/review/Brit-premium-cat"
+                                      : "/review/denta"
+                                  }
+                                  passHref
+                                >
+                                  <Link>
+                                    <Typography>{item.name}</Typography>
+                                  </Link>
+                                </NextLink>
+                              ) : (
+                                <Typography>{item.name}</Typography>
+                              )}
                             </TableCell>
                             <TableCell align="right">
                               <Typography>{item.quantity}</Typography>

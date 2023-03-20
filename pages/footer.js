@@ -10,7 +10,7 @@ export default function Footer() {
 
       <ul className={styles.social_icon}>
         <li>
-          <a href="#">
+          <a href="https://www.facebook.com/profile.php?id=100063847788639">
             <FacebookIcon />
           </a>
         </li>

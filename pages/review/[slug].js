@@ -9,6 +9,8 @@ import {
   List,
   ListItem,
   Typography,
+  TextField,
+  CircularProgress,
   withStyles,
 } from "@material-ui/core";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
@@ -32,7 +34,32 @@ export default function ProductScreen(props) {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
   const [reviews, setReviews] = useState([]);
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+  const [loading, setLoading] = useState(false);
 
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      await axios.post(
+        `/api/products/${product._id}/reviews`,
+        {
+          rating,
+          comment,
+        },
+        {
+          headers: { authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+      setLoading(false);
+      enqueueSnackbar("Review submitted successfully", { variant: "success" });
+      fetchReviews();
+    } catch (err) {
+      setLoading(false);
+      enqueueSnackbar(getError(err), { variant: "error" });
+    }
+  };
   const fetchReviews = async () => {
     try {
       const { data } = await axios.get(`/api/products/${product._id}/reviews`);
@@ -181,14 +208,53 @@ export default function ProductScreen(props) {
         ))}
         <ListItem>
           {userInfo ? (
-            <Alert severity="info">
-              {" "}
-              <Typography style={{ textTransform: "none" }}>
-                Kindly ensure that you have bought this item before writing a
-                review. If you have already made a purchase, please access the
-                order summary to provide a review for this product.
-              </Typography>
-            </Alert>
+            <form
+              style={{ border: "5px solid", borderColor: "#1A2421" }}
+              onSubmit={submitHandler}
+              className={classes.reviewForm}
+            >
+              <List>
+                <ListItem>
+                  <Typography variant="h2">Leave your review</Typography>
+                </ListItem>
+                <ListItem>
+                  <TextField
+                    multiline
+                    variant="outlined"
+                    fullWidth
+                    name="review"
+                    label="Enter comment"
+                    value={comment}
+                    onChange={(e) => setComment(e.target.value)}
+                  />
+                </ListItem>
+                <ListItem>
+                  <Typography component="legend">Rating</Typography>
+                  <Rating
+                    name="rating"
+                    value={rating}
+                    precision={0.5}
+                    onChange={(e, newValue) => setRating(newValue)}
+                  />
+                </ListItem>
+                <ListItem>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    style={{
+                      fontWeight: "bolder",
+                      color: "#fcd01c",
+                      backgroundColor: "#1A2421",
+                    }}
+                  >
+                    Submit
+                  </Button>
+
+                  {loading && <CircularProgress></CircularProgress>}
+                </ListItem>
+              </List>
+            </form>
           ) : (
             <Alert severity="warning">
               Please{" "}
