@@ -73,7 +73,7 @@ export default function RefundHistory() {
   }, []);
 
   return (
-    <Layout title="Order History">
+    <Layout title="Refund History">
       <Grid container spacing={1}>
         <Grid item md={3} xs={12}>
           <Card className={classes.section}>

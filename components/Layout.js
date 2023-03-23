@@ -191,7 +191,7 @@ export default function Layout({ title, description, children }) {
               {" "}
               <nav className={styles.navbar}>
                 <a href="../">Home</a>
-                <a href="\">Products</a>
+                <a href="../product">Products</a>
                 <a href="../search?category=">Categories</a>
                 <a href="../services">Services</a>
               </nav>

@@ -189,7 +189,7 @@ function Placeorder() {
                             <Typography>{item.quantity}</Typography>
                           </TableCell>
                           <TableCell align="right">
-                            <Typography>{item.price}</Typography>
+                            <Typography>₱{item.price}.00</Typography>
                           </TableCell>
                           <TableCell align="right"></TableCell>
                         </TableRow>
@@ -215,7 +215,9 @@ function Placeorder() {
                     <Typography>Items:</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography align="right">{itemsPrice}</Typography>
+                    <Typography align="right" style={{ fontWeight: "bolder" }}>
+                      ₱{itemsPrice}.00
+                    </Typography>
                   </Grid>
                 </Grid>
               </ListItem>
@@ -226,7 +228,9 @@ function Placeorder() {
                     <Typography>Shipping:</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography align="right">{shippingPrice}</Typography>
+                    <Typography align="right" style={{ fontWeight: "bolder" }}>
+                      ₱{shippingPrice}.00
+                    </Typography>
                   </Grid>
                 </Grid>
               </ListItem>
@@ -239,7 +243,7 @@ function Placeorder() {
                   </Grid>
                   <Grid item xs={6}>
                     <Typography align="right">
-                      <strong>{totalPrice}</strong>
+                      <strong>₱{totalPrice}.00</strong>
                     </Typography>
                   </Grid>
                 </Grid>

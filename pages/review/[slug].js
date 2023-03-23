@@ -11,9 +11,8 @@ import {
   Typography,
   TextField,
   CircularProgress,
-  withStyles,
 } from "@material-ui/core";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+
 import Rating from "@material-ui/lab/Rating";
 import Layout from "../../components/Layout";
 import db from "../../utils/db";
@@ -22,14 +21,13 @@ import axios from "axios";
 import { Store } from "../../utils/Store";
 import { getError } from "../../utils/error";
 import Product from "../../models/Product";
-import { useRouter } from "next/router";
+
 import { useSnackbar } from "notistack";
 import Alert from "@material-ui/lab/Alert";
 
 export default function ProductScreen(props) {
-  const router = useRouter();
   const { product } = props;
-  const { state, dispatch } = useContext(Store);
+  const { state } = useContext(Store);
   const { userInfo } = state;
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
@@ -74,29 +72,6 @@ export default function ProductScreen(props) {
   if (!product) {
     return <div>Product Not Found</div>;
   }
-  const addToCartHandler = async () => {
-    const existItem = state.cart.cartItems.find((x) => x._id === product._id);
-    const quantity = existItem ? existItem.quantity + 1 : 1;
-    const { data } = await axios.get(`/api/products/${product._id}`);
-    if (data.countInStock < quantity) {
-      window.alert("Sorry, Product is out of stock");
-      return;
-    }
-    dispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity } });
-    router.push("/cart");
-  };
-
-  const StyledButton = withStyles({
-    root: {
-      height: "50px",
-      backgroundColor: "#1A2421",
-      color: "#fcd01c",
-      "&:hover": {
-        backgroundColor: "#1A2421",
-        color: "#fcd01c",
-      },
-    },
-  })(Button);
 
   return (
     <Layout title={product.name} description={product.description}>
@@ -144,43 +119,7 @@ export default function ProductScreen(props) {
           </List>
         </Grid>
         <Grid item md={3} xs={12}>
-          <Card>
-            <List>
-              <ListItem>
-                <Grid container>
-                  <Grid item xs={6}>
-                    <Typography>Price</Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <strong>{product.price}</strong>
-                  </Grid>
-                </Grid>
-              </ListItem>
-              <ListItem>
-                <Grid container>
-                  <Grid item xs={6}>
-                    <Typography>Status</Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography>
-                      {product.countInStock > 0 ? "In Stock" : "Unavailable"}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </ListItem>
-              <ListItem>
-                <StyledButton
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  onClick={addToCartHandler}
-                >
-                  <strong>Add to cart </strong> &nbsp; &nbsp; <br />
-                  <AddShoppingCartIcon />
-                </StyledButton>
-              </ListItem>
-            </List>
-          </Card>
+          <Card></Card>
         </Grid>
       </Grid>
       <List>

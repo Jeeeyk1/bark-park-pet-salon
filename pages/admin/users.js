@@ -24,7 +24,7 @@ import { getError } from "../../utils/error";
 import { Store } from "../../utils/Store";
 import Layout from "../../components/Layout";
 import useStyles from "../../utils/styles";
-import { useSnackbar } from "notistack";
+import WarningIcon from "@mui/icons-material/Warning";
 import DashboardCustomizeIcon from "@mui/icons-material/DashboardCustomize";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
@@ -86,24 +86,6 @@ function AdminUsers() {
     }
   }, [successDelete]);
 
-  const { enqueueSnackbar } = useSnackbar();
-
-  const deleteHandler = async (userId) => {
-    if (!window.confirm("Are you sure?")) {
-      return;
-    }
-    try {
-      dispatch({ type: "DELETE_REQUEST" });
-      await axios.delete(`/api/admin/users/${userId}`, {
-        headers: { authorization: `Bearer ${userInfo.token}` },
-      });
-      dispatch({ type: "DELETE_SUCCESS" });
-      enqueueSnackbar("User deleted successfully", { variant: "success" });
-    } catch (err) {
-      dispatch({ type: "DELETE_FAIL" });
-      enqueueSnackbar(getError(err), { variant: "error" });
-    }
-  };
   return (
     <Layout title="Users">
       <Grid container spacing={1}>
@@ -155,6 +137,10 @@ function AdminUsers() {
                   <ListItemText primary="Refund requests"></ListItemText>
                 </ListItem>
               </NextLink>
+              <ListItem button component="a">
+                <WarningIcon />
+                <ListItemText primary="Critical Stocks"></ListItemText>
+              </ListItem>
             </List>
           </Card>
         </Grid>
@@ -207,23 +193,11 @@ function AdminUsers() {
                                   size="medium"
                                   variant="contained"
                                   color="red"
+                                  fullwidth
                                 >
                                   Edit
                                 </Button>
                               </NextLink>{" "}
-                              <Button
-                                style={{
-                                  backgroundColor: "red",
-                                  fontWeight: "bolder",
-                                  color: "#fff",
-                                  fontSize: "15px",
-                                }}
-                                onClick={() => deleteHandler(user._id)}
-                                size="medium"
-                                variant="contained"
-                              >
-                                Delete
-                              </Button>
                             </TableCell>
                           </TableRow>
                         ))}

@@ -88,6 +88,19 @@ function Order({ params }) {
       },
     },
   })(Button);
+  const ReviewButton = withStyles({
+    root: {
+      height: "30px",
+      width: "10px",
+      marginRight: "-13px",
+      backgroundColor: "#1A2421",
+      color: "#fcd01c",
+      "&:hover": {
+        backgroundColor: "#1A2421",
+        color: "#fcd01c",
+      },
+    },
+  })(Button);
   const [
     { loading, error, order, successPay, loadingDeliver, successDeliver },
     dispatch,
@@ -109,12 +122,15 @@ function Order({ params }) {
     deliveredAt,
     referenceNumber,
     applyRefund,
+    isReceived,
+    receivedAt,
   } = order;
 
   useEffect(() => {
     if (!userInfo) {
       return router.push("/login");
     }
+    console.log(isReceived + " received? " + receivedAt);
     console.log(referenceNumber);
     const fetchOrder = async () => {
       try {
@@ -208,21 +224,40 @@ function Order({ params }) {
         }
       );
       dispatch({ type: "DELIVER_SUCCESS", payload: data });
-      enqueueSnackbar("Order is delivered", { variant: "success" });
+      enqueueSnackbar("Order is Shipped Out", { variant: "success" });
+    } catch (err) {
+      dispatch({ type: "DELIVER_FAIL", payload: getError(err) });
+    }
+  }
+  async function receivedHandler() {
+    if (!window.confirm("Are you sure that you already received this order?")) {
+      return;
+    }
+    try {
+      dispatch({ type: "DELIVER_REQUEST" });
+      const { data } = await axios.put(
+        `/api/orders/${order._id}/received`,
+        { name: userInfo.name },
+        {
+          headers: { authorization: `Bearer ${userInfo.token}` },
+        }
+      );
+      dispatch({ type: "DELIVER_SUCCESS", payload: data });
+      enqueueSnackbar("Order is Received", { variant: "success" });
     } catch (err) {
       dispatch({ type: "DELIVER_FAIL", payload: getError(err) });
     }
   }
 
   return (
-    <Layout title={`Order ${orderId}`}>
+    <Layout title={`Order BPPSB${orderId.substring(20, 24)}`}>
       <CheckoutWizard activeStep={4}></CheckoutWizard>
       <Typography
         component="h1"
         style={{ fontSize: "25px", fontWeight: "bolder" }}
       >
         {" "}
-        Order {orderId}
+        Order BPPSB{orderId.substring(20, 24)}
       </Typography>
       {loading ? (
         <CircularProgress />
@@ -247,13 +282,15 @@ function Order({ params }) {
                   {shippingAddress.zipCode}
                 </ListItem>
                 <ListItem>
-                  Contact Number: {""}
-                  {shippingAddress.contactNumber}
+                  <strong> Contact Number:</strong>
+                  &nbsp; 0{shippingAddress.contactNumber}
                 </ListItem>
                 <ListItem>
-                  Status:{" "}
-                  {isDelivered
-                    ? `delivered at ${deliveredAt}`
+                  <strong>Status:</strong> &nbsp;
+                  {isDelivered && !isReceived
+                    ? `Shipped Out at ${deliveredAt} `
+                    : isReceived && isDelivered
+                    ? `Delivered at ${receivedAt}`
                     : "not delivered"}
                 </ListItem>
               </List>
@@ -271,7 +308,8 @@ function Order({ params }) {
                 </ListItem>
                 <ListItem>{paymentMethod}</ListItem>
                 <ListItem>
-                  Status: {isPaid ? `paid at ${paidAt}` : "not paid"}
+                  <strong> Status:</strong>
+                  {isPaid ? `paid at ${paidAt}` : "not paid"}
                 </ListItem>
                 {paymentMethod === "Gcash" && referenceNumber ? (
                   <ListItem>ReferenceNumber: {referenceNumber}</ListItem>
@@ -285,7 +323,7 @@ function Order({ params }) {
                 If your product has already been delivered and you would like to
                 share your thoughts on it, leaving a review is easy.{" "}
                 <strong>
-                  Simply click on the image or name of the product and you will
+                  Simply click on the review button of the product and you will
                   be taken to the review section
                 </strong>
                 , where you can leave your feedback and help others make
@@ -309,6 +347,7 @@ function Order({ params }) {
                         <TableCell>Name</TableCell>
                         <TableCell align="right">Quantity</TableCell>
                         <TableCell align="right">Price</TableCell>
+                        <TableCell align="right">Action</TableCell>
                       </TableHead>
                       <TableBody>
                         {orderItems.map((item) => (
@@ -516,7 +555,97 @@ function Order({ params }) {
                             <TableCell align="right">
                               <Typography>{item.price}</Typography>
                             </TableCell>
-                            <TableCell align="right"></TableCell>
+                            {isReceived ? (
+                              <TableCell align="right">
+                                <NextLink
+                                  href={
+                                    item.name === "Top ration Tasty Bites"
+                                      ? "/review/trtb"
+                                      : item.name === "Power Kitten 7kg"
+                                      ? "/review/pk7kg"
+                                      : item.name === "Dentasix"
+                                      ? "/review/denta"
+                                      : item.name === "Brit Premium Turkey"
+                                      ? "/review/bpt"
+                                      : item.name === "Brit Premium"
+                                      ? "/review/bp"
+                                      : item.name === "Meat Jerky"
+                                      ? "/review/mj"
+                                      : item.name === "Dental Chew Milk"
+                                      ? "/review/dcm"
+                                      : item.name === "Brit Fish"
+                                      ? "/review/bf"
+                                      : item.name === "Teo Junior"
+                                      ? "/review/tj"
+                                      : item.name === "Brit fresh fish"
+                                      ? "/review/fresh fish"
+                                      : item.name === "Brit Premium Pork"
+                                      ? "/review/pork brit"
+                                      : item.name === "Pedigree Meat Jerky"
+                                      ? "/review/pedigreeMeatJerky"
+                                      : item.name === "Feline Nutrition 6kg"
+                                      ? "/review/feline-nut-7kg"
+                                      : item.name === "Kitkat Complete Cuisine"
+                                      ? "/review/kitkta cuisine"
+                                      : item.name === "Zert Cheesecake Gellato"
+                                      ? "/review/cheesecake"
+                                      : item.name === "Whiskas Tuna 1kg"
+                                      ? "/review/whiskas-1kg"
+                                      : item.name === "Power Kitten"
+                                      ? "/review/pkitten"
+                                      : item.name === "Pedigree Adult 1kg"
+                                      ? "/review/pedigree1kg"
+                                      : item.name === "Pedigree puppy 1kg"
+                                      ? "/review/pedigreepuppy"
+                                      : item.name === "Tasty Bites 6kg"
+                                      ? "/review/tb6kg"
+                                      : item.name ===
+                                        "Top ration High-Nutrition 6kg"
+                                      ? "/review/trhn"
+                                      : item.name === "Brit Premium Lamb"
+                                      ? "/review/bplflrv"
+                                      : item.name === "Brit Premium Beef"
+                                      ? "/review/beef flavor"
+                                      : item.name === "Brit Premium Pork"
+                                      ? "/review/Pork Flavor"
+                                      : item.name === "Pedigree Puppy 15kg"
+                                      ? "/review/15kgpp"
+                                      : item.name ===
+                                        "Carnilove Soft Snack Carp"
+                                      ? "/review/holistic-adul-1kg"
+                                      : item.name ===
+                                        "Carnilove Soft Snack Sardines"
+                                      ? "/review/sardinessnack"
+                                      : item.name === "Brit Pate Salmon"
+                                      ? "/review/dog-adult-sack"
+                                      : item.name === "Carnilove Salmon"
+                                      ? "/review/for kitten"
+                                      : item.name === "Brit Premium Adult 2kg"
+                                      ? "/brit premium 2kg"
+                                      : item.name === "Kit Cat Tuna Hairball"
+                                      ? "/catHairdball"
+                                      : item.name === "Special Dog Adult 9kg"
+                                      ? "/dog-special-sack"
+                                      : item.name === "Aozi Dog Puppy 1kg"
+                                      ? "/dog-aozi-sack-1kg"
+                                      : item.name ===
+                                        "Brit Premium Dog in can Pork"
+                                      ? "/review/Brit-premium"
+                                      : item.name ===
+                                        "Brit Premium Dog in Can Fish"
+                                      ? "/review/Brit-premium-cat"
+                                      : "/review/denta"
+                                  }
+                                  passHref
+                                >
+                                  <Link>
+                                    <ReviewButton>Review</ReviewButton>
+                                  </Link>
+                                </NextLink>
+                              </TableCell>
+                            ) : (
+                              <strong></strong>
+                            )}
                           </TableRow>
                         ))}
                       </TableBody>
@@ -535,20 +664,34 @@ function Order({ params }) {
                 <ListItem>
                   <Grid container>
                     <Grid item xs={6}>
-                      <Typography>Item Price:</Typography>
+                      <Typography style={{ fontWeight: "bolder" }}>
+                        Item Price:
+                      </Typography>
                     </Grid>
                     <Grid item xs={6}>
-                      <Typography align="right">{itemsPrice}</Typography>
+                      <Typography
+                        align="right"
+                        style={{ fontWeight: "bolder" }}
+                      >
+                        ₱{itemsPrice}.00
+                      </Typography>
                     </Grid>
                   </Grid>
                 </ListItem>
                 <ListItem>
                   <Grid container>
                     <Grid item xs={6}>
-                      <Typography>Shipping:</Typography>
+                      <Typography style={{ fontWeight: "bolder" }}>
+                        Shipping:
+                      </Typography>
                     </Grid>
                     <Grid item xs={6}>
-                      <Typography align="right">{shippingPrice}</Typography>
+                      <Typography
+                        align="right"
+                        style={{ fontWeight: "bolder" }}
+                      >
+                        ₱{shippingPrice}.00
+                      </Typography>
                     </Grid>
                   </Grid>
                 </ListItem>
@@ -561,7 +704,7 @@ function Order({ params }) {
                     </Grid>
                     <Grid item xs={6}>
                       <Typography align="right">
-                        <strong>{totalPrice}</strong>
+                        <strong>₱{totalPrice}.00</strong>
                       </Typography>
                     </Grid>
                   </Grid>
@@ -601,7 +744,8 @@ function Order({ params }) {
                   !userInfo.isAdmin &&
                   isDelivered &&
                   !applyRefund &&
-                  userInfo && (
+                  userInfo &&
+                  isReceived && (
                     <ListItem>
                       {isPending ? (
                         <CircularProgress />
@@ -616,6 +760,30 @@ function Order({ params }) {
                               }}
                             >
                               Request Refund
+                            </StyledButton>
+                          </div>
+                        </div>
+                      )}
+                    </ListItem>
+                  )}
+                {isPaid &&
+                  !userInfo.isAdmin &&
+                  isDelivered &&
+                  !applyRefund &&
+                  userInfo &&
+                  !isReceived && (
+                    <ListItem>
+                      {isPending ? (
+                        <CircularProgress />
+                      ) : (
+                        <div className={classes.fullWidth}>
+                          <div>
+                            <StyledButton
+                              fullWidth
+                              variant="contained"
+                              onClick={receivedHandler}
+                            >
+                              Order Received
                             </StyledButton>
                           </div>
                         </div>

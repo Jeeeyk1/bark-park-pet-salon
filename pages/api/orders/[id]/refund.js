@@ -13,13 +13,16 @@ handler.put(async (req, res) => {
     order.appliedAt = Date.now();
     order.description = req.body.description;
     order.imageRefund = req.body.imageRefund;
+    order.reason = req.body.reason;
     const description = await order.save();
     const imageRefund = await order.save();
+    const reason = await order.save();
 
     res.send({
       message: "Refund request submitted!",
       order: description,
       imageRefund,
+      reason,
     });
   } else {
     await db.disconnect();

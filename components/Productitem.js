@@ -61,7 +61,7 @@ function Productitem({ product, addToCartHandler }) {
         </NextLink>
         <CardActions>
           <Typography style={{ fontSize: "20px", fontWeight: "bolder" }}>
-            ₱{product.price}
+            ₱{product.price}.00
           </Typography>
 
           <StyledButton

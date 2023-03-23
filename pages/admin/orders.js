@@ -29,7 +29,7 @@ import { getError } from "../../utils/error";
 import { Store } from "../../utils/Store";
 import Layout from "../../components/Layout";
 import useStyles from "../../utils/styles";
-
+import WarningIcon from "@mui/icons-material/Warning";
 function reducer(state, action) {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -122,6 +122,12 @@ function AdminOrders() {
                   <ListItemText primary="Refund requests"></ListItemText>
                 </ListItem>
               </NextLink>
+              <NextLink href="/admin/critical" passHref>
+                <ListItem button component="a">
+                  <WarningIcon />
+                  <ListItemText primary="Critical Stocks"></ListItemText>
+                </ListItem>
+              </NextLink>
             </List>
           </Card>
         </Grid>
@@ -188,7 +194,7 @@ function AdminOrders() {
                               fontSize: "1rem",
                             }}
                           >
-                            DELIVERED
+                            STATUS
                           </TableCell>
                           <TableCell
                             style={{
@@ -217,8 +223,10 @@ function AdminOrders() {
                                 : "not paid"}
                             </TableCell>
                             <TableCell>
-                              {order.isDelivered
-                                ? `delivered at ${order.deliveredAt}`
+                              {order.isDelivered && !order.isReceived
+                                ? `Shipped Out  `
+                                : order.isReceived && order.isDelivered
+                                ? `Delivered `
                                 : "not delivered"}
                             </TableCell>
                             <TableCell

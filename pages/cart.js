@@ -1,11 +1,13 @@
 import {
   Button,
   Card,
+  FormControl,
   Grid,
+  Input,
+  InputLabel,
   Link,
   List,
   ListItem,
-  MenuItem,
   Select,
   Table,
   TableBody,
@@ -107,20 +109,32 @@ function CartScreen() {
                         </NextLink>
                       </TableCell>
                       <TableCell align="right">
-                        <Select
-                          value={item.quantity}
-                          onChange={(e) =>
-                            updateCartHandler(item, e.target.value)
-                          }
-                        >
-                          {[...Array(item.countInStock).keys()].map((x) => (
-                            <MenuItem key={x + 1} value={x + 1}>
-                              {x + 1}
-                            </MenuItem>
-                          ))}
-                        </Select>
+                        <FormControl>
+                          <InputLabel id="quantity-label"></InputLabel>
+                          <Select
+                            labelId="quantity-label"
+                            native
+                            value={item.quantity}
+                            onChange={(e) =>
+                              updateCartHandler(item, e.target.value)
+                            }
+                            input={
+                              <Input
+                                type="number"
+                                min={1}
+                                max={item.countInStock}
+                              />
+                            }
+                          >
+                            {[...Array(item.countInStock).keys()].map((x) => (
+                              <option key={x + 1} value={x + 1}>
+                                {x + 1}
+                              </option>
+                            ))}
+                          </Select>
+                        </FormControl>
                       </TableCell>
-                      <TableCell align="right">{item.price}</TableCell>
+                      <TableCell align="right">₱{item.price}.00</TableCell>
                       <TableCell align="right">
                         <Button
                           style={{
@@ -145,8 +159,8 @@ function CartScreen() {
                   <Typography variant="h1">
                     <strong>Subtotal</strong> (
                     {cartItems.reduce((a, c) => a + c.quantity, 0)}&nbsp; items)
-                    :&nbsp;
-                    {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}
+                    :&nbsp;₱
+                    {cartItems.reduce((a, c) => a + c.quantity * c.price, 0)}.00
                   </Typography>
                 </ListItem>
                 <ListItem>

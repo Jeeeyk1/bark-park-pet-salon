@@ -125,18 +125,20 @@ export default function ProductScreen(props) {
                     <Typography>Price</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <strong>{product.price}</strong>
+                    <strong>₱{product.price}.00</strong>
                   </Grid>
                 </Grid>
               </ListItem>
               <ListItem>
                 <Grid container>
                   <Grid item xs={6}>
-                    <Typography>Status</Typography>
+                    <Typography>Stocks</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography>
-                      {product.countInStock > 0 ? "In Stock" : "Unavailable"}
+                    <Typography style={{ fontWeight: "bolder" }}>
+                      {product.countInStock > 0
+                        ? product.countInStock + "pcs"
+                        : "Unavailable"}
                     </Typography>
                   </Grid>
                 </Grid>

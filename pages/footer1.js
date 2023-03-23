@@ -15,12 +15,12 @@ export default function Footer() {
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href="https://www.instagram.com/barkpacksalon2600/">
             <InstagramIcon />
           </a>{" "}
         </li>
         <li>
-          <a href="#">
+          <a href="https://www.instagram.com/barkpacksalon2600/">
             <TwitterIcon />
           </a>{" "}
         </li>

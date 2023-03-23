@@ -30,7 +30,7 @@ import { getError } from "../../utils/error";
 import { Store } from "../../utils/Store";
 import Layout from "../../components/Layout";
 import useStyles from "../../utils/styles";
-
+import WarningIcon from "@mui/icons-material/Warning";
 function reducer(state, action) {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -121,6 +121,12 @@ function AdminOrders() {
                 <ListItem selected button component="a">
                   <AssignmentReturnIcon />
                   <ListItemText primary="Refund requests"></ListItemText>
+                </ListItem>
+              </NextLink>
+              <NextLink href="/admin/critical" passHref>
+                <ListItem button component="a">
+                  <WarningIcon />
+                  <ListItemText primary="Critical Stocks"></ListItemText>
                 </ListItem>
               </NextLink>
             </List>

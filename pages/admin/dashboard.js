@@ -26,7 +26,7 @@ import { getError } from "../../utils/error";
 import { Store } from "../../utils/Store";
 import Layout from "../../components/Layout";
 import useStyles from "../../utils/styles";
-
+import WarningIcon from "@mui/icons-material/Warning";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -130,6 +130,12 @@ function AdminDashboard() {
                 <ListItem button component="a">
                   <AssignmentReturnIcon />
                   <ListItemText primary="Refund requests"></ListItemText>
+                </ListItem>
+              </NexLink>
+              <NexLink href="/admin/critical" passHref>
+                <ListItem button component="a">
+                  <WarningIcon style={{ color: "red" }} />
+                  <ListItemText primary="Critical Stocks"></ListItemText>
                 </ListItem>
               </NexLink>
             </List>

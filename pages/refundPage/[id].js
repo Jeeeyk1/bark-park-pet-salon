@@ -105,6 +105,7 @@ function RefundInfo({ params }) {
     status,
     isApproved,
     imageRefund,
+    reason,
   } = order;
 
   useEffect(() => {
@@ -234,14 +235,14 @@ function RefundInfo({ params }) {
   };
 
   return (
-    <Layout title={`Order ${orderId}`}>
+    <Layout title={`Order ${orderId.substring(20, 24)}`}>
       <CheckoutWizard activeStep={4}></CheckoutWizard>
       <Typography
         component="h1"
         style={{ fontSize: "25px", fontWeight: "bolder" }}
       >
         {" "}
-        Order {orderId}
+        Order BPPSB{orderId.substring(20, 24)}
       </Typography>
       {loading ? (
         <CircularProgress />
@@ -290,7 +291,8 @@ function RefundInfo({ params }) {
                 </ListItem>
                 <ListItem>{paymentMethod}</ListItem>
                 <ListItem>
-                  Status: {isPaid ? `paid at ${paidAt}` : "not paid"}
+                  <strong>Status:</strong>&nbsp;
+                  {isPaid ? `paid at ${paidAt}` : "not paid"}
                 </ListItem>
                 {paymentMethod === "Gcash" && referenceNumber ? (
                   <ListItem>ReferenceNumber: {referenceNumber}</ListItem>
@@ -311,15 +313,24 @@ function RefundInfo({ params }) {
                   </Typography>
                 </ListItem>
 
-                <ListItem>Request refund at: {appliedAt}</ListItem>
-                <ListItem>Status: {status}</ListItem>
-
-                <ListItem>Message: {description}</ListItem>
+                <ListItem>
+                  <strong>Request refund at:</strong> &nbsp; {appliedAt}
+                </ListItem>
+                <ListItem>
+                  <strong>Status:</strong> &nbsp;{status}
+                </ListItem>
+                <ListItem>
+                  <strong>Reason for Refunding:</strong> &nbsp; {reason}
+                </ListItem>
+                <ListItem>
+                  <strong>Description: </strong> &nbsp;{description}
+                </ListItem>
                 <ListItem>
                   {" "}
-                  Approved at: {isApproved ? [approvedAt] : "Not approved"}
+                  <strong>Approved at:</strong> &nbsp;{" "}
+                  {isApproved ? [approvedAt] : "Not approved"}
                 </ListItem>
-                <Link>
+                <Link style={{ textDecoration: "none" }}>
                   <NextLink href={imageRefund} passHref>
                     <img
                       src={imageRefund}
@@ -328,9 +339,6 @@ function RefundInfo({ params }) {
                     />
                   </NextLink>
                   <br />
-                  <Typography style={{ cursor: "pointer" }}>
-                    View image
-                  </Typography>
                 </Link>
 
                 <br />
@@ -412,7 +420,7 @@ function RefundInfo({ params }) {
                               <Typography>{item.quantity}</Typography>
                             </TableCell>
                             <TableCell align="right">
-                              <Typography>{item.price}</Typography>
+                              <Typography>₱{item.price}.00</Typography>
                             </TableCell>
                             <TableCell align="right"></TableCell>
                           </TableRow>
@@ -428,25 +436,41 @@ function RefundInfo({ params }) {
             <Card className={classes.section}>
               <List>
                 <ListItem>
-                  <Typography variant="h2">Order Summary</Typography>
+                  <Typography variant="h2" style={{ fontWeight: "bolder" }}>
+                    Order Summary
+                  </Typography>
                 </ListItem>
                 <ListItem>
                   <Grid container>
                     <Grid item xs={6}>
-                      <Typography>Item Price:</Typography>
+                      <Typography style={{ fontWeight: "bolder" }}>
+                        Item Price:
+                      </Typography>
                     </Grid>
                     <Grid item xs={6}>
-                      <Typography align="right">{itemsPrice}</Typography>
+                      <Typography
+                        align="right"
+                        style={{ fontWeight: "bolder" }}
+                      >
+                        ₱{itemsPrice}.00
+                      </Typography>
                     </Grid>
                   </Grid>
                 </ListItem>
                 <ListItem>
                   <Grid container>
                     <Grid item xs={6}>
-                      <Typography>Shipping:</Typography>
+                      <Typography style={{ fontWeight: "bolder" }}>
+                        Shipping:
+                      </Typography>
                     </Grid>
                     <Grid item xs={6}>
-                      <Typography align="right">{shippingPrice}</Typography>
+                      <Typography
+                        align="right"
+                        style={{ fontWeight: "bolder" }}
+                      >
+                        ₱{shippingPrice}.00
+                      </Typography>
                     </Grid>
                   </Grid>
                 </ListItem>
@@ -459,7 +483,7 @@ function RefundInfo({ params }) {
                     </Grid>
                     <Grid item xs={6}>
                       <Typography align="right">
-                        <strong>{totalPrice}</strong>
+                        <strong>₱{totalPrice}.00</strong>
                       </Typography>
                     </Grid>
                   </Grid>

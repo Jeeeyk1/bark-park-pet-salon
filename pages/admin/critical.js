@@ -9,6 +9,7 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import LocalShippingSharpIcon from "@mui/icons-material/LocalShippingSharp";
 import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
+import WarningIcon from "@mui/icons-material/Warning";
 import {
   CircularProgress,
   Grid,
@@ -29,9 +30,9 @@ import { getError } from "../../utils/error";
 import { Store } from "../../utils/Store";
 import Layout from "../../components/Layout";
 import useStyles from "../../utils/styles";
-import { useSnackbar } from "notistack";
+
 import { Pagination } from "@material-ui/lab";
-import WarningIcon from "@mui/icons-material/Warning";
+
 function reducer(state, action) {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -66,7 +67,7 @@ function AdminProducts() {
   const { userInfo } = state;
 
   const [
-    { loading, error, products, loadingCreate, successDelete, loadingDelete },
+    { loading, error, loadingCreate, successDelete, loadingDelete },
     dispatch,
   ] = useReducer(reducer, {
     loading: true,
@@ -97,38 +98,15 @@ function AdminProducts() {
     }
   }, [successDelete]);
 
-  const { enqueueSnackbar } = useSnackbar();
-  const createHandler = async () => {
-    if (!window.confirm("Are you sure?")) {
-      return;
-    }
-    try {
-      dispatch({ type: "CREATE_REQUEST" });
-      const { data } = await axios.post(
-        `/api/admin/products`,
-        {},
-        {
-          headers: { authorization: `Bearer ${userInfo.token}` },
-        }
-      );
-      dispatch({ type: "CREATE_SUCCESS" });
-      enqueueSnackbar("Product created successfully", { variant: "success" });
-      router.push(`/admin/product/${data.product._id}`);
-    } catch (err) {
-      dispatch({ type: "CREATE_FAIL" });
-      enqueueSnackbar(getError(err), { variant: "error" });
-    }
-  };
-
   const [productz, setProductz] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage] = useState(1);
   const [postPerPage] = useState(9);
-  const pageNumbers = Math.ceil(products.length / postPerPage);
+
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const currentProducts = productz.slice(indexOfFirstPost, indexOfLastPost);
-  const paginateOnchange = (e, value) => {
-    setCurrentPage(value);
+  const paginateOnchange = () => {
+    // setCurrentPage(value);
     console.log(indexOfFirstPost, indexOfLastPost);
     console.log(currentProducts);
   };
@@ -165,7 +143,7 @@ function AdminProducts() {
                 </ListItem>
               </NextLink>
               <NextLink href="/admin/products" passHref>
-                <ListItem selected button component="a">
+                <ListItem button component="a">
                   <Inventory2Icon />
                   <ListItemText primary="Products"></ListItemText>
                 </ListItem>
@@ -183,7 +161,7 @@ function AdminProducts() {
                 </ListItem>
               </NextLink>
               <NextLink href="/admin/critical" passHref>
-                <ListItem button component="a">
+                <ListItem selected button component="a">
                   <WarningIcon />
                   <ListItemText primary="Critical Stocks"></ListItemText>
                 </ListItem>
@@ -203,18 +181,6 @@ function AdminProducts() {
                     {loadingDelete && <CircularProgress />}
                   </Grid>
                   <Grid align="right" item xs={6}>
-                    <Button
-                      style={{
-                        fontWeight: "bolder",
-                        backgroundColor: "#24a0ed",
-                        color: "#ffff",
-                      }}
-                      color="primary"
-                      onClick={createHandler}
-                      variant="contained"
-                    >
-                      Add Product
-                    </Button>
                     {loadingCreate && <CircularProgress />}
                   </Grid>
                 </Grid>
@@ -242,7 +208,7 @@ function AdminProducts() {
                           <TableCell>
                             <strong>CATEGORY</strong>
                           </TableCell>
-                          <TableCell>
+                          <TableCell style={{ color: "red" }}>
                             <strong>STOCKS</strong>
                           </TableCell>
                           <TableCell>
@@ -256,37 +222,51 @@ function AdminProducts() {
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {currentProducts.map((product) => (
-                          <TableRow key={product._id}>
-                            <TableCell>
-                              {product._id.substring(20, 24)}
-                            </TableCell>
-                            <TableCell>{product.name}</TableCell>
-                            <TableCell>{product.price}</TableCell>
-                            <TableCell>{product.category}</TableCell>
-                            <TableCell>{product.countInStock}</TableCell>
-                            <TableCell>{product.rating}</TableCell>
-                            <TableCell>
-                              <NextLink
-                                href={`/admin/product/${product._id}`}
-                                passHref
-                              >
-                                <Button
-                                  style={{
-                                    fontWeight: "bolder",
-                                    backgroundColor: "#24a0ed",
-                                    color: "#ffff",
-                                  }}
-                                  size="medium"
-                                  variant="contained"
-                                  color="red"
-                                >
-                                  Edit
-                                </Button>
-                              </NextLink>{" "}
-                            </TableCell>
-                          </TableRow>
-                        ))}
+                        {currentProducts.map(
+                          (product) =>
+                            product.countInStock <= 10 && (
+                              <TableRow key={product._id}>
+                                <TableCell>
+                                  {product._id.substring(20, 24)}
+                                </TableCell>
+                                {product.countInStock <= 10 && (
+                                  <>
+                                    <TableCell>{product.name}</TableCell>
+                                    <TableCell>{product.price}</TableCell>
+                                    <TableCell>{product.category}</TableCell>
+                                    <TableCell
+                                      style={{
+                                        color: "red",
+                                        fontWeight: "bolder",
+                                      }}
+                                    >
+                                      {product.countInStock}
+                                    </TableCell>
+                                    <TableCell>{product.rating}</TableCell>
+                                    <TableCell>
+                                      <NextLink
+                                        href={`/admin/product/${product._id}`}
+                                        passHref
+                                      >
+                                        <Button
+                                          style={{
+                                            fontWeight: "bolder",
+                                            backgroundColor: "#24a0ed",
+                                            color: "#ffff",
+                                          }}
+                                          size="medium"
+                                          variant="contained"
+                                          color="red"
+                                        >
+                                          Add Stocks
+                                        </Button>
+                                      </NextLink>{" "}
+                                    </TableCell>
+                                  </>
+                                )}
+                              </TableRow>
+                            )
+                        )}
                       </TableBody>
                     </Table>
                   </TableContainer>
@@ -294,7 +274,7 @@ function AdminProducts() {
               </ListItem>
               <Pagination
                 color="primary"
-                count={pageNumbers}
+                count={0}
                 onChange={paginateOnchange}
               ></Pagination>
             </List>

@@ -25,7 +25,8 @@ import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import Inventory2Icon from "@mui/icons-material/Inventory2";
 import LocalShippingSharpIcon from "@mui/icons-material/LocalShippingSharp";
-
+import AssignmentReturnIcon from "@mui/icons-material/AssignmentReturn";
+import WarningIcon from "@mui/icons-material/Warning";
 function reducer(state, action) {
   switch (action.type) {
     case "FETCH_REQUEST":
@@ -194,6 +195,18 @@ function ProductEdit({ params }) {
                 <ListItem button component="a">
                   <PeopleAltIcon />
                   <ListItemText primary="Users"></ListItemText>
+                </ListItem>
+              </NextLink>
+              <NextLink href="/admin/refund" passHref>
+                <ListItem button component="a">
+                  <AssignmentReturnIcon />
+                  <ListItemText primary="Refund requests"></ListItemText>
+                </ListItem>
+              </NextLink>
+              <NextLink href="/admin/critical" passHref>
+                <ListItem button component="a">
+                  <WarningIcon style={{ color: "red" }} />
+                  <ListItemText primary="Critical Stocks"></ListItemText>
                 </ListItem>
               </NextLink>
             </List>

@@ -70,6 +70,7 @@ function OrderHistory() {
     };
     fetchOrders();
   }, []);
+
   return (
     <Layout title="Order History">
       <Scroll showBelow={250} />
@@ -151,7 +152,7 @@ function OrderHistory() {
                               fontWeight: "bold",
                             }}
                           >
-                            DELIVERED
+                            STATUS
                           </TableCell>
                           <TableCell
                             style={{
@@ -174,8 +175,10 @@ function OrderHistory() {
                                 : "not paid"}
                             </TableCell>
                             <TableCell>
-                              {order.isDelivered
-                                ? `delivered at ${order.deliveredAt}`
+                              {order.isDelivered && !order.isReceived
+                                ? `Shipped Out  `
+                                : order.isReceived && order.isDelivered
+                                ? `Delivered `
                                 : "not delivered"}
                             </TableCell>
                             <TableCell>

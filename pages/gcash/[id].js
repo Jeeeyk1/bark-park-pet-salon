@@ -108,11 +108,11 @@ function Gcash({ params }) {
     <Layout title="Gcash Payment">
       <div className={classes.payment}>
         <Typography component="h1" className={classes.title}>
-          Order {orderId}
+          Order BPPSB{orderId.substring(20, 24)}
         </Typography>
         {userInfo ? (
           <Typography className={classes.userGcash}>
-            Hello, {userInfo.name} Please pay ₱{totalPrice}
+            Hello, {userInfo.name} Please pay ₱{totalPrice}.00
           </Typography>
         ) : (
           <Typography variant="h5">Logging out...</Typography>

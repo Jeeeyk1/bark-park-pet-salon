@@ -12,7 +12,9 @@ handler.get(async (req, res) => {
   await User.insertMany(data.users);
   await Product.deleteMany();
   await Product.insertMany(data.products);
+
   await db.disconnect();
+
   res.send({ message: "seeded successfully" });
 });
 

@@ -42,6 +42,9 @@ const orderSchema = new mongoose.Schema(
     description: { type: String, required: false },
     status: { type: String, required: true, default: "pending" },
     imageRefund: { type: String, required: false },
+    isReceived: { type: Boolean, required: false, default: false },
+    receivedAt: { type: Date, required: false },
+    reason: { type: String, required: false },
     referenceNumber: {
       type: Number,
       required: false,

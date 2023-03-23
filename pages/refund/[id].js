@@ -7,6 +7,7 @@ import {
   Button,
   TextField,
   withStyles,
+  MenuItem,
 } from "@material-ui/core";
 import { Controller, useForm } from "react-hook-form";
 
@@ -75,8 +76,8 @@ function RefundRequest({ params }) {
     order: {},
     error: "",
   });
-  const { description } = order;
-  const submitHandler = async ({ description, imageRefund }) => {
+  const { description, reason } = order;
+  const submitHandler = async ({ description, imageRefund, reason }) => {
     if (!window.confirm("Are you sure to refund this order?")) {
       return;
     }
@@ -85,6 +86,7 @@ function RefundRequest({ params }) {
       await axios.put(`/api/orders/${orderId}/refund`, {
         description,
         imageRefund,
+        reason,
       });
       enqueueSnackbar("Refund request has been successful", {
         variant: "success",
@@ -96,10 +98,12 @@ function RefundRequest({ params }) {
     }
     console.log("number of request added + " + order.numberOfRefundRequests);
     console.log("Description tested " + description);
+    console.log("Reason tested " + reason);
   };
 
   useEffect(() => {
     setValue("description", description);
+    setValue("reason", reason);
     if (!userInfo) {
       return router.push("/login");
     }
@@ -157,7 +161,7 @@ function RefundRequest({ params }) {
   };
 
   return (
-    <Layout title={`Order ${orderId}`}>
+    <Layout title={`Order BPPSB${orderId.substring(20, 24)}`}>
       <br />
       <br />
       <Typography
@@ -170,7 +174,7 @@ function RefundRequest({ params }) {
         }}
       >
         {" "}
-        Order {orderId}
+        Order BPPSB{orderId.substring(20, 24)}
       </Typography>
       <br />
       <br />
@@ -200,6 +204,73 @@ function RefundRequest({ params }) {
           <List>
             <ListItem>
               <Controller
+                name="reason"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  minLength: 5,
+                }}
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    id="reason"
+                    select
+                    label="Reason for return"
+                    inputProps={{ type: "text" }}
+                    error={Boolean(errors.city)}
+                    helperText={
+                      errors.city
+                        ? errors.city.type === "minLength"
+                          ? "reason length is more than 4"
+                          : "reason is required"
+                        : ""
+                    }
+                    {...field}
+                  >
+                    <MenuItem
+                      value="Wrong Item Received"
+                      style={{ fontWeight: "bolder" }}
+                    >
+                      Wrong item received
+                    </MenuItem>
+                    <MenuItem
+                      value=" Unauthorized Purchased"
+                      style={{ fontWeight: "bolder" }}
+                    >
+                      Unauthorized Purchased
+                    </MenuItem>
+                    <MenuItem
+                      value="Expired Product"
+                      style={{ fontWeight: "bolder" }}
+                    >
+                      Expired Product
+                    </MenuItem>
+                    <MenuItem
+                      value=" Different from Website Description"
+                      style={{ fontWeight: "bolder" }}
+                    >
+                      Different from Website Description
+                    </MenuItem>
+                    <MenuItem
+                      value=" Damaged item"
+                      style={{ fontWeight: "bolder" }}
+                    >
+                      Damaged item
+                    </MenuItem>
+                    <MenuItem
+                      value=" Replacement"
+                      style={{ fontWeight: "bolder" }}
+                    >
+                      Replacement
+                    </MenuItem>
+                  </TextField>
+                )}
+              ></Controller>
+            </ListItem>
+            <ListItem>
+              <Controller
                 name="description"
                 control={control}
                 defaultValue=""
@@ -215,7 +286,7 @@ function RefundRequest({ params }) {
                     fullWidth
                     multiline
                     rows={6}
-                    label="Please enter details why do you want to refund or return this item"
+                    label="Please enter full details why do you want to refund or return this item"
                     inputProps={{ type: "text", sx: { height: 300 } }}
                     error={Boolean(errors.description)}
                     helperText={
@@ -230,6 +301,7 @@ function RefundRequest({ params }) {
                 )}
               ></Controller>
             </ListItem>
+
             <ListItem>
               <Controller
                 name="imageRefund"
